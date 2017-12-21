@@ -1,0 +1,25 @@
+<!ELEMENT bodhran (songs, recordings, people, discs, contains)>
+<!ELEMENT songs (song*)>
+<!ELEMENT song (songID, title, composerID, lyricistID)>
+<!ELEMENT songID (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT composerID (#PCDATA)>
+<!ELEMENT lyricistID (#PCDATA)>
+<!ELEMENT recordings (recording*)>
+<!ELEMENT recording (recordingID, songID, singerID)>
+<!ELEMENT recordingID (#PCDATA)>
+<!ELEMENT singerID (#PCDATA)>
+<!ELEMENT people (person*)>
+<!ELEMENT person (personID, firstname, surname, profession, photo)>
+<!ELEMENT personID (#PCDATA)>
+<!ELEMENT firstname (#PCDATA)>
+<!ELEMENT surname (#PCDATA)>
+<!ELEMENT profession (#PCDATA)>
+<!ELEMENT photo (#PCDATA)>
+<!ELEMENT discs (disc*)>
+<!ELEMENT disc (discID, title, photoOnCoverOfDisc)>
+<!ELEMENT discID (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT photoOnCoverOfDisc (#PCDATA)>
+<!ELEMENT contains (contain*)>
+<!ELEMENT contain (discID, recordingID)>

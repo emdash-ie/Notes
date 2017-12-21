@@ -1,0 +1,146 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 SQL Recap\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 SQL is DDL, DML, and DCL.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Arithmetic Expressions & Functions\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Arithmetic Operators:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 +}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 -}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 *}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 /}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Numeric Functions:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 ABS(x)}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 CEILING(x)}, {\f1 FLOOR(x)}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 COS(x)}, {\f1 SIN(x)}, {\f1 TAN(x)}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 EXP(x)}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 LOG(x)}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Example: Find the Name of Male Employees Aged Between 21 and 25\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT Fname Lname\line
+FROM EMPLOYEE\line
+WHERE Sex = 'M'\line
+    AND DOB BETWEEN DATE_SUB(CURDATE(), INTERVAL 25 YEAR)\line
+                AND DATE_SUB(CURDATE(), INTERVAL 21 YEAR)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 CURDATE()} gives the current date\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 DATE_SUB()} subtracts amounts from dates\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Accounts for leap years based on the calendar\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab This won't actually work in MySQL\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab MySQL won't allow you to have a function within a function\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Statistical Data Retrieval\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 MAX(Salary)}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Gives the maximum entry in Salary\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 MIN(Salary)}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Gives the minimum entry in Salary\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 AVG(Salary)}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Gives the average for Salary\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 COUNT(*)}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Counts the number of rows in the result table\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Normally used with {\f1 *} as the argument (one exception - {\f1 DISTINCT ColumnName} as below)\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 COUNT(DISTINCT expr)}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Counts the rows containing {\f1 expr}\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab Example:\par}
+{\pard \ql \f0 \sa180 \li720 \fi0 \f1 SELECT COUNT(DISTINCT ESSN)\line
+FROM DEPENDENT\line
+[\u8230?]\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 SUM(Hours)}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Gives the sum of the entries for Hours\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab You always get a result table with a single value (a singleton) when using these functions.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Note that the where condition happens before the averaging, so this query below finds the average salary for female employees in department number 5:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT AVG(Salary)\line
+FROM EMPLOYEE\line
+WHERE Dno = 5\line
+    AND Sex = 'F'\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 GROUP BY\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 {\f1 GROUP BY} is used for computing statistics over groups of values, rather than individual values.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It sorts by a specified column, and then groups together all rows which have the same value for that column. Then it treats each group as a separate table.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 E.g. finding the maximum salary in each group:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT Dno, MAX(Salary)\line
+FROM EMPLOYEE\line
+GROUP BY Dno\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The {\f1 WHERE} clause is evaluated before the {\f1 GROUP BY}, e.g.:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT Dno, AVG(Salary / 12)\line
+FROM EMPLOYEE\line
+WHERE Sex = 'F'\line
+GROUP BY Dno\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 HAVING\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The {\f1 HAVING} clause is evaluated after separation by {\f1 GROUP BY} \u8211- it applies to groups, rather than rows.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Usually contains a function.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT Dno, AVG(Salary)\line
+FROM EMPLOYEE\line
+GROUP BY Dno\line
+HAVING AVG(Salary) > 35000\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Group the table by department number\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Eliminate groups with average salary less than 35000\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Display the department number and average salary of each remaining group\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Example: Find the Average Female Salary in Departments of More Than 100 Employees\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You might try this:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT Dno, AVG(Salary)\line
+FROM EMPLOYEE\line
+WHERE Sex = 'F'\line
+GROUP BY Dno\line
+HAVING COUNT(*) > 100\line
+ORDER BY 2\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Eliminate all male rows\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Group by department number\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Eliminate groups with less than 100 rows\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 4.\tx360\tab Display department number and average salary for each remaining group, ordered by average salary.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 However, here the {\f1 COUNT} clause only counts female employees, because the male employees were removed first. So only departments with more than 100 {\i female} employees are kept.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 ORDER BY 2} orders by the second column.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab For computed columns, you have to specify the column positionally rather than by name.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 To do what we want, we need subqueries.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Subqueries\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab These go in brackets, and evaluate earlier than the rest of the query.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Example:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT CONCAT(Lname, ', ', Fname) AS Name\line
+FROM EMPLOYEE\line
+WHERE Sex = 'M'\line
+    AND Dno IN\line
+        (SELECT Dnumber\line
+         FROM DEPT_LOCATIONS\line
+         WHERE Dlocation = 'Houston')\line
+ORDER BY Name\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Get the department numbers of all departments in Houston\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Eliminate all employee rows who're female or are in a department not in Houston (using the list of numbers from above)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Display the concatenated name of all remaining employees, ordered by name.\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 IN} is an inter-block connective \u8211-\u160?there are more later\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab You can't use {\f1 DISTINCT} or {\f1 ORDER BY} in subqueries.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab MySQL has another limitation to subqueries, which we'll see later.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Interblock Connectives\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT Lname, Fname\line
+FROM EMPLOYEE\line
+WHERE Salary =\line
+    (SELECT MAX(Salary)\line
+     FROM EMPLOYEE)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Equality is only legal when a subquery only returns a single value.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT Lname, Fname\line
+FROM EMPLOYEE\line
+WHERE Salary >=ALL\line
+    (SELECT Salary\line
+     FROM EMPLOYEE)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT Lname, Fname\line
+FROM EMPLOYEE\line
+WHERE Sex = 'F'\line
+    AND Salary =\line
+        (SELECT MAX(Salary)\line
+         FROM EMPLOYEE\line
+         WHERE Sex = 'F'))\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Comparison Operators:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 =}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 !=}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 >}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 <}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 >=}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 <=}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab These can only be used when a subquery returns a single value.\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Set Comparison Operators:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Any of the comparison operators followed by {\f1 ANY} e.g. {\f1 =ANY}.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Any comparison operator followed by {\f1 ALL}.\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Set Inclusion Operator:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 IN}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 NOT IN}\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Existential Quantifier:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 EXISTS}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 NOT EXISTS}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab These can only be used with a specific kind of subquery (synchronised subqueries) that we'll see later.\sa180\sa180\par}
+}

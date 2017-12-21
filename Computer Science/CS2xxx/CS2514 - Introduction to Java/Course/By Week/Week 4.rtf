@@ -1,0 +1,188 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Battleship (cont.)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 final int maxStartValue = MAX_CELL_VALUE - CELLS_IN_DOT_COM + 1;\line
+final int cell = rand[\u8230?];\line
+[\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [check out alternative implementations in lecture notes]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This implementation contains a bug. You can see the specific bug in the book if you want to fix it.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Class & Instance Methods\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Class methods are owned by the class:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab There is one method/variable per class\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab To access the method/variable you need the class\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Class attributes are for representing class state\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Class methods are for class behaviour\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Instance methods are owned by instances:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab There is one method/variable per instance\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab To access the method/variable you need the instance\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Instance attributes are for representing object state\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Instance attributes are for object behaviour\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There are two ways statements can access an instance attribute:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Direct \u8211- they have access to the object reference for the instance\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab For this you have to use dot notation: {\f1 reference.attribute}\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Indirect \u8211- they are in an instance method of the class that has been called on the instance\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab For this you don't need dot notation (unless there's ambiguity): {\f1 attribute}\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Notation for Classes\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can always write {\f1 class.method(arguments)}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Inside the defining class you may write {\f1 method(arguments)}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The same applies for variables.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Inheritance\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two main advantages:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab increases ability to reuse implementation effort\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab separates class-specific code from general code\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Common code is put in a common, more abstract class (the superclass).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public class Surgeon extends Doctor \{\line
+    public Surgeon() \{\line
+        worksAtHospital = true;\line
+    \}\line
+\line
+    @Override\line
+    public void treatPatient() \{\line
+        // specific patient treatment\line
+    \}\line
+\line
+    public void makeIncision() \{\line
+        // additional behaviour\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab This is how to implement a subclass in java.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There are classes that support arrays that grow:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 import java.util.ArrayList;\line
+\line
+final ArrayList<Animal> animals = new ArrayList<Animal>();\line
+\line
+animals.add(new Dog());\line
+animals.add(new Cat());\line
+animals.add(new Hippo());\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Enhanced {\f1 for} notation:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 for (Animal animal: animals) \{\line
+    animal.makeNoise();\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab = for each animal in animals\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Hierarchy\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Rather than make an {\f1 Animal} superclass and subclass every animal individually from that, it's useful to note that you can split animals into {\f1 Canines}, {\f1 Felines}, and {\f1 Others}, where canines have stuff in common and felines and stuff in common.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This way you have to write less code.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 E.g. all canines can use the same roaming method, rather than writing that method for each individual animal class within that group.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab all canines eat meat\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab all canines roam in packs\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Superclass Constructor\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Calling the superclass constructor should be the first call in the constructor for the Canine class.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You do that like this:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 class Canine extends Animal \{\line
+    private static final boolean EATS_GRASS = false;\line
+    public Canine(final String picture)\{\line
+        super(picture, EATS_GRASS, hungerLevel);\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 super()} calls the constructor for the superclass\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Interfaces\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Overloading\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two methods with the same name may overload each other. This is when you have two methods with the same name but a different signature. The signature of a method is its name and its argument types. A different signature might be:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab e.g. different numbers of arguments\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab e.g. same number of arguments but at least one different type\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Class constructors may also be overloaded.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public void f(int x) \{\}\line
+public int f(double x) \{\}\line
+private void f(int x, double y) \{\}\line
+public void f(double x, int y) \{\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Which method is called is determined by the types of arguments passed in. If you call {\f1 f()} and pass it one {\f1 int}, the first definition here will be called.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The following doesn't work:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public void f(int x) \{\}\line
+private int f(int y) \{\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab return types or visibility isn't enough, the parameter numbers and types need to be different\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab it's not enough to just call the parameters something different\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Constructor Overloading\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Constructors can be overloaded, and they can call each other. You do this using {\f1 this(\u8230?)}. This should be the first call in a class constructor if it's used.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This lets you implement easy client-friendly constructors.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab A general constructor does the work\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The friendly versions call {\f1 this()}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The friendly version may do additional configuration [check]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public class NameObject \{\line
+    private static final String DEFAULT_NAME = "Object";\line
+    private final String name;\line
+\line
+    // Default constructor\line
+    public NamedObject(final String name) \{\line
+        this.name = name;\line
+    \}\line
+\line
+    // Special-purpose constructor\line
+    public NamedObject() \{\line
+        this(DEFAULT_NAME);\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The special-purpose constructor here allows you to have a default value if the constructor is called without an argument\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Motivation for Interfaces\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Interfaces are similar to classes, where the API is defined, but not the implementation.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Say you have a sorting algorithm. The algorithm works for certain kinds of objects. Say it works for Integers and you'd like to use the algorithm for Doubles. Ideally you'd like to reuse the algorithm's implementation.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You use an interface for this.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab We could do this by overloading methods, but then we'd have the same code in multiple places, leading to changes having to be made in multiple places and mistakes propagating.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Interfaces\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public int linearSearch(final Comparable[] things, final Comparable key)\{\line
+    int index = 0;\line
+    while ((index != things.length) && (things[index].compareTo(key) != 0))\{\line
+        index++;\line
+    \}\line
+    return (index < numbers.length) ? index : -1;\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 Comparable} is an interface that defines {\f1 compareTo}.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab If classes like {\f1 Double} etc. provide an implementation of {\f1 compareTo}, then they can be used in this.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Contract\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We want to restrict the type of parameter to make sure the parameter has the behaviour we need.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We do this using an interface, which is a multi-stage process:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab define the interface (once)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab implement the interface (any number of times)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Defining the Interface\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It's like defining a class. You provide the name of the interface.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You provide the API of the public instance methods.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You don't provide an implementation of the instance methods.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public interface Sellable \{\line
+    public double getPrice();\line
+    public void sellTo(final Buyer buyer);\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Note there's no implementation\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Once you've defined it, you can implement it.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Implement the Interface\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A class may implement an interface by overriding all methods defined in the interface. In order to be an implementation of the interface, it {\i must} override all methods define in the interface.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public class Cat implements Sellable \{\line
+    \u8230?\line
+    private final double price;\line
+    private Buyer owner;\line
+    public Cat(\u8230?)\{\line
+        \u8230?\line
+    \}\line
+\line
+    @Override\line
+    public double getPrice() \{\line
+        return price;\line
+    \}\line
+\line
+    @Override\line
+    public void sellTo(final Buyer buyer)\{\line
+        // implementation\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Substitution Principle for Interfaces\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Say we have an interface called {\f1 Interface}. Say we have a variable {\f1 var} of type {\f1 Interface}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 At runtime you may assign {\f1 var} any reference to an instance of a class that implements {\f1 Interface}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 More generally, if a class implements {\f1 Interface} you may use its instances when an {\f1 Interface} object reference is expected.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is called the {\i Liskov substitution principle}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Say the {\f1 Dog} class implement the {\f1 Animal} interface. Then you can use a Dog when Java expects an Animal.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 Animal animal = new Dog();\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Substitution Principle for Classes\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If a class extends {\f1 Clazz} you may use its instances when a {\f1 Clazz} object reference is expected. Say [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 Animal animal = new Dog();\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Polymorphism\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The term means the occurrence of [check].\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 With polymorphism the type of reference variable and of object may be different. An {\f1 Animal} object reference may reference a {\f1 Dog} object, as long as the {\f1 Dog} class extends the {\f1 Animal} class (or implements the {\f1 Animal} interface).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The type of the object, not the type of the reference, determines which instance method is called.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is also known as late binding.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Polymorphic Methods\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Formal parameters and return types can be polymorphic. With formal parameter {\f1 Animal} the actual parameter may be a {\f1 Dog} type. The same for return types.\par}
+}

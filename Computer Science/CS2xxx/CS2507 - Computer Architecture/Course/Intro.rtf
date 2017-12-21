@@ -1,0 +1,79 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Big Picture\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Designing for application/program performance and energy efficiency on modern computers.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab What determines program performance?\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab How are programs translated into machine language?\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab How do hardware designers improve performance?\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Course Overview\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Fundamentals of computer design\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Hardware/software interface\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Program performance and improvement\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Hardware techniques to improve performance\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Hardware techniques to improve energy efficiency\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Instruction set principles\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Pipelining\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Memory hierarchy\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Parallel processors\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Understanding Performance\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab What algorithm was used?\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Determines the number of operations executed\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Programming language, compiler, architecture\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Determines the number of machine instructions executed per operation\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab I/O System (including OS)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Determines how fast I/O operations are executed\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Processor and memory system\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Determine how fast instructions are executed\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 8 Great Ideas of Computer Architecture\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Design for Moore's Law\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Design for rapid change \u8211- by the time your computer is ready (3\u8211-4 years), it may be outdated\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Use abstraction to simplify design\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Represent hardware and software at different levels\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Make the common case fast\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Easier to improve on simple cases than complex ones\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 4.\tx360\tab Performance via parallelism\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Parallel operations are faster\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 5.\tx360\tab Performance via pipelining\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Sequential pattern of parallelism\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 6.\tx360\tab Performance via prediction\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Guess the outcome of a branch\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 7.\tx360\tab Hierarchy of memories\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Arranging memory according to cost/speed\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 8.\tx360\tab Dependability via redundancy\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Including redundant components for addressing failure\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Levels of Program Code\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab High-level language\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Level of abstraction is closer to the problem domain\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab This makes programmers more productive\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Provides for productivity and portability\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Assembly language\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The textual representation of instructions\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Hardware representation\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Bits\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Encoded instructions and data\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Computer Components\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Inputs\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Outputs\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Memory\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Processor (datapath and control units)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 All classes of computer share these same components.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Inside the Processor\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Datapath\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab performs operations on data\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Control\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab sequences the datapath, provides memory access\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Cache Memory\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab small fast SRAM memory for immediate access to data\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 All input to the processor goes to the (cache) memory first, and then the control determines when things are sent to the datapath.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Memory\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There are two classes of memory:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Volatile main memory\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Non-volatile secondary memory\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Volatile memory loses instructions and data when powered off.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Secondary memory examples:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Magnetic disk\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Flash Memory\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Optical disk (CDROM, DVD)\sa180\par}
+}

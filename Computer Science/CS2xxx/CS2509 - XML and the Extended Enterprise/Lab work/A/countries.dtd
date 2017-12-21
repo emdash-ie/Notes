@@ -1,0 +1,5 @@
+<!ELEMENT countries (country+)>
+<!ELEMENT country (name, capital, population)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT capital (#PCDATA)>
+<!ELEMENT population (#PCDATA)>

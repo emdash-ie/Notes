@@ -1,0 +1,134 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Intro\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab for every problem, we can have many approaches for solving it\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab e.g. thread vs. process vs. activity\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab need to analyse and compare approaches, see the benefits and disadvantages of each\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 OS Architecture, Models, Concepts\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Computing resources, multiplication, virtualisation\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab virtualisation is very important\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab associated with many areas of computer science, especially IoT\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab saw it with virtual file system in Linux, which was to accommodate different file systems\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab also the virtual machine in/with Android\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab multiplication\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab now we have multiple physical copies of the same resource\par}
+{\pard \ql \f0 \sa180 \li1440 \fi-360 \endash \tx360\tab e.g. many CPUs instead of just one\par}
+{\pard \ql \f0 \sa180 \li1440 \fi-360 \endash \tx360\tab have to deal with scheduling and load-balancing with many cores\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Layer architecture, services\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab most OSes now built on concept of a service \u8211- OS provides a set of services to users and their applications\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab flexibility, openness, ease of management, updating\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Models: hierarchical, service-based, component-based\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab e.g. TinyOS, where software is a combination of components\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Process, task, activities\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab similar but managed differently by the OS\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab all about computation in the program\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab processes are quite complex because of admin info\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab tasks (remember TinyOS) are different to processes \u8211- no admin info\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab sequence of instructions that is brought to the queue, ready to be executed\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab round-robin scheduling\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab lack of admin info possible because tasks are fully known beforehand\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab TinyOS v2 more complex, allows for priorities, etc.\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab activity\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab Android\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab mobile, highly interactive OS\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab can go from one activity to another across processes\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab important difference is user is interacting with an activity \u8211- visible phase\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab hosted within processes\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Process Management\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab process definition, structure, lifecycle, states\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab creation of child processes\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab fork, vfork, clone \u8211- very important to know the difference between fork and vfork\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab threads\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab process management in Linux\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab process creation in Linux\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Scheduling\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab purpose of scheduling\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab deciding which process takes control of the system for the next time slice\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab FIFO, shortest-time first\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab priority-based, multilevel feedback queues (parameters adjusting at run-time)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab two-level scheduling\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab real-time scheduling\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab group and domain scheduling\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab many-core systems\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab simple approaches, e.g. one core for OS and one for user\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab complex approaches, e.g. consider all processes and schedule according to group or domain\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab group is about affinity of processes (e.g. sharing data, IPC)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab domain is about hardware resources (characteristics of cores and cache memory are very important)\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab assume all packages/cores are the same\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab there are systems where packages are different\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab can be optimised for specific types of process (e.g. numerical analysis, image processing)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab load balancing\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab important in many-core systems as well as scheduling\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab partly about energy efficiency\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Linux scheduling\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Memory Management\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab address translation\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab virtual memory (pages, page table)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab using virtualisation here\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab expand memory across the storage, using e.g. pages\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab process has variable number of pages allocated to it\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab pages have flags indicating how they were used (present, modified, etc.)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab now implemented in hardware (CPU), rather than in the OS\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab address translation, page management\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab free space, fragmentation\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab strategies try to reduce fragmentation as much as possible\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab memory allocation algorithms, over-allocation/swapping\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab replacement algorithms\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab if everything is allocate, what is a good candidate for replacement?\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Windows NT page working set\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab memory is full \u8211- if a process needs a new page, an existing page needs to be replaced\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab either local choice \u8211- replacement done with a page in use by that process\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab or global choice \u8211- replacement done with a page chosen from all processes\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Linux memory management\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 I/O Management\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab different from memory because different devices are very different from each other\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab generally grouped into character devices or block devices\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab I/O subsystem\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab drivers' interaction and families\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab families is a recent development\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab generic family which characterises all devices of the same type, even if performance is different\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab similar to virtualisation\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab device driver structure\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab representation of devices in Unix\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab I/O devices in Linux\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab I/O schedulers\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab different deadlines for read and write\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sensors\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab especially for mobile devices\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab how sensors return data \u8211- continuously, on demand, event-triggered\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab allow context-aware applications\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 The Filesystem\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab not much here has changed recently\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab though look at how this can be ported to clouds \u8211- research topic at the moment\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab file concept, structure, operations\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab filesystem services, metadata, management\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab directories\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab storage management\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab linux virtual filesystem \u8211- interesting to study more\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab structure\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab main components\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab superblock\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab inode\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab EXT3, disk scheduling\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Block, character devices\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab RAID management \u8211- also interesting to study\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Overview\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab didn't focus only on one OS, tried to bring in aspects of several\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab not just general purpose OSes\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab sensor OSes are important now/soon\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab also mobile OSes\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab can look at the differences between them\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab note: look at difference between activity and process\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab ask why things are different\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab good to evaluate different approaches, not just one\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab best way is to take the simplest approach\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab people don't adopt sophisticated solutions, complex algorithms\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab complex solutions are prone to errors\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab potential of mobile devices not fully exploited\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab applications and even OS don't provide means to fully exploit resources\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab a lot to do here, worth considering as a future career\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Sample questions will be posted tomorrow, we'll talk about the exam on Wednesday.\par}
+}

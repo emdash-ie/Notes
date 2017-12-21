@@ -1,0 +1,39 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Database Programming\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab most people interact with databases through programs (parametric users)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab they don't need to know that they're interacting with a database\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In the past there was typically one mainframe, which contained the DBMS and the applications for interaction. Embedded SQL (ESQL) was used.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This changed to a client-server model, where the applications run on the client, and communicate with the server. ODBC (a small extension to ESQL) is used for this.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Then everything moved to the internet. At this point, PHP and ASP were developed specifically for interfacing databases with the internet. Looking at PHP and ASP, you can see how they developed from ESQL.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 ESQL\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab note all examples are in pseudocode\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this is to keep the emphasis on how the program interacts with the database, and not coding in a particular language\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab {\f1 INCLUDE SQLCA} is for status information \u8211- what happened? did it work? etc. It's a data structure shared between the DBMS (which can write into it) and the program (which can read from it).\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab program needs to log in and be verified using a username and password\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab if the login was unsuccessful, there's no point continuing\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab the program checks the SQLCA to determine whether it was successful or not\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab the value accessed will be 0 if the command was correct, a negative value if there was an error, and a positive value if there was an exception\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab program also needs to log out at the end\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab connection is closed anyway when the program terminates, but need to make sure SQLCA datastructure is deleted\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab {\f1 INTO} line puts the selected results into the specified variables\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab colon prefix is used to indicate a local variable\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab stafflookup program is made easier by the fact that we're looking up based on a unique key \u8211- the result will either be a single row or nothing\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab so we know that we only need a single variable for each column in the result\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Since programs contain SQL and whatever language they're written in, there needs to be something marking the SQL code (telling the other compiler/interpreter to ignore it)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab pre-compilers also used to solve this problem \u8211-\u160?they validate and compile just the embedded SQL statements (like an interactive interpreter)\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab extract the individual statements, compile to machine code, put comments around the result code within the host code, which then goes through a normal compiler\par}
+{\pard \ql \f0 \sa0 \li1440 \fi-360 \endash \tx360\tab then use a linker to link all the individual machine code segments into a single executable\sa180\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 SQL Communication Area\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab a datastructure that contains information on the database interactions\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab SQLCode is a numeric value, where 0 means success, a negative number means an error happened, and a positive value means an exception happened\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab there are then different positive numbers for different exceptions, e.g. 100 to say that the query ran but retrieved nothing\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab same for errors, e.g. -56 says you don't have permission to execute the query you tried to run\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Example: StaffRecord\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Will check that the staff number given doesn't already exist\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab error feedback isn't very comprehensive \u8211- would need to be more specific in a proper program\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Example: StaffList\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab may get multiple results\sa180\par}
+}

@@ -1,0 +1,138 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 BubbleSort\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Loop over the list, swapping adjacent elements if they're out of order\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Puts the next-biggest element in the next-last slot each time\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Time Complexity\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab O(n^2) for best and worst case because it always does (n + n-1 + \u8230? + 1) comparisons\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Space Complexity\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Can be done in-place so O(1)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Stability\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Stable once swap condition is left > right \u8211- elements with the same value will never be swapped past each other\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 SelectionSort\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Find the next-smallest item each time and swap it into the next place from the start\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab growing sorted list from the front\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 \u160?Time Complexity\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Worst case and best case the same - O(n^2)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab have to search the whole unsorted section to find the next smallest item every time\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab n + n-1 + \u8230? + 1 = O(n^2)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Space Complexity\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Can be done in-place so O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Otherwise O(n) for the PQ\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Stability\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Not stable\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab take the list [2, 3, 7, 4, 5, 2, 1]\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab first step will search the whole list for the 1, and then swap it with the first 2\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab first two is now after the second one: [1, 3, 7, 4, 5, 2, 2]\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 InsertionSort\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Grow sorted list from the front\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Each time put the next item into the correct position in the sorted list\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 \u160?Time Complexity\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Worst case - O(n^2)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab list is already sorted backwards\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab have to shuffle each element the whole way to the front of the sorted section\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab 1 + 2 + \u8230? + n-1 comparisons = O(n^2)\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Best case - O(n)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab list is already sorted\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab compare each element to the one before it - O(n)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Space Complexity\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Can be done in-place so O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Otherwise O(n) for the PQ\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Stability\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab stable\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab as long as you stop once you reach the same value when inserting\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab e.g. if you're inserting a 4 and the sorted section already contains 4s, the new 4 must go to the right of the existing 4s\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 HeapSort\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Put everything into a heap, then take it out again\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Can be done in-place by growing a max heap from the front of the array and then taking the elements out one by one and putting them in the next-last place\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Time Complexity \u8211- O(n log n)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab O(log n) for each element added to heap\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab so O(n log n)\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab O(log n) for each element removed from the heap\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab O(n log n)\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Best case: list already in max heap order \u8211- still O(n log n)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab O(n) to grow\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab still O(n log n) to shrink\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab total O(n log n)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Space Complexity\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab O(n) for tree implementation \u8211- node for each element\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab O(1) for array-based implementation because it can be done in-place\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Stability\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Not stable because of the heap\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab though possibly stable if the list is already sorted in descending order?\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 MergeSort\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Split the list in two and recursively sort the sections, then merge them\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab to merge: repeatedly take the smaller of the next items in each section\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab base case: section with 0 or 1 elements is already sorted\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Difficult to do in-place, but can be done back-and-forth between two lists\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Time Complexity \u8211- O(n log n)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Each merge is O(k) where k is the combined size of the sections\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab each level of the call stack is O(n) \u8211- e.g. two sections, each O(n/2)\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Depth of call tree is O(log n)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab So total is O(n log n)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Best case is still O(n log n) because the same amount of merging and number of comparisons are done\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Space Complexity\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab O(n) for bottom-up with two lists\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab O(n log n) for implementations that create extra smaller lists\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Stability\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Stable as long as the left-hand element is taken first when merging and two elements are equal\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab e.g. if you're merging two lists and the front element is 3 in each of them, take the left one first\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 \u160?QuickSort\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Choose a pivot\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab move all elements less than the pivot before it and the rest after it\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab put the pivot in between\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab sort the subsections either side of the pivot recursively\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Efficient implementation avoids shuffling elements through the list by swapping out of place ones\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab find one before the pivot that should be after, swap it with one that's after the pivot but should be before\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab QuickSort is fastest if each pivot is the median value \u8211- there's an algorithm called median of medians which can guarantee this\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Slowest if each pivot is the next smallest or largest value \u8211- can choose a random pivot or shuffle the list at the start to avoid this\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Time Complexity \u8211- O(n^2) but O(n log n) on average\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Worst case \u8211- O(n^2)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab if each pivot is the next smallest or next largest value\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab so the tree gets to maximum depth (n)\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Best case \u8211- better than O(n log n)?\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab each pivot is the median\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab tree depth is O(log n)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab but it's less than n comparisons at each level, because the pivots from the last level aren't included, and there's only one comparison for each element that isn't the pivot in a given sublist\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Average \u8211- O(n log n)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Space Complexity\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Can be done in-place, so O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab If a new list is created, then O(n log n), possibly better\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Stability\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab not stable with the random shuffle\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab without it it might be\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 BucketSort\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Make a bucket for each possible value, pass through the list, putting each item into the right bucket\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Then empty the buckets in order\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Not a comparison sort\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Time Complexity \u8211- O(n + N)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab N is the number of buckets, n is the length of the list\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Create buckets is O(N)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Pass through the list to put in buckets is O(n)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Processing buckets is O(N)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab O(n) assignments to create the list again\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Total of O(n + N)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Space Complexity \u8211- O(n + N) or O(N)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab N buckets, n elements added across them\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab though you could say that things can be moved to buckets rather than copied to them, in which case it's just O(N) space\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Stability\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Stable if buckets are FIFO\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 RadixSort\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab One bucket sort for each character (or digit), starting from the right\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Works because bucket sort is stable\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Time Complexity \u8211- O(mn)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab O(n + 10) for each digit (because there are 10 possible digits \{0, 1, 2, \u8230?, 9\} and so 10 buckets), which is ~= O(n) for n > 10\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab So O(mn) total, where m is the maximum number of digits in the input list (e.g. if the largest number in a list of integers is 10749, m = 5)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab According to Ken's notes time complexity for radixsort is unclear, though, so I've probably oversimplified here\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Space Complexity \u8211- O(n) or O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab O(1) for buckets\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab this is for base 10 numbers\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab for characters, it's constant but may be quite large if you need to support a lot of possibly characters (e.g. utf)\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab O(n) for filling buckets\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Total of O(n)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab or possibly O(1) if you move rather than copy, as mentioned in bucketsort\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Stability\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab stable because requires stable bucketsort\sa180\par}
+}

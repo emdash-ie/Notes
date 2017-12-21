@@ -1,0 +1,82 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Sorting\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Sorting is important because it's everywhere. Physical sorting (mail, cards in card game hands, library books), interfaces (holidays by cost, financial results in a spreadsheet), software (Google search results, data structures for ease of searching, for assigning jobs to processors).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 To write efficient software, you have to understand sorting, and know which algorithms to use when.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Bubble Sort\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Basic sort algorithm, easy to write down.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 def bubble_sort(mylist):\line
+    n = len(mylist)\line
+    for i in range(n-1):\line
+        for j in range(0, n-1 - i):\line
+            if mylist[j] > mylist[j+1]:\line
+                mylist[j], mylist[j+1] = mylist[j+1], mylist[j]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Worst case gives {\f1 0.5*(n-1)*n} comparisons, which is O(n{\super 2}).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Worst case O(n{\super 2}) swaps.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Sorting Using Priority Queues\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A priority queue is a data structure to which we can add items, and from which we can remove the item with the top priority.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Outline sorting algorithm:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab for each item in our list, add it to the PQ\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab then repeatedly remove the top item from the PQ and put in successive cells in the list\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 def pq_sort(mylist):\line
+    pq = PriorityQueue()\line
+    for i in range(len(mylist)):\line
+        pq.add(mylist[i], None)\line
+    for i in range(len(mylist)):\line
+        mylist[i] = pq.min()\line
+[check this]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Sorting With an Unsorted Linked List PQ\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 {\i Selection} sort \u8211- main task is selecting the next smallest item.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Adding an item to the PQ is O(1), so the cost of the first loop is O(n).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Removing the top item requires a linear search over all items in the list, so n-1 comparisons. Each time we remove an item, the list shrinks by 1, and we make one assignment back into our original (array-based) list.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab O(n{\super 2}) comparisons, n assignments\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Best case (for n)?\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The best case is also O(n{\super 2}) comparisons and n assignments \u8211- same as worst case.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 In-place Sorting\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Sorting using a separate priority queue requires extra space.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So we sort in place to make sure we don't run out of space for large n.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 In-place Selection Sort\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Treat the unsorted input array as the PQ list implementation (so no build cost). Instead of removing the top item, swap it into the correct cell, and shrink the 'view' of the PQ.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab find the smallest item, swap it with cell 0\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab find the smallest item in the rest of the list, swap it with cell 1\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab repeat until sorted\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Worst case: O(n{\super 2}) comparisons, n swaps.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Best case: O(n{\super 2}) comparisons, n swaps.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [get python code]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Sorting With a Sorted Linked List PQ\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Insertion sort: main task is inserting each item in the right place.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Adding an item to a sorted linked list of length n takes at most n comparisons, and if we are lucky, just 1 comparison. It always takes 1 assignment.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Adding n items to an initially empty PQ takes 0+1+2+...+(n-1) = O(n{\super 2}) comparisons and n assignments for worst case.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Removing top item is O(1).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Best case: O(n) comparisons, n assignments.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 In-place Insertion Sort\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Treat the unsorted array as the stream of items to be added to the PQ list implementation, and gradually expand the sorted list from the front (growing the 'view' of the PQ). Search the PQ to find the insertion place.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Copy the new item, shuffle the others down one place, insert the new item.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [get python code]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Worst case: O(n{\super 2}) comparisons and O(n{\super 2}) swaps.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Best case: O(n) comparisons, and 0 swaps.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Sorting With a Binary Heap PQ\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Heap sort: all the action takes place with heap operations.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Adding an item to a binary heap which has n items takes O(log n) comparisons and swaps. So adding all n items takes log(2) + log(3) + ... + log(n-1).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Each of these is <= log(n), and there are <=n of them, so O(n log n) to build the PQ.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Removing the top item from a binary heap with n items takes O(log n), so by the same arguments, to rebuild the array takes O(nlogn) comparisons and swaps.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So that's 2nlogn, which is O(n log n). O(n log n) is a lot better than O(n{\super 2}).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Represent the heap using a list as before.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 In-place Heap Sort\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Treat the unsorted input array as the stream of items to be added to the PQ, and gradually expand an array-based heap from the front.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Next item added to heap goes into last position, so it is already in the right starting place. Now bubble up to find its correct position.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The list is not a sorted list, though.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Using a Max Heap\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The heap is not a sorted list.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Instead, we will do two phases, and in the first phase, we will build a {\i max} binary heap. Same as before, but now each item must be larger than or equal to its children.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Phase 1\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Build a max heap from the front.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Phase 2\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In the final output, we want the biggest item at the end, so we remove it from the heap, copy the last item up and then bubble it down, leaving the last place free to re-insert the biggest item.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Iterate until the virtual heap is empty, and we're back to a sorted list.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Complexity\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab O(n log n) to build the max heap\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab O(n log n) to turn the max heap into the sorted list\sa180\par}
+}

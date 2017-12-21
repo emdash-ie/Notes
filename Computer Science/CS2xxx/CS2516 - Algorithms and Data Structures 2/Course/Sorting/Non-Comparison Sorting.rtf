@@ -1,0 +1,127 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Limits to Comparison Sorting\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We can't do any better than O(n log n).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 All the algorithms so far are based on repeated comparisons between pairs of elements. These comparisons provide the biggest chunk of the complexity.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 How many do we need to do?\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Consider an arbitrary sorting algorithm that uses {\i only} comparisons to decide on the relative placement of elements.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Consider an arbitrary input list consisting of some permutation of n distinct elements\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Build a binary tree to represent all possible sequences of comparisons that out algorithm does to the input list.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab At each node in the tree, branch left if the test is true, branch right if not\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 E.g. consider any comparison sort of a list of three elements V1, V2, and V3. At the start, we know nothing about their relative ordering. With each node, write down everything we have learned in the current path. Pick the questions randomly.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Suppose we do the same for input lists of n distinct items. Every permutation of the input given will end a different leaf node.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Proof by contradiction:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Suppose two different input permutations end up at the same leaf\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The leaf determines the final order of the input elements by their initial position\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab But in the inputs there must have been some case where Vi < Vj in one list and Vi > Vj in the other\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab For those two positions, the leaf will definitely choose one of the two orderings\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab So one of the two input lists must end up with an incorrectly sorted output\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab But each leaf in our tree correctly sorts the input -> contradiction\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab So two different inputs must end up at different leaves.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So there must be one leaf for every possible permutation of the n distinct items \u8211- n! different permutations.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There are n! different leaf nodes. There must be at least n! nodes in the tree.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The tree must have at least depth log(n!).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 n! = n * (n-1) * \u8230? * 1\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 At least n/2 factors in that product are >= n/2.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 n! >= (n/2){\super n/2}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 so log(n!) = \u937?(n log n).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So the depth of the tree is \u937?(n log n).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So there is at least one path to a leaf of length \u937?(n log n), which means at least one sequence requires that many comparisons.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So you cannot get a worst-case running time that's less than n log n.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is a lower bound for all comparison-based sorting. We cannot get a comparison-based sorting algorithm which has worst-case complexity significantly better than heapsort or mergesort.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 (Therefore heapsort and mergesort are Theta(n log n) in the worst case.)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There are now only two options for improving sorting algorithms:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Accept that we are not going to get anything significantly better, and just look at improving the expected case, or making small improvements to the worst case.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Quicksort did this.\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Find some way of sorting that is not based on comparing pairs of input elements.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Non-Comparison Sorting\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Suppose we knew that all the elements in our input list had values (or keys) within a limited range (e.g. [0, N-1]).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Use a bucket array with a bucket for each value in the range.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Iterate through the list, and enqueue each item in the bucket for its value\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Once the list has been processed, take each bucket in turn and dequeue its items into the list in sequence\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This takes 2n steps, and then the list is sorted.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Pseudocode\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab N steps to create each bucket\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab 2n steps to read each element and add to the correct bucket\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab N steps to process each bucket\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab n assignments of elements back into the list\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is O(N + n).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If N is not big compared to n (i.e. if N is O(n)), the the complexity is O(n).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If N is O(n^2) or worse, then the complexity is O(n^2) or worse.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can get linear-time sorting if you know the range.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The space requirement is also O(N + n).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Stable Sorting\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A sort is stable if items that are equal in the sort appear in their original order.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A stable sorting algorithm is one that keeps the original order of any pair of items that have equivalent keys.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Stable sort is preferable because then we know something about the order in the output.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Formal definition:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Let x0, x1, \u8230? xn be the items in the list in original order.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Let the key for each item xi be xi.k, and resort the list by the key.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Previous Algorithms\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Our bubblesort, insertionsort, mergesort, and (because we used a queue for each bucket) bucketsort were stable\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Our selectionsort, heapsort, quicksort were not\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Lexicographic Ordering\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Add 'a' characters to the smaller string so that they are the same length\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Compare first position\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab If they're equal, compare the second position\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab etc.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Lexicographic Sort of 2-Tuples\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Use a stable sort\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Sort by the second element of each tuple\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Resort by the first element of each tuple\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Radix Sort\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Apply the last technique using bucket sort.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 O(N + n) for the first sort. O(N + n) for the second sort.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 With Integers\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Sort by the last digit, then the next, and so on until you get to the first digit.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This cuts N down to 9 for each sort, giving O(9 + n) for each sort.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Summary\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Bubblesort:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab stable\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab slower than other O(n^2) algorithms\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab never used\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Selectionsort:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Unstable\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Slow, rarely used\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Insertionsort:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Good on input that's close to being sorted\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Can be easily adapted to sort an online stream of incoming data\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Usually better than other O(n^2) algorithms, reasonably fast on smaller inputs\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Often used inside recursive algorithms when the input list gets below a certain size\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Heapsort:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Complex to write\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Can be written in-place\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Not stable\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Worse-case time complexity is O(n log n)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Generally slower in practice than other O(n log n) algorithms\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Mergesort:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Easy to write for linked lists, difficult for a bottom-up array sort\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Difficult to write in-place\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Most implementations are stable\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Worst-case time complexity is O(n log n)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Quicksort:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Idea is simple, but need to be careful when implementing\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Can be written as in-place\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Not stable\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Normally faster than O(n log n) algorithms\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Worst case O(n^2) but average is O(n log n)\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab For a long time, thought to be the best practical algorithm\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Bucketsort:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Not a comparison sort\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Simple to understand and implement\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Normally implemented to be stable\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Worst case is O(N + n), where N is the range of values to be sorted\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Requires O(N) additional space\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Radix:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Distribution sort\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Multiple iterations of bucket sort on different keys\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Stable\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Worst case time complexity not clear \u8211- based on number of items in the key words, and the number of items\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Not in-place\sa180\par}
+}

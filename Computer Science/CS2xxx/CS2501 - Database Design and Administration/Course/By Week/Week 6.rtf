@@ -1,0 +1,43 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Views (a.k.a. virtual tables, derived tables)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Base tables have a security problem:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab You can't hide some columns from people\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab e.g. give read access to the employee table but hide the salary column\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab You can't hide some rows from people\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Views solve this problem, and also make data requests simpler.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 View Definition\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When someone submits a {\f1 CREATE VIEW} statement, two things happen:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab the DBMS validates the {\f1 SELECT} command\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab the DBMS stores the text of the {\f1 SELECT} statement and labels it according to the name you gave\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab it stores this in the database directory\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Note no validation takes place at this point.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This allows the views to remain consistent with the base tables when they change.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Examples\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 CREATE VIEW HoustonEmployeesD5 AS\line
+SELECT Ssn, Fname, Lname, Sex, Salary\line
+FROM EMPLOYEE\line
+WHERE Address LIKE '%Houston, TX'\line
+    AND Dno = 5;\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Create a view containing certain information on Houston-based employees of the research department:\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 CREATE VIEW HER_1 (StaffId, Name, Sex, Salary) AS\line
+SELECT SSn, CONCAT(Lname, ', ', Fname), Sex, Salary\line
+FROM EMPLOYEE, DEPARTMENT\line
+WHERE Dno = Dnumber\line
+    AND Address LIKE '%Houston, TX'\line
+    AND Dname = 'Research';\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab In the above one we rename the columns\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can also create views from other views:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 CREATE VIEW HERWORK AS\line
+SELECT Pno, Pname, Plocation, Hours\line
+FROM WORKS_ON, PROJECT, HER_1\line
+WHERE Pno = Pnumber\line
+    AND Dnum = Dnumber;\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Anyone can create a view who has the permission to run the sql {\f1 SELECT} query that creates it.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 View Manipulation\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can use {\f1 SELECT} queries on views just as you would on base tables.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When this is done, a part of the DBMS called the query modifier retrieves the view definition from storage and merges it with the text of the input query. The query modifier is a text-based algorithm that runs very quickly. The result of the merging is the query that is run by the DBMS.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Views are not particularly useful for {\f1 UPDATE}, {\f1 INSERT}, and {\f1 DELETE} statements, as it's often not clear what they would mean in relation to the base tables.\sa180\par}
+}

@@ -1,0 +1,175 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 (this is my own attempt, I'll scan his tomorrow \u8211- mine are pretty close)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Question 1: Objects and Classes\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 (a) Define object state and object behaviour.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab object state is what an object knows\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab object behaviour is what an object does\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 (b) How do you implement object state and object behaviour?\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab object state is implemented with instance attributes\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab object behaviour is implemented with instance methods\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 (c) Why can't a class attribute represent object state?\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab a class attribute has one value per class, so each object of that class references the same value\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab objects can't have their own state\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Question 2: Inheritance\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 (a) Explain inheritance and polymorphism.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Inheritance: If a class inherits from another class, objects of the inheriting class have methods from the other class as well.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Polymorphism: If an object has type A, then it can be referred to as being of type A or of any type which is a superclass of A (any type A inherits from).\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 (b)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The "is-a" test is used to check relationships between objects for suitability for inheritance. If saying "An Object A is an Object B" makes sense, then it makes sense for an Object A class to inherit from an Object B class.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 (c)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The {\f1 @Override} notation in Java throws an error if the marked method does not override another method. It is useful to help catch typos and other errors as early as possible.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 (d)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab To overload a method means to provide another implementation with an alternate signature (i.e. a method where the number of formal parameters or the types of formal parameters are different). An example would be if we want to provide multiple constructors for an object, which allow defaults to be used for some or all of the state:\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public class Pencil \{\line
+    private static final int DEFAULT_LENGTH = 4;\line
+    private static final String DEFAULT_WEIGHT = "HB";\line
+    private static final boolean DEFAULT_RUBBER = false;\line
+\line
+    private int length;\line
+    private String weight;\line
+    private boolean hasRubber;\line
+\line
+    public Pencil(int length, String weight, boolean hasRubber) \{\line
+        this.length = length;\line
+        this.weight = weight;\line
+        this.hasRubber = hasRubber;\line
+    \}\line
+\line
+    public Pencil(String weight) \{\line
+        Pencil(DEFAULT_LENGTH, weight, DEFAULT_RUBBER);\line
+    \}\line
+\line
+    public Pencil(int length) \{\line
+        Pencil(length, DEFAULT_WEIGHT, DEFAULT_RUBBER);\line
+    \}\line
+\line
+    public Pencil() \{\line
+        Pencil(DEFAULT_LENGTH, DEFAULT_WEIGHT, DEFAULT_RUBBER);\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Question 3: Class Design\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public abstract class Book \{\line
+    private final String title;\line
+    private final int pageCount;\line
+\line
+    public Book(final String title, final int pageCount) \{\line
+        this.title = title;\line
+        this.pageCount = pageCount;\line
+    \}\line
+\line
+    public abstract double getPrice();\line
+\line
+    public int getPageCount() \{\line
+        return this.pageCount;\line
+    \}\line
+\line
+    public String getTitle() \{\line
+        return this.title;\line
+    \}\line
+\}\line
+\line
+public abstract class PaperBook extends Book \{\line
+    private static final double PRICE_PER_PAGE = 0.15;\line
+    private final double coverPrice;\line
+\line
+    public PaperBook(final String title, final int pageCount, final double coverPrice) \{\line
+        super(title, pageCount);\line
+        this.coverPrice = coverPrice;\line
+    \}\line
+\line
+    @Override\line
+    public double getPrice() \{\line
+        return this.getPageCount() * PRICE_PER_PAGE + this.coverPrice;\line
+    \}\line
+\}\line
+\line
+public class Paperback extends PaperBook \{\line
+    private static final double COVER_PRICE = 1.0;\line
+\line
+    public Paperback(final String title, final int pageCount) \{\line
+        super(title, pageCount, COVER_PRICE);\line
+    \}\line
+\}\line
+\line
+public class Hardcover extends PaperBook \{\line
+    private static final double COVER_PRICE = 5.0;\line
+\line
+    public Hardcover(final String title, final int pageCount) \{\line
+        super(title, pageCount, COVER_PRICE);\line
+    \}\line
+\}\line
+\line
+public class EBook extends Book \{\line
+    private static final double PRICE_PER_PAGE = 0.1;\line
+\line
+    public EBook(final String title, final int pageCount) \{\line
+        super(title, pageCount);\line
+    \}\line
+\line
+    @Override\line
+    public double getPrice() \{\line
+        return this.getPageCount() * PRICE_PER_PAGE;\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Question 4: Iterators and Generics\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 (a) Complete PartialIterableClass\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 import java.util.Iterator;\line
+\line
+public class PartialIterableClass implements Iterable<String>  \{\line
+    private String[] things;\line
+\line
+    public PartialIterableClass(String[] things) \{\line
+        this.things = things;\line
+    \}\line
+\line
+    public Iterator<String> iterator() \{\line
+        return new ThingsIterator(this.things);\line
+    \}\line
+\line
+    private class ThingsIterator implements Iterator<String>\{\line
+        private int currentPosition;\line
+        private String[] things;\line
+\line
+        public ThingsIterator(final String[] things) \{\line
+            this.things = things;\line
+            this.currentPosition = 0;\line
+        \}\line
+\line
+        @Override\line
+        public boolean hasNext() \{\line
+            return this.currentPosition < this.things.length;\line
+        \}\line
+\line
+        @Override\line
+        public String next() \{\line
+            return this.things[this.currentPosition++];\line
+        \}\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 (b) Generic class Pair\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 ```java public class Pair \{ private T firstItem; private S secondItem;\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public Pair(final T firstItem, final S secondItem) \{\line
+    this.firstItem = firstItem;\line
+    this.secondItem = secondItem;\line
+\}\line
+\line
+public T getFirstItem() \{\line
+    return this.firstItem;\line
+\}\line
+\line
+public void setFirstItem(final T firstItem) \{\line
+    this.firstItem = firstItem;\line
+\}\line
+\line
+public S getSecondItem() \{\line
+    return this.secondItem;\line
+\}\line
+\line
+public void setSecondItem(final S secondItem) \{\line
+    this.secondItem = secondItem;\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \}\par}
+}

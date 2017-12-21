@@ -1,0 +1,57 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Linked Lists (cont.)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab We continued implementing Quicksort with linked lists in Java (see {\f1 ../Implementing Quicksort}).\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Assignment 1\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab We'll get assignment 1 back on Monday.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Everyone made similar mistakes for the assignment\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Some we definitely should have known not to make\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Should have comments\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Should have sensible variable names\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Recursion\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab a recursive function does not {\i have} to call itself\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Lower order computations = computations that are smaller in some way\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Controlling the Size\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Proof by Contradiction\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Computing Factorials\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Fibonacci\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If you want to become famous, don't become a pop star or celebrity \u8211- those don't last. Become a composer or mathematician instead.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Tracing the Calls\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab This is an inefficient method, as there are duplicated calls\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab becomes exponentially slow\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Towers of Hanoi\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Intermediate State\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Often useful to first try to find a recursive solution, and if that's inefficient, then change to an iterative solution\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Alternative Solution\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Ranges are empty for the base case\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Java\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Note you can find the number of the third peg by subtracting the sum of the other peg numbers from the sum of all of the peg numbers.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab moveDisk just prints the move\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Binary Search\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab return negative number if the element isn't found\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab {\f1 mid = (lo + hi) / 2} causes rounding error if\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab lo is maximum int value and hi is value just below\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab gives negative result\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Comparable Interface\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab lots of classes already implement this\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Tail Recursion (For Fibonacci)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab work up from the start values (0 and 1) until you get to the number you want\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab prevents duplication of calls\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Compute first pair\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab If not there yet, compute next pair\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Repeat until there\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A method is tail recursive if it has no more than recursive calls at the current level. (?)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Implementing this is a suggested exercise. You can then easily turn it into an iterative solution.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 private static int f(P p, int pos) \{\line
+    int result;\line
+    if (pos == 0) \{\line
+        result = p.get(1);\line
+    \} else \{\line
+        result = f(new P(p.get(1), p.get(0) + p.get(1), pos - 1));\line
+    \}\line
+    return result;\line
+\}\par}
+}

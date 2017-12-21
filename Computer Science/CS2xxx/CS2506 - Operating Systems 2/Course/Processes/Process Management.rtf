@@ -1,0 +1,111 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Processes\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A process is:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab an instance of a running program\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab the context associated with a program in execution\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A process consists of:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the executable (the code/instructions)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab data\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab management info\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The data and management info make up the process context.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Process Context\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The context represents state information:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab program values/variables, stored in the user space\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab management information (process descriptor), stored in the kernel space\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The following things form the process descriptor \u8211- the main component of the process context:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab process ID\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab a unique integer value\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab parent process ID\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab real user ID\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab the id of the user who started this process\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab effective user ID\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab the user whose rights the process carries\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab usually the same as the real user\sa180\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab current directory\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab the start directory for looking up relative pathnames\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab file descriptor table\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab a table with data about all input/output streams opened by the process\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab indexed by an integer value called the file descriptor\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab the environment\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab list of strings of format {\f1 VARIABLE = VALUE} used to customise the behaviour of certain programs\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab code area\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab data area\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab stack\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab for calling programs\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab heap\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab for additional memory space when required\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab priority\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab signal disposition\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab masks indicating which signals are awaiting delivery and which are blocked\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab umask\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab mask value used to ensure that specified access permissions are not granted when this process creates a file\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Basic Process States\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Ready\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Can go from this to Running\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Comes here when created\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Running\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Can go from here back to ready or to blocked\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab E.g. might block itself while waiting for an I/O operation to finish\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Can terminate from here\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Blocked\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Can go from here back to ready\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Nowadays we have much more complex sets of states than this basic example.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Process Management\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Create\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The internal representation of the process is created\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Initial resources allocated\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Resources will change over time.\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Initialise the program that is to run the process.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Terminate\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Release all resources\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Possibly inform other processes of the end of this one\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Change program\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The process replace the code it is executing (by calling exec)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab This is useful when we have multiple processes and we want them to do different things\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab We start with a parent process, and then use different children to do different things (multi-threading)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Block\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Wait for an event, e.g. the completion of an I/O operation\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Awaken Process (and put in queue)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab After sleeping, the process can run again.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Waits for its turn once awakened.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Switch process\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab process context switching (another process takes control of the CPU)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Schedule process\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Take control of the CPU\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Set process parameters\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab e.g. priority\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Get process parameters\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab e.g. CPU time so far\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When a process is ready to run, it is sent to a ready-to-run queue, where it competes with other processes.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Processes, Threads, and Scheduling\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Child Processes\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A process can create a child process identical to it by calling {\f1 fork()} (the UNIX function). As the kernel creates a copy of the caller, two processes will return from this call.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When fork is called, the process saves its state, then switches control to the kernel process which will create the copy.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The parent and child will then continue to execute asynchronously, competing for CPU time shares.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 CPU time is allocated to processes in constant-size chunks. Say a user process calls {\f1 fork()} before the end of its time-slice. Then the kernel process for this purpose takes over for the rest of the time-slice. At the boundary of every time-slice, the scheduler (another kernel process) takes control and decides which process (of all competing processes \u8211- it'll be the highest-priority one) takes control for the next time-slice.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The child and parent will have the same priority, as the child is an identical copy of the process, including the context. They will have different IDs, however, as they are distinct processes.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Generally, the child is used to compute something different from the parent. The {\f1 fork()} returns the child ID to the parent, while it returns 0 to the child itself. For this reason, {\f1 fork()} is placed inside an if test. The if block will be run by the parent, and the else block will be run by the parent. The two processes work from the same code, but are directed to different sections of it.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Process Genealogy\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 All processes are descendants of the {\f1 init} process, whose PID is 1. The kernel starts init in the last stage of the boot process.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The init process then reads system init scripts and executes more programs, completing the boot process.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab every process has only 1 parent\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab every process can have 0 or more children\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab processes which share a parent are called siblings\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Threads\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Switching process takes a lot of time, because the processes have to save their state, usually to the main memory.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A thread is known as a lightweight process. Within a process we can have several threads (execution flows) which share the process context, including code.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The context private to each thread is represented by the registers file and stack, the priority and own id. Generally the thread switch within the process is handled by the thread library, without calling the kernel. It is very fast as the thread context is minimal.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When a process starts execution [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Say we have a process which has a main thread, and 2 new threads (so 3 execution flows). When this process takes control of a time-slice, the threads within the process are executed in turn according to their priority (each thread has its own priority).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Creating multiple threads makes a lot of sense when we have many CPU cores, to take advantage of parallel processing.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Advantages and Disadvantages\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Threads provide concurrency, which can be exploited by many-core computers.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Concurrency also corresponds to the internal structure of many programs.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If a thread changes directory, all threads in the process see the new current directory.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If a thread closes a file descriptor, it will be closed in all threads.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If a thread calls {\f1 exit()}, the whole process, including all its threads, will terminate.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If a thread is more time consuming than others, all other threads will be starved of CPU.\sa180\par}
+}

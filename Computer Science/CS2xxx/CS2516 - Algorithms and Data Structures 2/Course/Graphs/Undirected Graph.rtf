@@ -1,0 +1,112 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Graphs\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A graph is an abstract representation of the relationships between a set of objects.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We'll see how to implement them efficiently and how to implement efficient algorithms for processing them.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Intro\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A simple graph is a pair (V, E) where V is a set of vertices, and E is a set of edges. Each edge is a set \{x, y\} of two vertices.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab degree of a vertex is the number of edge sets that contain x\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab vertices x and y are adjacent if there's an edge \{x, y\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab edge \{x, y\} is incident on x (and on y)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab the neighbours of a vertex x are all other vertices adjacent to x\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In a multigraph, E is a bag of edges rather than a set of edges, so there may be multiple edges \{x, y\} in E for the same pair of vertices x and y.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In a directed graph, each edge is an ordered pair (x, y).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The out-degree of a vertex is the number of edges with x as the first element of the pair\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab the in-degree of a vertex is the number of edges with x as the second element of the pair\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A weighted graph has a function w from E to some set, defining a weight with the edge.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We can also associate labels from some set L with either vertices or edges.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Vertex and Edge ADTs\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Vertex\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 element()} \u8211- returns the id of the vertex\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Edge\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 vertices()} \u8211-\u160?returns the pair of vertices the edge is incident on\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 opposite(x)} \u8211-\u160?if the edge is incident on x, return the other vertex\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 element()} \u8211-\u160?return the label of the edge\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We don't ask each vertex what they're connected to, because they may be involved in multiple graphs. Instead we ask the specific graph.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 (Undirected) Graph ADT\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There is no one agreed ADT for a graph. This is one possible one:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 * `vertex()` \u8211-\u160?return a list of all vertices\line
+* `edges()` \u8211-\u160?return a list of all edges\line
+* `num_vertices()` \u8211- return the number of vertices\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab most important methods:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 num_edges()} \u8211- return the number of edges\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 get_edge(x, y)} \u8211- return the edge from {\f1 x} to {\f1 y}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 degree(x)} \u8211- return the degree of vertex {\f1 x}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 get_edges(x)} \u8211- return a list of all edges incident on {\f1 x}\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab these help us create or edit graphs:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 add_vertex(element)} \u8211- add a new vertex with element element\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 add_edge(x, y, element)} \u8211- add a new edge between x and y, with element element\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 remove_vertex(x)} \u8211-\u160?remove vertex {\f1 x} and all incident edges\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 remove_edge(e)} \u8211- remove edge {\f1 e}\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Remember you can have a graph with an vertex that has no edges, but if you delete a vertex, you must also delete all edges that contain that vertex.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 An edge's element might be the weight or label for that edge.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Implementing the ADT\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The main operations are retrieving vertices and edges, so we want those to be efficient. Updating will be relatively rare.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For the edges, there are 4 main options:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab a list of edges\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab adjacency list\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab for each vertex, store a list of the edges incident on it\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab adjacency map\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab for each vertex, store a map of the edges incident on it, using the other vertex as the key\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab better than the adjacency list if the vertices have high degree\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 4.\tx360\tab adjacency matrix\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab maintain a 2D array, where {\f1 matrix[i][j]} contains a reference to the edge \{i, j\} (or between the ith and jth vertices)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Edge List\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Maintain the vertices and edges in unordered linked lists.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab two linked lists, one for edges, one for vertices\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab each edge has references to two vertices\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Can improve this by adding references back to the linked list from each edge or vertex.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Searching for the edges that are incident on a certain vertex involves crawling the entire (linked) list of edges and checking if each one is incident on the vertex.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Complexity\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 {\f1 n} is the number of vertices, {\f1 m} is the number of edges.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Space complexity is O(n + m).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 time complexity:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 get_edge(x, y)} \u8211- O(m)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab must check each edge\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 degree(x)} \u8211- O(m)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab get edges O(m)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab add O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab add edge O(1)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 remove_edge()} \u8211- O(1)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 remove_vertex()} \u8211- O(m)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab must check each edge\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Would it make a difference to use sorted lists?\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Adjacency List\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Maintain a list of vertices. Each vertex points to a list of edges that are incident on it.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Complexity\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Space complexity: O(m + n)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab get edge O(min(degree(x), degree(y)))\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab degree O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab get edges O(degree(x))\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab add vertex O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab add edge O(1)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab remove edge O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab remove vertex O(degree(x))\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We've replaced all O(m) complexities with O(1), or O(degree). We would expect it the be faster.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Adjacency Map\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Maintain a list of vertices. Each vertex maintains a hash-map of its edges, using the other vertices as the key.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Complexity\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Space complexity: O(n + m)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab get edge O(1) expected\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab degree O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab get edges O(degree(x))\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab add vertex O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab add edge O(1) expected\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab remove edge O(1) expected\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab remove vertex O(degree)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Adjacency Matrix\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Associate a unique integer in 0 to n-1 with each vertex. Maintain a 2D array, where {\f1 cell[i][j]} contains a reference to that edge.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Complexity\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Space complexity is now O(n^2).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab get edge O(1)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab fastest we've seen\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab degree O(n)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab get edges O(n)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab add vertex O(n^2)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab add edges O(1)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab remove edge O(1)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab remove vertex O(n^2)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Some advantages, but some things are slower. This is wasteful for graphs with few edges (sparse graphs).\par}
+}

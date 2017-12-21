@@ -1,0 +1,177 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Objects\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Java makes sure the right types are passed to functions.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Every object in Java belongs to a unique class. Every object is an instance of a class.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Every class has its own API. The API defines a common protocol and describes how to use the class:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab The names of methods\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab types of arguments\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab purpose of arguments\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab return value\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab side effects\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Global variables are stored on a heap\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Local variables within functions are usually stored on the stack\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab When declaring variables in Java, you have to provide the name and the type. You may also provide the value.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Types in Java\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Java has a few numeric (primitive) types:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab whole numbers:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 byte}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 short}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 int}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 long}\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab floating point numbers:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 float}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 double}\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These are primitive types because they correspond to byte patterns (or something?).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For whole numbers, {\f1 int} is usually a good choice, unless you need a really big number.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For floating point numbers, use {\f1 double}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Operations on Numbers\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Note the {\f1 int} and {\f1 long} types are 2's complement integers, so there is one more value less than 0 than there is greater than 0. The unary minus functions differently with this value.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Primitive Types\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A type starting with a lowercase variable is a primitive type. It corresponds to a byte pattern.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Object Types\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Types starting with uppercase letters are object reference types. Object variables have objects.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can use capitalised versions of primitive types as wrapper classes for primitive type values:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 Integer number = new Integer(1);\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In general the primitives are best, as they incur less overhead, though you do get some additional methods from the wrapper classes.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Wrapper Classes\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Java has a wrapper class for each primitive type. These wrapper classes have getter functions to access the value:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1     final Integer iObject = new Integer(42);\line
+    final int val = iObject.intValue();\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab primitive {\f1 bool} variables have values of {\f1 true} and {\f1 false}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The object wrapper for that has values of {\f1 True} and {\f1 False}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Autoboxing & Unboxing\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Writing code to convert to and from wrapper classes is tedious, and increases the code size.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Java automates some conversions.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Automatic conversion to the wrapper class is called {\i autoboxing}.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Automatic conversion from the wrapper class is called {\i unboxing}.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Autoboxing\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Let {\f1 val} be a value with a primitive type. If you use {\f1 val} when Java expects an object, Java will autobox it.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Values will be autoboxed according to their primitive values. An {\f1 int} becomes an {\f1 Integer}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Unboxing\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Unboxing is the opposite process, and happens when you use one of these objects where Java expects a primitive type.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Caching\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Java caches a limited number of wrapper class values. So {\f1 new Integer(0) == new Integer(0)} evaluates as true \u8211- both object references point to the same object representing the number 0.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This guarantees shallow equality for small number of boxed values:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If {\f1 o1.equals(o2)}, then {\f1 o1 == o2}.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This doesn't work for all numbers. {\f1 new Integer(666) == new Integer(666)} evaluates as false.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Caching is implemented because it saves memory, rather than creating a new object to represent 0 every time we make a new {\f1 Integer} with value 0.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In general caching works for small primitive values. Here are the ranges:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 boolean}: {\f1 true} and {\f1 false}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 byte}: 0-255\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 char}: {\f1 \\u0000-\\u007f}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 short}: -128 \u8211- 127\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 int}: -128 - 127\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Using Variables in Methods\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab You can't use variables that don't have a value yet. The following will give a compiler error:\par}
+{\pard \ql \f0 \sa180 \li360 \fi0 int number; int square = number * number;\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Comments\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Comments have a couple of purposes:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Describing the purpose of a variable of method.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab [more here]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab There are multi-line comments and javadoc comments. Javadoc comments are a special kind of multi-line comment.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Variable Names\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab By convention, variable names should be nouns.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab For non-constant variables, use {\f1 lowerCamelCase}.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab For constant variables, use {\f1 UPPER_CASE_WITH_UNDERSCORES}.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Variable names should be descriptive.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Variable Types\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can't do this because the types don't match:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1     Dog barney = new Giraffe();\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Working With Objects\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Before you can user an object, you must construct it by calling a constructor for it. There may be several constructors with different signatures.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Constructor Process\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab The new operator creates memory to represent the object.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab The constructor uses its arguments to initialise the object. [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Method Declarations\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 To define a method you provide:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The name of the method\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The return type\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The names and types of the formal parameters\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public int getWidth() \{/* Implementation omitted. */\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab You use {\f1 void} for a method without a return value.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If the argument types are different, the names may overlap. This is called overloading:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Multiple methods with the same name but different argument signatures, e.g. one takes one string, one takes two ints.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Accessor and Mutator Methods\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 An accessor method returns information about an object without modifying the object, e.g. {\f1 rectangle.getWidth()}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A mutator method modifies an object's instance variables, e.g. {\f1 rectangle.setWidth(4.0)}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 State and Behaviour\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 State should be implemented by instance variables and behaviour by instance methods.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Too much (object) state slows down the JVM.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab An object's behaviour should determine its state.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Start writing a class by thinking about its behaviour, then you can add state as required.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Implementing a Tally Counter Class\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We'll call the class {\f1 Counter}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Behaviour\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Increment the counter - {\f1 public void incrementValue()}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Maybe reset the counter\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Return the current count - {\f1 public int getValue()}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 State\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We can see from the behaviour that we need a counter value.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Counter value - {\f1 private int value}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Implementation\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 // Class for representing tally counter objects.\line
+public class Counter \{\line
+    // The current tally counter value\line
+    private int value;\line
+\line
+    // Returns the current counter value\line
+    public int getValue() \{\line
+        return value;\line
+    \}\line
+\line
+    // Increment the counter\line
+    public void incrementValue() \{\line
+        value += 1;\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Note that the comments should be javadoc comments.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab You may need auxiliary methods if methods are getting long.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Explicit constructor not shown.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Don't have to write {\f1 this.value} as there's no conflict.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab If a formal parameter had the name {\f1 value} we'd have a conflict, for example.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Instance Variables\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab You write {\f1 tally.value} to access the value of a specific counter object (inside the class).\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Encapsulation\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Instance variables should be private.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Prevents malicious access to the variables\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Makes it easier to use the API\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Allows implementation to change without breaking code that uses it\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For similar reasons, methods that aren't/shouldn't be part of the API should be private.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Allows you to remove methods in future.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Automatic Variables\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Variables declared in methods are "automatic" \u8211- they only live for the lifespan of their block.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Use these for intermediate computations rather than instance attributes.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Arrays\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Arrays are a special data type in Java. They are objects that contain other things.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There are two kinds:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Arrays consisting of primitive data type values\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Arrays consisting of object reference values\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The type of an array determines the type of its values.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Before you use an array you have to create it.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab When doing this you have to specify the array's length.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab The length remains fixed.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can put things into the array and retrieve things from the array.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can only access arrays with index value:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Only {\f1 int} index values are allowed\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab They must be non-negative\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab They must be smaller than the length of the array\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Initialisation\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 final int[] numbers = new int[10];\line
+System.out.println("");\line
+[\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Default values\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 New arrays will be initialised with the default value for the type.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab boolean: {\f1 false}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab char: {\f1 \\u0000}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab numeric: {\f1 0}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab object: {\f1 null}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Arrays with Primitive Type Values\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 byte[] nums = new byte[5];\line
+nums[1] = 4;\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Arrays Do Not Grow\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The length attribute of a java array is final. You can't assign any values to array.length.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Minimum size is 0 and maximum size is the max int size.\par}
+}

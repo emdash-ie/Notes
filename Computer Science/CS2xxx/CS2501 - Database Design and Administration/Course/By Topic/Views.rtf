@@ -1,0 +1,45 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Views\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Views (a.k.a. derived tables) are definable windows into one or more tables of an SQL database.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 They give two main advantages:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab You can grant access to a view without granting access to the base tables it's derived from\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab This allows you to give someone access to some columns or rows of a base table but not others\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab You can provide alternate database structures to some people\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab This can simplify access to the database for those people\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 View Definition\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Example:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 CREATE VIEW HoustonEmployeesD5 AS\line
+SELECT Ssn, Fname, Lname, Sex, Salary\line
+FROM EMPLOYEE\line
+WHERE Address LIKE '%Houston, TX'\line
+    AND Dno = 5;\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When someone submits a {\f1 CREATE VIEW} statement, two things happen:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab the DBMS validates the {\f1 SELECT} command\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab the DBMS stores the text of the {\f1 SELECT} statement and labels it according to the name you gave\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab it stores this in the database directory\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Note no validation takes place at this point.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This allows the views to remain consistent with the base tables when they change.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab You can also rename columns in views, and create views from other views.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 CREATE VIEW HER_1 (StaffId, Name, Sex, Salary) AS\line
+SELECT SSn, CONCAT(Lname, ', ', Fname), Sex, Salary\line
+FROM EMPLOYEE, DEPARTMENT\line
+WHERE Dno = Dnumber\line
+    AND Address LIKE '%Houston, TX'\line
+    AND Dname = 'Research';\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Anyone can create a view who has the permission to run the {\f1 SELECT} query that creates it.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 View Manipulation\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can use {\f1 SELECT} queries on views just as you would on base tables.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 View Implementation\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When this is done, a part of the DBMS called the query modifier retrieves the view definition from storage and merges it with the text of the input query. The query modifier is a text-based algorithm that runs very quickly. The result of the merging is the query that is run by the DBMS.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 View Updatability\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Using views for {\f1 UPDATE}, {\f1 INSERT}, and {\f1 DELETE} statements often doesn't make sense as it's not clear what they would mean in relation to the base tables.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Some DBMSs (including MySQL) don't allow any commands other than {\f1 SELECT} to be used on views.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Others (e.g. Oracle) impose some constraints, typically allowing views to be modified if:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab They are derived from a single base table\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab They contain all {\f1 NOT NULL} columns of that base table.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab They do not contain any function calls in their {\f1 SELECT} clause.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Views not meeting these conditions can be marked as "not updatable" when created.\par}
+}

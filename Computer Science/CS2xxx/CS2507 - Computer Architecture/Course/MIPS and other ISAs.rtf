@@ -1,0 +1,502 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Instruction Set Architecture: The Language of the Computer\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The instruction set is the repertoire of instructions of a computer.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Different computers have different instruction sets, but there are many aspects in common.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Early computers had very simple instruction sets. Simplified implementation.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Many modern computers also have simple instruction sets, though expanded.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 MIPS Instruction Set\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Stanford MIPS commercialised by MIPS Technologies (www.mips.com).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This has a large share of embedded core market.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Typical of many modern ISAs: * Intel x86 * ARMv7 * ARMv8\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Arithmetic Operations\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Add and subtract each have three operands:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab two sources\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab one destination\par}
+{\pard \ql \f0 \sa180 \li360 \fi0 add a, b, c # a gets b + c\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab All arithmetic operations have this form.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Design Principle 1: Simplicity favours regularity\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Regularity makes implementation simpler\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Simplicity enables higher performance at lower cost\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Separation of source and destination is the simplicity(?)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 C code:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 f = (g + h) - (i + j);\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Compiled MIPS code:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 add t0, g, h    # temp t0 = g + h\line
+add t1, i, j    # temp t1 = i + j\line
+sub f, t0, t1   # f = t0 - t1\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Register Operands\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Arithmetic instructions use register operands/\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIPS has 32 32-bit registers (32 x 32-bit register file.)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Each register can store up to 32 bits.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab They're numbered from 0 to 31.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab 32-bit data is called a "word".\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Assembler names:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab $t0, $t1, \u8230? $t9\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab temporary variables\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab the $ symbols are not used in usage, they just emphasise that we're talking about registers (or maybe not \u8211- I'm not sure)\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab $s0, $s1 \u8230? $s9\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab saved variables\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Same deal with the $ symbols\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Design Principle 2: Smaller is faster. If we have more registers, the clock time has to increase. If we keep the number of registers low, we can have a faster clock time, but we need to spend more time swapping things. It's a compromise.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIPS code:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 add $t0, $s1, $s2\line
+add $t1, $s3, $s4\line
+sub $s0, $t0, $t1\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Memory Operands\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Main memory is used for composite data (arrays, structures, dynamic data).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 To apply arithmetic operations, we need to load values from memory into registers, and then store the result from registers into memory.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Memory is byte addressed (each address identifies an 8-bit byte).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Words are aligned in memory (address must be a multiple of 4).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIPS is big-endian:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Most significant byte is at the least address of a word\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Opposite of little-endian\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 C code:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 g = h + A[8];\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Compiled MIPS code:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 * we have the base address of A in $s3, g in $s1, and h in $s2\line
+* The index of 8 requires an offset from the base address of the array of 32 (4 bytes per word \u8211- 4 * 8 = 32)\line
+\line
+lw $t0, 32($s0)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 C code:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 A[12] = h + A[8];\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Compiled MIPS code:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 lw $t0, 32(\u163?s3)     # load word\line
+add $t0, $s2, $t0\line
+sw $t0, 48($s3)     # save word\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Register vs. Memory\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Registers are faster to access than memory\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Operating on memory data requires loads and stores\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab more instructions to be executed\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Compilers must use register for variables as much as possible\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab only spill to memory for less frequently used variables\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Register optimisation is important\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Immediate Operands\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Constant data specified in an instruction\line {\f1 addi $s3, $s3, 4}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The add-immediate command can add a value to a stored register and stored the value in the same register\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab To do negative numbers, use {\f1 addi} with a negative constant:\line {\f1 addi $s2, $s1, -4}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Design Principle 3: Make the common case fast\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 * Small constants are common\line
+* Immediate operand avoids a load instruction\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 The Constant Zero\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIPS register 0 ($zero) is the constant 0. It can't be overwitten.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It's useful for common operations, e.g. moving between registers:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 add $t2, $s1, $zero\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Unsigned Binary Integers\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Range of an n-bit unsigned integer is 0 \u8211- 2^n - 1\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 2's Complement Signed Integers\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Given an n-bit number:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 x = -x_(n-1)2^(n-1) + [\u8230?]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If the most significant digit is a 1, it's a negative number.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab There's one more negative number than there are positive numbers.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab To negate a 2's complement number, you invert all binary digits, and then add one to it.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Signed Extension\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Representing a number using more bits \u8211-\u160?putting an 8-bit number in 16-bit memory, for example.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Replicate the sign bit to the left.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab For unsigned values, extend with 0s.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Representing Instructions\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Instructions are encoded in binary (machine code).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIPS instructions are encoded as 32-bit instruction words. This provides the ability to map registers into numbers.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 * This layout is called instruction format.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Register Numbers\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 $t0} to {\f1 $t7} are mapped to register numbers 8-15\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 $t8} to {\f1 $t9} are mapped to register numbers 24-25 [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 MIPS R-Format Instructions\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is the format for register-format MIPS instruction. These all have 3 operands.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab op: 6 bits\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab operation code\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab rs: 5 bits\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab register source [check]\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab rt: 5 bits\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab [check]\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab rd: 5 bits\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab destination register\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab shamt: 5 bits\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab shift amount\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab funct: 6 bits\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab function e.g. add\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 MIPS I-Format Instructions\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab op: 6 bits\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab rs: 5 bits\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab rt: 5 bits\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab destination or source register number\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab constant or address: 16 bits\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab offset added to base address in rs\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Memory: Stored-program Concept\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Everything is in memory, just in different locations (source code, compiler, machine code, data).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two key principles:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Instructions represented in binary, just like data\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Instructions and data stored in memory\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Programs can operate on programs, e.g. compilers, linkers.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Binary compatibility allows compiled programs to work on different computers \u8211- standardised ISAs.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Logical Operations\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Instructions for bitwise manipulation.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 sll} - shift left\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 srl} - shift right\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 and}, {\f1 andi} - bitwise AND [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Shifting left and filling with 0s is multiplying by powers of 2.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Shifting right and filling with 0s is dividing by powers of 2.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 AND Operations\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These are useful to mask bits in a word \u8211- you can select some bits, clear others to 0.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 and $t0, $t1, $t2\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 OR Operations\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Useful to include bits in a word \u8211- set some bits to 1 while leaving others unchanged.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 or $t0, $t1, $t2\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 NOT Operations\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Useful to invert bits in a word. In MIPS, the NOR operation is used by NORing with zero.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 nor $t0, $t1, $zero\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Conditional Operations\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Branch to a labeled instruction if a condition is true, otherwise continue sequentially.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIPS supports two:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab {\f1 beq rs, rt, L1}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab If rs == rt branch to instruction labelled L1\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab {\f1 bne rs, rt, L1}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab If rs != rt branch to instruction labeled L1\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There's also an unconditional jump:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 j L1\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIPS assembler handles label addresses.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Basic Blocks\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A basic block is a sequence of instructions with:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab no embedded branches (except at the end)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab no branch targets (except at the beginning)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A compiler identifies basic blocks for optimisation.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 An advanced compiler can accelerate execution of basic blocks.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 More Conditional Operators\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Set a result to 1 if a condition is true, otherwise set the result to 0.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Set less than:\par}
+{\pard \ql \f0 \sa180 \li360 \fi0 slt rd, rs, rt\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Set less than (immediate):\par}
+{\pard \ql \f0 \sa180 \li360 \fi0 slti rt, rs, constant\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These are used with {\f1 beq} and {\f1 bne}:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 slt $t0, $s1, $s2\line
+bne $t0, $zero, L\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Signed vs. Unsigned\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 {\f1 slt} and {\f1 slti} are for signed comparisons.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Unsigned equivalents are {\f1 sltu} and {\f1 sltui}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Important distinction because negative signed numbers will be read as large unsigned numbers by unsigned comparisons and vice-versa.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Procedure Calling\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Procedures allow programmers to concentrate on a portion of a task at a time. Each includes a parameter to interface with the rest of the program. Equivalent to functions.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Steps:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Place parameters in special registers\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Transfer control to the procedure\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Acquire storage for the procedure\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 4.\tx360\tab Perform procedure's operations\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 5.\tx360\tab Place result in register for caller\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 6.\tx360\tab Return to place of call\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Register Usage\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 $a0} to {\f1 $a3} are argument registers for passing parameters.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab numbers 4-7\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 $v0} and {\f1 $v1} are registers for result values\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab numbers 2 and 3\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab temp\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab saved\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 $gp}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab global pointer for static data (number 28)\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab stack pointer {\f1 $sp}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab frame pointer {\f1 $fp}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab return address {\f1 $ra}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Procedure Call Instructions\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Special instruction for procedure call: "jump and link"\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1     jal ProcedureLabel\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Address of following instruction put in {\f1 $ra}.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Procedure Call Instructions\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Jump and Link\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 jal ProcedureLabel\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Address of following instruction put in $ra\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Jumps to target address\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 jr $ra\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Unconditional jump\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Copies $ra to program counter\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Can also be used for computed jumps (e.g. for case/switch statements)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Leaf Procedure and Stack Memory\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A leaf procedure is a procedure that does not call another procedure.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can use {\f1 push} to add an element to the stack and subtract from the stack pointer.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 int leaf_example(int g, h, i, j)\line
+\{\line
+    int f;\line
+    f = (g + h) - (i + j);\line
+    return f;\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 addi    $sp,    $sp,    -4\line
+sw      $0,     0($sp)\line
+add     $t0,    $a0,    $a1\line
+[\u8230?]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Note we save the value on {\f1 $s0} in the stack when the function is called, to preserve the value in this memory, and load it again\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab We use {\f1 -4} for the incrementation of the stack pointer because there are 4 bytes in a word, and we are storing a word for one register\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Non-Leaf Procedures\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These are procedures that call other procedures.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For a nested call, the caller needs to save the following on the stack:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Its return address\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Any arguments and temporaries needed after the call\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These are restored from the stack after the call\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab We have to save the return address when the procedure is called, and any arguments\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Local Data on the Stack\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Frame pointer points to the first word of a procedure frame\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Memory Layout\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Dynamic data is the heap\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Arrays, other data that can grow are stored here\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Static data is pointed to by {\f1 $gp}, with +/- offests\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Text is the program code [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Character Data\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Byte-encoded character sets\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab ASCII: 128 characters (95 graphic, 33 control)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Latin-1: 256 characters (ASCII + more graphic characters)\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Unicode: 32-bit character set\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Used in Java, C++ wide characters, \u8230?\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Most of the world's alphabets, plus symbols\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab UTF-8, UTF-16: variable-length encodings\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 String Copy Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Copies a null-terminated string to a new string.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 void strcpy (char x[], char y[])\line
+\{\line
+    int i;\line
+    i = 0;\line
+    while ((x[i] = y[i]) != '\\0')\line
+        i += 1;\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Have to store {\f1 $s0}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Use the {\f1 lbu} (load byte unsigned) command to copy each character (each character in C is a byte).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Use {\f1 addi $sp, $sp, 4} to pop 1 item from the stack\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 sb} is save byte (I'm guessing)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 32-bit Constants\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Most constants are small \u8211- 16-bit immediate is sufficient.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For 32-bit constants:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 lui $s0, 61\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Use this command with the value represented by the left 16 bits\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab This then clears the right 16 bits of $s0 to 0\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Then you do:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 ori $s0, $s0, 2304\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab This copies in the right digits (which in this number have the value 2304).\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Branch Addressing\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 PC-relative addressing is used for 32-bit addresses in a 16-bit space.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 MIPS Addressing Mode Summary\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Immediate Addressing\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Register Addressing\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Base addressing\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 4.\tx360\tab PC-relative addressing\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 5.\tx360\tab Pseudodirect addressing\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Parallel Execution Synchronisation\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two processors sharing an area of memory\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab P1 writes, then P2 reads\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Data race if P1 and P2 don't synchronise (P1 might re-write a value before P2 has a chance to read it)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab result depends on order of accesses\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Hardware support is required.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Atomic read\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Synchronisation in MIPS\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab load linked: {\f1 ll rt, offset(rs)}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Loads a particular area and blocks other people from writing to it\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab store conditional: {\f1 sc rt, offset(rs)}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this succeeds if the location isn't changed since the {\f1 ll}\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab returns 1 in rt\sa180\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab fails if location is changed\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab returns 0 in rt\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 try: add $t0, $zero, $s4\line
+     ll $t1, 0($s1)\line
+     sc $t0, 0($s1)\line
+     beq $t0, $zero, try\line
+     add $s4, $zero, $t1\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Program Translation and Startup\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Assembler Pseudoinstructions\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Most assembler instructions represent machine instructions 1-to-1\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Pseudoinstructions are ones that don't:\line {\f1 move $t0, $t1} -> {\f1 add $t0, $zero, $t1} {\f1 blt $t0, $t1, L} -> {\f1 slt $at, $t0, $t1} {\f1 bne $at, $zero, L}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Producing an Object Module\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The Assembler (or compiler) translates program into machine instructions\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Provides information for building a complete program from the pieces\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab header: describes contents of object module\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab text segment: translated instructions\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Static data segment: data allocated for the life of the program\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab relocation into: for contents that depend on absolute location of loaded program\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab symbol table: global definitions and external refs\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab debug info: for associating with source code\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Linking Object Modules\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Produces an executable image\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 1.\tx360\tab Merges segments\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 2.\tx360\tab Resolve labels (determine their addresses)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 3.\tx360\tab Patch location-independent and external regs\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Could [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Dynamic Linking\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Code is compiled into different blocks, and those blocks only have to be re-compiled when they're changed.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Only link/load library procedure when it is called.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab This requires the procedure code to be relocatable.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab We avoid image bloat caused by static linking of all (transitively) referenced libraries.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab This automatically picks up new library versions.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Lazy Linkage\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When a particular function or procedure is called, the links are made \u8211- it doesn't need to be linked up before execution.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The first time a particular thing is linked, there are some setup steps. Subsequent calls have to go through fewer steps and are faster.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Starting Java Application\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Java uses the Java Virtual Machine with the goal of being able to run on any system.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Code is first compiled to java bytecode\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab This is a very quick compilation\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The "Just In Time" compiler compiles bytecodes of "hot" methods into native code for host machine\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Methods that are used often are compiled by this compiler.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Ones that are used less often won't be compiled, and will be interpreted by the JVM instead.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab compromise between execution speed and portability\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Java used to be much slower than C, but is catching up in recent years.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Bubble Sort Procedure\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 C\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 void sort(int v[], int n)\line
+\{\line
+    int i, j;\line
+    for (i = 0; i < n; i++) \{\line
+        for (j = i - 1; j >= 0 && v[j] > v[j + 1]; j -= 1) \{\line
+            swap(v, j);\line
+        \}\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab To convert to MIPS, we put v in {\f1 $a0}, k in {\f1 $a1}, [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 MIPS\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 move $s2, $a0\line
+move $s3, $a1\line
+\line
+move $s0, $zero\line
+for1tst:    slt $t0, $s0, $s3\line
+            beq $t0, $zero, exit1\line
+[\u8230?]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab don't forget array indices from C have to be multiplied by 4 in MIPS (each index in C corresponds to a word, but memory is byte-addressable in MIPS \u8211- 4 bytes in a word of 32 bits, so we multiply by four).\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab These are added to the base address for the array\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Remember you have to manage the stack pointer yourself \u8211- decrementing by 4 for each value you store.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 ARMv7 and MIPS Similarities\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab ARMv7 is the most popular embedded core\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The two are similar in many ways:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab both announced in 1985\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab instruction size: 32 bits [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Differences:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab ARMv7 has 9 data addressing modes\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab MIPS only has 3\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab register\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab constant immediate\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab register and displacement\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab ARMv7 only have 15 32-bit registers\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab MIPS has 31 32-bit registers\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Compare and Branch\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIPS uses the contents of registers to evaluate conditional branches.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 ARMv7 uses condition codes for the result of an arithmetic/logical instruction:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab negative, zero, carry, overflow\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab compare instructions to set condition codes without keeping the result\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab this is what we saw in CS1110/1111 with Samphire\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Each instruction can be conditional \u8211-\u160?you can jump based on any instruction, rather than having to use a specific comparison one.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab This can avoid the necessity of branching because of a single instruction\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab i.e. you only need your instruction and your jump command\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab not jump, check, branch, etc.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 ARMv8\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The new version is 64-bit, and ARM redesigned now.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab ARMv8 resembles MIPS:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab No conditional execution field (flags)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Immediate field is 12-bit constant\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab PC is no longer a GPR\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab GPR set expanded to 32\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Addressing modes work for all word sizes\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Divide instruction\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Branch if equal/branch if not equal instructions\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These changes were made because (I think) it's faster now and they can afford to use branch if equal instructions, which are clearer. (Not certain of that.) Possibly just the revisions made it faster.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Intel x86 ISA Evolution\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Evolution with backward compatibility\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab 8080 (1974): 8-bit microprocessor\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab accumulator plus 3 index-register pairs\sa180\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab 8086 (1978): 16-bit extension to 8080\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab CISC\sa180\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab 8087 (1980): floating-point coprocessor\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab adds FP instructions and register stack\sa180\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab 80286 (1982): 24-bit addresses\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab segmented memory mapping and protection\sa180\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab 80386 (1985): 32-bit extension (now IA-32)\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab additional addressing modes and operations\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab paged memory mapping as well as segments\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 To guarantee backward compatibility, the instruction set only adds instructions \u8211- existing ones are never changed or removed. There are now about 900 instructions.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Basic x86 Addressing Modes\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two operands per instruction.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab source/destination operand\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab second source operand\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The first can be a register or memory. The second can be either of those or an immediate value.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab register -> register\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab register -> immediate\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab register -> memory\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab memory -> register\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab memory -> immediate\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Memory addressing modes:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab address in register\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab register + displacement\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 x86 Instruction Encoding\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Variable length encoding:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab postfix bytes specify addressing mode\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab prefix bytes modify operations\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Comparison to MIPS and ARMv7\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 x86 computers are more difficult to build because of the complex instructions.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Market size advantage:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab frequently used components of x86 are not too difficult to implement\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Intel and AMD have experience in this area\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In the post-pc era, x86 has not been competitive in personal mobile devices (it's mostly ARM and MIPS).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Fallacies\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Powerful instructions -> higher performance\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab fewer instructions are required\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab but complex instructions are hard to implement\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab may slow down all instructions, including simple ones\sa180\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab compilers are good at making fast code from simple instructions (in complex instruction sets)\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Use assembly code for high performance\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab but modern compilers are better at dealing with modern processors\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab compilers know more than you do\sa180\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab and more lines of code -> more errors and less productivity\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Pitfall\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Sequential words are not at sequential addresses\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab increment by 4, not by 1\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab MIPS uses a 32-bit word that's equivalent to 4 bytes\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Exceptions and Interrupts\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Different ISAs use the terms differently. In general they're "unexpected" events that require a change in flow of control.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In MIPS:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab exceptions arise within the CPU\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab e.g. undefined opcode\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab overflow\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab syscall\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab interrupts are from an external I/O controller\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It's difficult to deal with these without sacrificing performance.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Handling Exceptions\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The current MIPS implementation generates two types of exceptions:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab undefined instruction\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab arithmetic overflow\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Handling steps:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Save address of offending (or interrupted) instruction in the Exception Program Counter (EPC)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Save an indication of the problem in the Cause register\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Transfer execution to the operating system\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this takes appropriate action by using the EPC to determine where to restart program execution\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Vectored Interrupts\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is an alternative to handling exceptions.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The handler address is determined by the cause \u8211- each instruction is given an address (which specifies how to handle it)?.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When the exception occurs, that address is copied to the EPC and pushed to the OS.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Handler Actions\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Read cause, transfer to relevant handler\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Determine action required\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab If restartable\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab take corrective action\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab use EPC to return to program\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 4.\tx360\tab Otherwise\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab terminate program\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab report error using EPC, cause\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Exceptions in a Pipeline\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These are seen as another form of control hazard (branch hazard).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Need to complete previous instructions before transferring control to the handler.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Handling of these is similar to a mispredicted branch.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Exception Properties\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Restartable or not\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab pipeline can flush the instruction, let the handler execute, and return to the instruction if it is\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab the instruction is refetched and executed from scratch\sa180\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Address saved in EPC register\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab identifies causing instruction\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab PC + 4 is actually what's saved (the handler subtracts 4 again)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Multiple Exceptions\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab out-of-order completions: second instruction could finish before the first (in a pipeline)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Imprecise Exception Handling\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Let the OS work out which instruction had exceptions, rather than working it out in hardware\sa180\par}
+}

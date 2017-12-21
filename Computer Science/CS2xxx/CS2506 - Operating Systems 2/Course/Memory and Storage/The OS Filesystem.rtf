@@ -1,0 +1,120 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 The filesystem implements all the operations required to manage files.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 The File Concept\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A file is a contiguous logical address space.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Contains either data (numeric, character, or binary) or code.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 File Structure\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A few options:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab None\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab sequence of words or bytes\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab data semantics lost, no way to get it apart again\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Simple record structure\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab a collection of related fields\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab lines\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab fixed length or variable length\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Complex structures\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab formatted document\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab relocatable load file\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Can simulate the last two (simple record structure and complex structures or formatted document and relocatable load file?) with the first method by inserting appropriate control characters\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab controlled by:\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab the OS\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab the program\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 File Attributes\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab name\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab only information kept in human-readable form\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab identifier\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab unique tag identifies the file within the filesystem\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab type\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab needed for systems that support different types\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab UNIX file types (e.g. directory, pipe, device, link) or file formats?\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab location\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab pointer to file location on device\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab size\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab current file size\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab protection\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab controls who can read, write, execute\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab time, date, and user identification\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab data for protection, security, and usage monitoring\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Information about files is kept in the directory structure, which is maintained on the disk.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 File Operations\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A file is an abstract datatype. It offers the following operations:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab create\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab write\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab read\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab reposition within file\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab delete\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab truncate\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab open(F_i)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab search the directory structure on disk for the entry F_i and move the content of the entry to main memory\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab close(F_i)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab move the content of the entry F_i in memory to the directory structure on disk\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Open Files\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Several pieces of data are needed to manage open files.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab file pointer\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab pointer to the last read/write location\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab one for each process that has the file open\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab file open count\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab counter of the number of times a file is open\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab allows removal of data from open file table when the last process closes it\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab disk location of the file\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab cache of data access information\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab access rights\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab per-process access mode information\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Open File Locking\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Mediates access to a file.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Provided by some OSes and file systems.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two kinds:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab mandatory\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab access is denied depending on locks held and requested\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab only one process\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab advisory\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab co-operating processes may use locks to co-ordinate access to a file among themselves, but unco-operative processes are also free to ignore locks and access the file in any way they choose\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Access Methods\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sequential access\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab read next\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab write next\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab reset\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab no read after last write (rewrite) (?)\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab direct access (n is a relative block number)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab read n\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab write n\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab position to n\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab read next\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab write next\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab rewrite n\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 File System Services\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab create/remove file, address file, open/close file, read/write an open file, fetch/modify metadata of a file\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab shared/exclusive access to a file\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab algorithm for exclusive file access (reads like gibberish?):\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab if Q (queue of processes awaiting access) is non-empty, then add P to the tail of Q and return\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab If no process currently has exclusive access to the file, give P access and return\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab If P requests read-only access and Q is empty and the processes with current access are readers, give P access and return\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab Add P to the tail of Q and return\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Metadata\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Metadata is data about the file \u8211- name, size, last modification date, owner, protection codes. It's managed by the OS and sometimes also by applications.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The file type is supported by some OS.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Filetypes are used in a number of ways, for example they can be used to control certain aspects of reading/writing such as end-of-line conventions for text files.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Files that are compressed are automatically decompressed when read.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Another aspect is assigning an application to the file.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 (Different from file attributes in that it's stored within the file and is part of it, rather than stored and managed by the file system. I think.)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 The Filesystem Design\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The filesystem process can be a part of the kernel or not \u8211- it can instead be a distinct process in the user space.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In the latter case, there are some issues:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab how does it handle system calls?\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab how does it access process' memory space?\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab how can it obtain process information that is stored in process tables?\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab how does it access the drivers?\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 One possible answer: a new protocol of message-passing between processes.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Management Data Structures\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The FS uses two important data structures for file management:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the open file table\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab entries for all open files\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab each entry stores file attributes (size, device, shared or not shared, etc.)\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the mount table\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab making a file system accessible is called mounting\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab the details of mounting a system vary considerably between filesystems\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab in some cases a device is referenced explicitly and the FS metadata is read at that time. For other systems, the new FS is added into an overall naming scheme. In these systems, the file names are determined by the mount operation rather than by the physical operation.\sa180\sa180\sa180\par}
+}

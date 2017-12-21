@@ -1,0 +1,55 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Intro\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Java makes sure the right types are passed to functions \u8211- if you pass the wrong type, the code won't run.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When declaring variables, you have to provide the name and the type:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 int favouriteNumber = 4;\line
+// you can leave out the value and specify it later:\line
+int undecidedValue;\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab variables have a type, which determines the values they can hold\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab when an object reference's type is {\f1 Object}, it can hold any object reference\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab any object reference variable can be assigned the value {\f1 null}, which corresponds to nothing\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Primitive Types\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Primitive types correspond to byte patterns \u8211- they are not objects. Names of primitive types are in lowercase.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab whole numbers:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 byte}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 short}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 int}\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab this is the standard choice\sa180\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 long}\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab floating point numbers:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 float}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 double}\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab this is the standard choice\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The {\f1 int} and {\f1 long} types are 2's complement integers.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Object Types\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Types starting with uppercase letters are object reference types. Object variables have objects.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can use capitalised versions of primitive types as wrapper classes for primitive type values:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 Integer number = new Integer(1);\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In general the primitives are best, as they incur less overhead, though you do get some additional methods from the wrapper classes.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Wrapper Classes\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Java has a wrapper class for each primitive type. These wrapper classes have getter functions to access the primitive value:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1     final Integer iObject = new Integer(42);\line
+    final int val = iObject.intValue();\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab primitive {\f1 bool} variables have values of {\f1 true} and {\f1 false}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The object wrapper for that has values of {\f1 True} and {\f1 False}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Autoboxing & Unboxing\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Writing code to convert to and from wrapper classes is tedious, and increases the code size.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Java automates some conversions.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Autoboxing\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If you use a primitive type when Java expects an object, Java will autobox it to the corresponding wrapper class. For example, an {\f1 int} becomes an {\f1 Integer}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Unboxing\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Unboxing is the opposite process, and happens when you use one of these objects where Java expects a primitive type.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Caching\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When autoboxing and unboxing, Java will cache a limited number (e.g. from -128 to 127 for Integers) of wrapper class values. In the following code, {\f1 firstNumber} and {\f1 secondNumber} point to the same object:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 Integer firstNumber = 1;\line
+Integer secondNumber = 1;\line
+\line
+// prints 'true' because both numbers have the same value\line
+System.out.println(firstNumber.equals(secondNumber));\line
+\line
+// prints 'true' because firstNumber and secondNumber point to the same object\line
+System.out.println(firstNumber == secondNumber);\par}
+}

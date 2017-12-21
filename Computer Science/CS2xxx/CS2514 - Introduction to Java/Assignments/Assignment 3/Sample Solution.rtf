@@ -1,0 +1,44 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Info\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab For the general class structure, we create interfaces for each top and middle level, and create concrete classes which implement those interfaces\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab Instead of each level inheriting from the one above it, each level contains an object from the level above, which it delegates the methods to\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab So a Dog object contains a ConcreteCanine object which contains a ConcreteAnimal object.\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab Shared canine behaviour can be put in the ConcreteCanine class and shared animal behaviour in the ConcreteAnimal class\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab Dog implements the Canine interface so that you can use a variable of type {\f1 Canine} to hold a Dog object or an object of another class that implements Canine\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab It does bug me a bit that Dog implements Canine and also has an animal attribute that implements Canine \u8211- seems like the Canine interface (along with the Eater, NoiseMaker, and Roamer interfaces) is being used for more than one thing and it makes me uncomfortable.\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab For enum method and class method, see relevant folders.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab For animal noises, since it's unlikely any class is going to share a noise, it may also make sense to use anonymous classes like this:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab for each animal, make an anonymous class that implements the {\f1 NoiseMaker} interface\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public final class Dog implements Canine \{\line
+    private static final String WOOF = "Woof!";\line
+    private final Canine animal;\line
+\line
+    public Dog() \{\line
+        final NoiseMaker noiseMaker = new NoiseMaker() \{\line
+            @Override\line
+            public void makeNoise() \{\line
+                System.out.println(WOOF);\line
+            \}\line
+        \};\line
+        animal = new ConcreteCanine(noiseMaker);\line
+    \}\line
+\line
+    @Override\line
+    public void eat() \{\line
+        animal.eat();\line
+    \}\line
+\line
+    @Override\line
+    public void makeNoise() \{\line
+        animal.makeNoise();\line
+    \}\line
+\line
+    @Override\line
+    public void roam() \{\line
+        animal.roam();\line
+    \}\line
+\}\par}
+}

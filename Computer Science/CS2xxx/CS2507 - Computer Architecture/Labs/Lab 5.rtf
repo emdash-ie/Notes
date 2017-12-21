@@ -1,0 +1,24 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab using COM1 in async mode\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab doing our own interrupts \u8211- have to define which input is an interrupt\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab baud rate factor sets clock rate relative to baud rate\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab x16 means count to the 8th clock cycle, sample, then wait 8 cycles, then repeat\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab always sampling in the middle of the bit\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab similar for x64\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab normally we go for x16\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab U12 generates the clock for U15\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab default to 8 bits for the character length\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab use 2 bits for stop\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab not using parity\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab addressing\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab only need E4 - E5\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab address space allows for more addresses than needed, and repeats the ones there are\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab clock rate of the machine is half the clock rate of the crystal (inside the metal canister) \u8211- half of app. 4 MHz\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this is halved coming out of U6 (EPLD) into U12 (8253) because it has to be less than 2 MHz\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab binary coded decimal counter counts to ten and then resets\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab CTS linked to DTR to ensure we're always ready to send (?)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab count value is ~ when the counter resets (depending on mode)\sa180\par}
+}

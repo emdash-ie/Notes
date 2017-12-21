@@ -1,0 +1,65 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Challenge\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab given source text file, want to search for the first occurrence of a character string\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab can't do similar thing to making a binary search tree before because we're looking for an arbitrary character string, not a word\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 First Attempt\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Brute force:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab look for the first character\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab if you find it, check if the next character is the second character, etc\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab if not, move on\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Need to check a couple of things:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab make sure we haven't gone off the end of the string we're searching\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Complexity\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If searching for a string of 7 'a's ('aaaaaaa') in a string ('aaaaaabaaaaaab\u8230?'), we waste a lot of time checking 'a's when we know (after the first check of each set of 6 'a's) that the string can't be found here.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If {\f1 n} is the length of the source text and {\f1 m} is the length of the target, we may need {\f1 0.5 * m * (m + 1)} checks, repeated {\f1 n/m} times, which is {\f1 O(n * m)}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Second Attempt\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab jump forward every time you match some letters to the letter that failed\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this misses some matches, though, so doesn't work\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Computing the Maximum Jump\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab don't need to look at the source, can just look at the target for repetitions\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab since we're not looking at the source, we can compute the jumps based only on the target, and do it offline before we begin\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab look at each position: what happens if I fail here\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 \u160?Computing the \u960? Table\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Knuth Morris Pratt Algorithm for String Matching\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is what we have when we use the \u960? table.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Complexity\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Inside the loop there are only O(1) operations.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We continue round the loop when j increases by 1, or i decreases (since i is assigned to \u960?(i-1) [\u8230?])\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The worst we can do is always change i each time round the loop. Since i only increases when j increases, it has a maximum of n steps up. Therefore it has a maximum of n steps down.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Therefore the loop is executed a maximum of 2n times, which is O(n). The initialisation was O(m), therefore the algorithm is O(n + m).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is optimal for the worst case, since you have to look at every character in the source at least once, and every character in the target at least once.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Longest Common Subsequence\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab used in molecular biology and forensics\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab used in the UNIX {\f1 diff} command\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We'll define the distance between two strings as the minimal number of additions or deletions that transforms the first string into the second.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 * only allow additions and deletions \u8211- replacing a letter with another counts as one addition and one deletion\line
+\line
+* can't re-order letters except by additions and deletions\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Characters identified as unchanged are called a common subsequence (allows spaces).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We want to identify the length of the longest common subsequence.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Rules\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If you add the same character to the end of two sequences, the length of the longest common subsequence increases by one.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If you add two different characters to the end of the two sequences, you may get an improvement, which will only be an improvement of 1.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Represented differently, these become:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 1.\tx360\tab {\f1 if s[j] == t[k] then L_j+1_k+1 = 1 + L_j_k}\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 2.\tx360\tab `if s[j] != t[k] then L_j+1_k+1 = max(L_j+1_k , L_j_k+1)``\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Method\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Fill in a table with all possible L values. Know all the left and top values, because one subscript is 0, which means the result is 0.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 From that we can work out L_1_1, and work along the second row, then the third row, etc.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The bottom right cell in the result table is the answer.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Rebuilding\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We have the length of the longest common subsequence \u8211- how do we find a common subsequence with the right length?\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 As we go down the table diagonally, if there's an increase of 1, then we added two matching characters.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Start in the bottom right corner and move up or left until we reach [0,0].\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab Only move to a lower value if it is a diagonal as above\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab otherwise, prefer to move up \u8211- if you can't move up without going to a lower value, go left instead\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Dynamic Programming\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This solution method is dynamic programming. Trying to find some optimal answer to a problem, we break the problem into smaller chunks, find the optimal answers for the chunks, recombine them in deterministic ways.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 To work efficiently, we should be able to use the subproblem solutions more than once.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We've seen other examples of dynamic programming already.\par}
+}

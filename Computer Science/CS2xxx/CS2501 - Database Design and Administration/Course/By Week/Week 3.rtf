@@ -1,0 +1,39 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT Pnumber, Pname, Plocation\line
+FROM Project\line
+WHERE Pnumber IN\line
+    (SELECT Pno\line
+     FROM WORKS_ON\line
+     GROUP BY Pno\line
+     HAVING COUNT(*) = MAX(COUNT(*))\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab MySQL won't allow the code above (even though it's correct SQL) because it won't allow function calls within function calls ({\f1 COUNT} inside {\f1 MAX}).\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT Fname, Lname\line
+FROM EMPLOYEE\line
+WHERE Ssn <> '128490127'\line
+    AND Dno =\line
+        ( SELECT Dno )\line
+        [\u8230?]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab In MYSQL, subqueries can only return single columns \u8211- you have to use separate conditions.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab This is not incorrect SQL, it's just not supported in MySQL.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Joins\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Conceptually, joins make all possible combinations of rows between the tables given. In practice, the {\f1 WHERE} condition is used by the implementation to eliminate rows as the join is compiled.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 SELECT CONCAT(UPPER(Lname), ', ', Fname) AS Name\line
+FROM EMPLOYEE, DEPARTMENT\line
+WHERE Dno = Dnumber\line
+    AND Dname = 'Research'\line
+ORDER BY Name;\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If it was {\f1 Dno} in both tables, we'd use dot notation to distinguish them:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 \u8230?\line
+WHERE EMPLOYEE.Dno = DEPARTMENT.Dno\line
+\u8230?\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We can also use aliases to shorten these table names:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 \u8230?\line
+FROM EMPLOYEE E, DEPARTMENT D\line
+WHERE E.Dno = D.Dno\line
+\u8230?\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Joins are more general than subqueries, and sometimes you have to use them (e.g. when the columns in the result table come from different source tables).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab A subquery can't use {\f1 SELECT DISTINCT}, or {\f1 ORDER BY} [check].\sa180\par}
+}

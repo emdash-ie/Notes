@@ -1,0 +1,72 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 I/O Devices\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Main issue is heterogeneity\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab there's a vast range of I/O devices, and they can have very different forms and performance\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Each has a driver to help operate it\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab driver forms part of the kernel\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab driver provides {\i only} the direct control of the device.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab driver works directly with the controller of the device\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab .. makes sure the device is operated correctly by the OS\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 But we may have classes of devices of the same type, and so cost-effective operation requires more from the OS. (don't understand what this means)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Class of device may be whether it's block or character.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We can create virtual copies of devices in memory to act as buffers, so that one device can be allocated to different processes simultaneously, with each waiting on the physical resource \u8211- gives a performance gain over each waiting to connect to the specific device with no virtual representation.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It is also possible to virtualise two cores with one physical core.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab additional software layer\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab allows homogeneous representation of I/O devices\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab this is better (it's an engineering principle)\sa180\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab I/O space is brought in line with the file system\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab same set of operations executed with files and I/O devices\par}
+{\pard \ql \f0 \sa0 \li1440 \fi-360 \endash \tx360\tab major benefit\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab need same or similar namespace\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab qualified names used to address a device\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab so now each process can have a name and an operation, where the name can be a file or an I/O device, and the operations are the same for both\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Broadly two classes of I/O device \u8211- character and block.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Have also a major and minor device number (minor device number selects instance of a resource).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Major number used to identify position in character or block table, where there are pointers to op procedures (entry points in the driver).\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab disk controller handles waiting on sectors, etc.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 I/O schedulers operate in the kernel, in co-operation with the drivers.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 (Week 8)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In Linux we have block and character devices, and I/O control is different for the two.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Example\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab application running on the computer wants to write using the parallel port\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab there's a file descriptor that has all the details required to manage that connection\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab {\f1 write()} calls {\f1 lp_write()} which prepares for the output operation\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab "prepares" as in for the specific device\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab e.g. split the output into basic operations (i.e. one operation corresponds to a buffer)\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab buffer-size data transfers will occur\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab need a starting pointer and the amount of data to be printed\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab driver in kernel memory space, controller separate\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab controller uses an interrupt to tell the computer when each page is finished (then the next page is sent)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab also need a lock mechanism to uniquely allocate a printer to a particular process, for the duration of the print operation\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab printer is then unlocked after\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab other requests for the resource are queued until they can be processed\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Interrupt handler can take some steps to complete, so is divided into upper half and lower half.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the upper half detects what has happened and acknowledges it\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab only does quick things\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the lower half does any further processing required\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Sensors on Mobile Computing Devices\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Sensors\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Three categories:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab motion sensors\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab environmental sensors\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab position sensors\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Most sensors have an official sensor type. There can be several sensors of the same type, e.g. two proximity sensors or two accelerometers.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Some sensors are hardware but some are software sensors \u8211-\u160?these consider input from different hardware sensors.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The OS allows users to get the raw data from sensors and use it in applications.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For any sensor, the two important parameters are the sampling rate and the accuracy.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Android Sensor Subsystem\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Application framework is different, as are libraries\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Applications Framework\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab One sensor can be connected to several applications.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab important that applications might not get the latency and sampling rate they expect\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab when the last application unregisters from a sensor, the framework sends a request to the HAL to deactivate the sensor (de-allocate resources such as buffers and flags)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Use of Sensors in Applications\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab need a listener for changes to the sensor\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Sensor Events\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Event Reporting Modes\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Further Developments\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab external sensors e.g. sensors in the environment\sa180\par}
+}

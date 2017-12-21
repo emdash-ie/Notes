@@ -1,0 +1,33 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Intro\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The support the OS provides for parallel execution.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Content\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Application: matrix multiplication\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab clear example of the potential for parallel execution\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab split problem into groups of lines, each group allocated to one process\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab these processes share some data though\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab the shared stored will be stored in cache L2 (this is OS support)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Speedup is the execution time sequentially, divided by the execution time in parallel. This is generally less than the number of cores (which is the theoretical potential speedup).\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab pipeline model\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab computation split into successive operations, which can be executed by different cores\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab all these operations can overlap\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Parallel execution of an application:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab multiple processes running in parallel\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 1.\tx360\tab create multiple processes / threads\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab benefit of threads is that the context of the process is used\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab but data protection is an issue\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 2.\tx360\tab data sharing\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 3.\tx360\tab mutual exclusion to data that is updated\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 4.\tx360\tab scheduling / synchronisation\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab if we have fewer cores than processes\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab shared data\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab communication\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab t_comm / t_comp << 1 \u8211- communication should be very efficient\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Summary\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab parallel computing still not prevalent in mass devices, just high-performance computing\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab some operating systems are better than others at providing the means for parallel execution\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab this material is not examinable, but is useful/interesting\sa180\par}
+}

@@ -1,0 +1,31 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab 16-bit addressing & 8-bit data\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab address is unidirectional but data is bidirectional\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab multiplexed address and data is because the data is folded into the address bus\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab data is buffered out to where it needs to go\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 3.\tx360\tab For interrupt vectoring see diagram in practical 3\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab RAM jump table\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab comes back to the last instruction + 1 at the end\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 4.\tx360\tab Simple diagram\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab parallel interface\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab block of logical elements that convert parallel to serial when writing out\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab simplify\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab show the USARTs place in the system and what it might have inside (converts serial to parallel and vice-versa)\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 5.\tx360\tab Crystal\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab value selected to give nice count values for baud rates\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 6.\tx360\tab So we can more accurately determine the bit sample (centre of the thing)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab want to make sure you're at the centrepoint of the data\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 7.\tx360\tab CTS crosses over RTS\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab DTR used as foldback for DSR (?)\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 8.\tx360\tab Software vs. hardware\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab one is more time-efficient (wired)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab software may get overrun (latency between buffer filling and sender receiving XOFF)\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 9.\tx360\tab \sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab DSR is trying to detect if a piece of data is ready for input\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 10.\tx360\tab Polling\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If you didn't have interrupts you'd have to constantly poll things to see if things need to be done (is there data for me?)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab very inefficient \u8211- probably spend most of your time looping instead of progressing data\sa180\par}
+}

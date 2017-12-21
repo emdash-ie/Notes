@@ -1,0 +1,66 @@
+<!DOCTYPE database [
+<!ELEMENT database (mobilePhoneTowers, mobilePhoneCustomers, sims, calls, voiceTowerUsages,
+                    webRequests, webResponses, dataTowerUsages, suspectDomains)>
+
+<!ELEMENT mobilePhoneTowers (tower*)>
+<!ELEMENT tower (towerID, degreesNorth, minutesNorth, secondsNorth, degreesWest,
+                 minutesWest, secondsWest, streetAddress, townName, countyName)>
+<!ELEMENT mobilePhoneCustomers (customer*)>
+<!ELEMENT customer (customerID, surname, firstname, streetAddress, townName,
+                    countyName, contractOrPrepaid, confirmedIdentity)>
+<!ELEMENT sims (sim*)>
+<!ELEMENT sim (simID, areaCode, number, customerID, yearPurchased,
+               monthPurchased, dayPurchased)>
+<!ELEMENT calls (call*)>
+<!ELEMENT call (callID, simID, madeOrReceived, countryCodeOfOtherParty,
+                areaCodeOfOtherParty, numberOfOtherParty, year, month, day,
+                hour, minute, second)>
+<!ELEMENT voiceTowerUsages (voiceUsage*)>
+<!ELEMENT voiceUsage (callID, towerID, durationOfUse)>
+<!ELEMENT webRequests (request*)>
+<!ELEMENT request (requestID, simID, url, year, month, day, hour, minute,
+                   second, towerID)>
+<!ELEMENT webResponses (response*)>
+<!ELEMENT response (responseID, requestID, sizeOfResponse)>
+<!ELEMENT dataTowerUsages (dataUsage*)>
+<!ELEMENT dataUsage (responseID, towerID)>
+<!ELEMENT suspectDomains (domain*)>
+
+<!ELEMENT towerID (#PCDATA)>
+<!ELEMENT degreesNorth (#PCDATA)>
+<!ELEMENT minutesNorth (#PCDATA)>
+<!ELEMENT secondsNorth (#PCDATA)>
+<!ELEMENT degreesWest (#PCDATA)>
+<!ELEMENT minutesWest (#PCDATA)>
+<!ELEMENT secondsWest (#PCDATA)>
+<!ELEMENT streetAddress (#PCDATA)>
+<!ELEMENT townName (#PCDATA)>
+<!ELEMENT countyName (#PCDATA)>
+<!ELEMENT customerID (#PCDATA)>
+<!ELEMENT surname (#PCDATA)>
+<!ELEMENT firstname (#PCDATA)>
+<!ELEMENT contractOrPrepaid (#PCDATA)>
+<!ELEMENT confirmedIdentity (#PCDATA)>
+<!ELEMENT simID (#PCDATA)>
+<!ELEMENT areaCode (#PCDATA)>
+<!ELEMENT number (#PCDATA)>
+<!ELEMENT yearPurchased (#PCDATA)>
+<!ELEMENT monthPurchased (#PCDATA)>
+<!ELEMENT callID (#PCDATA)>
+<!ELEMENT madeOrReceived (#PCDATA)>
+<!ELEMENT countryCodeOfOtherParty (#PCDATA)>
+<!ELEMENT areaCodeOfOtherParty (#PCDATA)>
+<!ELEMENT numberOfOtherParty (#PCDATA)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT month (#PCDATA)>
+<!ELEMENT day (#PCDATA)>
+<!ELEMENT hour (#PCDATA)>
+<!ELEMENT minute (#PCDATA)>
+<!ELEMENT second (#PCDATA)>
+<!ELEMENT durationOfUse (#PCDATA)>
+<!ELEMENT requestID (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT responseID (#PCDATA)>
+<!ELEMENT sizeOfResponse (#PCDATA)>
+<!ELEMENT domain (#PCDATA)>
+]>

@@ -1,0 +1,17 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Info\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab representing level with an attribute is a waste of space\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab this can be computed\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab use a recursive method which increments an argument instead\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab same for indentation\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab also better to print than append, as the append is O(n{\super 2})\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab common mistake to represent relative level of indentation as a string literal\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab then you have multiple copies of the string - hard to maintain\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab better to have a constant class attribute\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab see file {\f1 BinaryTree.java} for solution\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab the enum solution is fancy but possibly overkill, and a bit strange that the Node methods recurse back to the Traversal\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab might have been better to switch on the Node values in the Traversal enum\sa180\sa180\par}
+}

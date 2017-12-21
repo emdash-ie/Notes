@@ -1,0 +1,261 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 The Processor\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The CPU performance factors are:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The instruction count\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this is determined by the ISA and the compiler\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab CPI and cycle time\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab This is determined by the CPU hardware\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 To investigate these we'll examine two MIPS implementations:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab A simplified version\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab This is a simple subset that shows most aspects:\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab memory reference\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab arithmetic/logical\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab control transfer\sa180\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab A more realistic pipelined version\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Instruction Execution\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There are two basic steps for all instructions:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Program counter -> instruction memory [?]\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab fetch the instruction\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Register numbers -> register file\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab load data\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab read/write registers\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Depending on the instruction class, then:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Use ALU to calculate:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab arithmetic result\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab memory address [\u8230?]\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Building a Datapath\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A datapath is a set of elements that process data and addresses in the CPU.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Instruction Fetch\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab requires two state elements\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab instruction memory\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab program counter\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab increments PC with an added\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 R-Format Instructions\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The MIPS instructions with 3 registers (source1, source2, and destination).\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Read two register operands\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Perform arithmetic/logical operation\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Write register result\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Load/Store Instructions\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Read register operands\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Calculate address using 16-bit offset\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab use ALU, but extend\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab For:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Load \u8211- read memory and update register\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Store \u8211- write register value to memory\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Branch Instructions\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Read register operands\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab [check]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 ALU Control\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 the ALU is used for:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Load/Store \u8211- uses the add function\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Branch \u8211-\u160?uses the subtract function\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab R-Type instructions \u8211- uses a function depending on the funct field\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Datapath Control\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A datapath needs a control because it has sequential circuits which must be clocked.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Implementing Jumps\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Jumps use word addresses.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Update the PC with concatenation of (in order):\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab top 4 bits of old PC value\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab 26-bit jump address\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab 00\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab So there's an upper and lower limit to how far you can jump.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Need an extra control signal decoded from the opcode\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab called a jump control\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab set only when opcode has the value of 2\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Performance Issues\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The longest delay (longest path) determines the clock period. The longest path is the load instruction:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab instruction memory -> register file -> ALU -> data memory -> register file\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It is not feasible to vary the clock period for different instructions, because it becomes too complicated.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So all instructions are delayed to fit the longest, which violates the design principle of making the common case fast.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Pipelining can be used to improve performance.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Pipelining (At the Instruction Level)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Overlap execution to give parallelism.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 MIPS Pipeline\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Five stages, one step per stage:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Instruction fetch from memory (IF)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Instruction decode & register read (ID)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Execute operation or calculate address (EX)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 4.\tx360\tab Access memory operand (MEM)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 5.\tx360\tab Write result back to register (WB)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Assume the time for the stages is:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab 100 ps for register read or write\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab 200 ps for other stages\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This gives a total time of 800 ps for the load word instruction:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab 200 ps for instruction fetch\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab 100 ps for register read\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab 200 ps for ALU operation\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 4.\tx360\tab 200 ps for memory access\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 5.\tx360\tab 100 ps for register write\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Whereas the {\f1 beq} instruction had now memory access or register write, and so only takes 500 ps.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Pipelining works by allowing e.g. the instruction fetch operation for the second instruction to start while the rest of the first instruction happens.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Pipeline Speedup\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If all stages are balanced (take the same time), then the time between instructions for pipeline is = time between instructions without a pipeline / number of stages.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If things aren't balanced, then the speedup is less.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Note that the speedup is due to increased throughput \u8211- the latency (time for each instruction) does not decrease.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Pipelining and ISA Design\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 MIPS is designed for pipelining:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab All instructions are 32-bits\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this makes it easier to fetch and decode in one cycle\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab compare with x86, which has 1- to 17-byte instructions\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Small number of regular instruction formats (R-format, I-format, jump)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab can decode and read registers in one step\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab load/store addressing\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab can calculate address in 3rd stage, access memory in 4th stage\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Alignment of memory operands (word alignment)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab memory access takes only one cycle\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Hazards\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Some situations prevent starting the next instruction in the next cycle.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab structure hazards\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab a required resource is busy\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab data hazards\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab need to wait for previous instruction to complete its data read/write\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab control hazard\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab deciding on control action depends on previous instruction\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab can't make the decision what to run next till that instruction has finished\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Structure Hazards\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Conflict for use of a resource.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In MIPS pipeline with a single memory:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab load/store requires data access\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab instruction fetch would have to stall for that cycle\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this would cause a pipeline "bubble"\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So pipelined datapaths require separate instruction/data memories (or separate instruction/data caches). This way you can fetch an instruction and access data (from different instructions) at the same time.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [missed a lecture on Monday] - week 6?\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Multi-Cycle Pipeline\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab At each stage, different sections (instruction fetch, instruction decode, execution, memory, write back) are being used by/for different instructions.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Pipelined Control\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The control signals are derived from each instruction. Control lines start with execution stage.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Control signals are passed along from stage to stage with the instruction until they're used \u8211-\u160?each stage uses the control signal that's for it and passes the others along.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Instruction fetch doesn't need control signals, because it's always either fetching the next instruction or fetching a branch instruction.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Hazards (cont.)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Data Hazards\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Consider this sequence which has dependencies (the same number needs to be used in subsequent stages):\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 sub $2, $1, $3\line
+and $12, $2, $5\line
+or $13, $6, $2\line
+add $14, $2, $2\line
+sw $14, 100($2)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We can resolve hazards with forwarding. How do we detect when to forward?\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Assuming $2 has the value 10 before the subtraction and -20 after the subtraction.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Detecting the Need to Forward\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Pass register numbers along the pipelines.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab e.g. {\f1 ID/EX.RegisterRs} = register number for Rs sitting in ID/EX pipeline register\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab ALU operand register numbers in EX stage are given by: {\f1 ID/EX.RegisterRs}, {\f1 ID/EX.RegisterRt}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There is a data hazard when:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 EX/MEM.RegisterRd} = {\f1 ID/EX.RegisterRs}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab or {\f1 EX/MEM.RegisterRd} = {\f1 ID/EX.RegisterRt}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So at these points we need to forward from EX/MEM pipeline register.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There's also a data hazard when:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 MEM/WB.RegisterRd} = {\f1 ID/EX.RegisterRs} or {\f1 = ID/EX.RegisterRt}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 At these points we need to forward from MEM/WB pipeline register.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 But these conditions only require forwarding when the forwarding instruction will write to a register, so we check:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If {\f1 EX/MEM.RegWrite} or {\f1 MEM/WB.RegWrite} is set.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab That {\f1 Rd} for that instruction is not {\f1 $zero}.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Remember that in MIPS every use of {\f1 $zero} as operand yields an operand value of 0, so every instruction that uses {\f1 $zero} as the destination register will always output a 0.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Double Data Hazard\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can also have a double data hazard, which needs different treatment. Consider this sequence:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 add $1, $1, $2\line
+add $1, $1, $3\line
+add $1, $1, $4\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Both hazards occur.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We want to use the most recent result at the MEM stage.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So we have revise the MEM hazard condition \u8211-\u160?only forward if EX hazard condition isn't true (make sure execution hazard is taken care of before we handle the memory hazard).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Data Hazard and Stalls\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Data forwarding doesn't work when instruction tries to read a register following a load instruction that writes the same register.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Something must stall in the pipeline for a combination of load followed by an instruction that reads its result.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Therefore, we need a hazard detection unit to tell when to stall.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Load-Use Hazard Detection\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Check when using instruction is decoded in ID stage.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 ALU operand register numbers in ID stage are given by {\f1 IF/ID.RegisterRs} and {\f1 Rt}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We have a load-use hazard when:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 ID/EX.MemRead and ((ID/EX.RegisterRt = IF/ID.RegisterRs) or (ID/EX.RegisterRt = IF/ID.RegisterRt))}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If we detect a load-use hazard, we need to stall and insert a bubble.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 How to Stall the Pipeline\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Force control values in ID/EX register to 0\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab EX, MEM, and WB do {\i nop} (no operation)\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab prevent update of PC and IF/ID register\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab using instruction is decoded again\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab following instruction is fetched again\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab 1-cycle stall allows MEM to read data for {\f1 lw}\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab can subsequently forward to EX stage\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Hazards (cont.)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We saw that stalls reduce performance, but that we need them to enable pipelining.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The compiler can arrange code to avoid hazards and stalls, but this requires knowledge of the pipeline structure (it's difficult).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Branch Hazard\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We don't know the result of a branch until after the memory access step.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Before we know, the instructions following the branch are executed in the meantime (static prediction). If we are branching, the intermediate instructions need to be discarded.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The number of cycles lost waiting for the branch instruction is called the {\f1 branch delay}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Reducing Branch Delay\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Try moving the hardware that determines the outcome to the ID stage (previously it was in the ALU). This comprises:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab a target address adder\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab a register comparator\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This will allow us to forward the result and branch earlier.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab intermediate instructions are made into a bubble \u8211- they will not change anything, though the calculations will be performed.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Data Hazard\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If a branch instruction uses a register that's the destination register from previous instructions, then that result might not be ready in time for the branch instruction \u8211- this gives us a data hazard within the branch hazard.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If the branch instruction requires a value from (e.g.) an {\f1 add} instruction immediately before it, then we have to stall the branch instruction for one cycle.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If the branch instruction comes right after a load instruction, we have to stall the branch for 2 cycles.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Dynamic Branch Prediction\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In deeper and superscalar pipelines, branch penalty is more significant. Dynamic branch prediction is used for this.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab record every branch that's taken in a table or buffer\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab if we encounter a branch again, we guess that we'll do the same thing as last time (if we took it then, we'll predict that it'll be taken this time)\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this makes sense for loops in programs, where it'll repeat multiple times from a branch condition\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The table is indexed by recent branch instruction addresses\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab If the guess is wrong, we flush the pipeline and flip the prediction\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 1-Bit Predictor\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Only looks at the last branch condition outcome to make prediction\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab This mispredicts things a little with nested loops (at the starts and ends of inner loops)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 2-Bit Predictor\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Only changes prediction on two successive mispredictions\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Calculating the Branch Target\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Even with a predictor, we need to calculate the target address (the address jumped to if the branch is taken). This gives a 1-cycle penalty for a taken branch.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We can use a branch target buffer (a cache of target addresses) to overcome this. It's indexed by the PC when instructions are fetched. If there's a cache hit and the instruction is predicted as taken, we can fetch the target immediately.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Instruction-level Parallelism\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Deeper pipeline\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab make the pipeline longer (more stages)\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab break up the longest stage\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab less work per stage -> shorter clock cycle\sa180\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab multi-issue\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab replicate pipeline stages to give multiple pipelines.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Multiple Issue\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab two types:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab static\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab dynamic\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Compiler does most of the work in static multiple issue. Detects and avoids hazards by packaging issue slots in different ways.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In dynamic multi-issue, the CPU does more of the work. Resolves hazards using techniques we've seen at runtime.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Speculation\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab another form of prediction\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab used so subsequent instructions can be started quickly\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Compiler/Hardware Speculation\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab compiler speculation known as static speculation\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab hardware speculation known as dynamic speculation\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Speculation and Exceptions\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In static speculation, we can add ISA support for deferring exceptions to a later stage. (Is this a real exception or a false one caused by the re-ordering of instructions?).\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In dynamic speculation, we buffer the exception until instruction completion to determine if it is real. If the exception still exists at a later stage, it's a real exception.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Static Multiple Issue\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab compiler needs info about pipeline.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Scheduling Static Multiple Issue\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Compiler must remove some/all hazards while reordering instructions into issue packets with no dependencies within a packet.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Example: MIPS with Static Dual Issue\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab two-issue packets (each packet has two instructions)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab empty things padded with {\f1 nop}s\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab have to duplicate the hardware\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab new ALU is not used for normal arithmetic operations, and so is simpler (is still needed for load word instructions)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Hazards in Dual-Issue MIPS\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab load-use hazard\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab include a nop to stall\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Scheduling Example\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab it looks like the multi-issue code will put the result in the wrong array position to me, but he insists that it's right\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab performance is poor, so we use loop unrolling (see below)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Loop Unrolling\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab replicates loop body to achieve more parallelism\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab does it also predict decrements?\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab have to use different registers for each replication, to avoid different replications using the same register (looks like a dependency to the compiler even though it isn't)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Dynamic Multiple Issue\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Dynamic Pipeline Scheduling\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab allow out-of-order execution but writeback has to be in order (to give correct result)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Dynamically Scheduled CPU\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Register Renaming in Dynamic Scheduling\par}
+}

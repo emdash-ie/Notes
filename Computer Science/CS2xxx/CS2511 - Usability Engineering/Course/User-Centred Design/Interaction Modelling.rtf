@@ -1,0 +1,152 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Intro\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab some are very detailed and expensive, only used on large projects\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab some are more entry-level and used on small projects\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two broad categories:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab task analysis\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab models only what happens (or is observable) during interaction\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab based on observation\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab e.g. asking questions of the users is not part of the specifications\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab cognitive models\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab designed to incorporate some representation of the user's abilities, understanding, knowledge, etc.\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab the aim is to formalise knowledge gleaned by psychologists so that it can be employed in the design of computer systems\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab go a step further than task analysis\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Note: not all cognitive models explicitly model memory or decision making. Some will just point out that (e.g.) memory was used at this point.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Three broad categories of Cognitive models:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Hierarchical representations of the user's task and goal structure\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab these models deal directly with the issues of formulating tasks and goals\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab linguistic and grammatical models\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab these models deal with articulation and translation between the system and the user\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab physical and device-level models\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab these models deal with articulation at the human motor level rather than at higher levels\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab deals with unit tasks (e.g. changing gear in a car) \u8211- tasks which it is not worthwhile to break down into smaller tasks because we've become so good at them\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab you can be thinking about something else while changing gear\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Some cognitive models directly embody knowledge about human perception, memory, etc.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Other cognitive models do not embody this knowledge directly, but model interaction in a way that makes it easy to identify [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Granularity\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A major issue in the design and use of models is selecting the appropriate level of granularity.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab what is the top-level goal?\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab tends to be quite small tasks, as modelling is complicated even for medium-size tasks\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab most tasks for part of larger undertakings, so goals can be defined at many levels.\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab the choice is often determined by the system being modelled\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab what is the lowest-level sub-goal?\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab should we break down the goals until we reach the level of individual finger and eye movements?\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab no, because they don't take much or any effort\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab the approach generally adopted is to identify sub-goals that are routine, learned tasks which do not involve problem-solving\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab these are known as unit tasks \u8211- either tasks that can't be broken down any further or have no real thought involved\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Most modelling languages and techniques leave decisions on granularity to the user.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Generally use physical and device-level models for unit tasks, and the other two categories for higher-level tasks.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Cognitive Complexity Theory\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 CCT is designed to model interaction, and in particular the amount of cognitive effort involved in performing a task with a particular interface.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 CCT has two descriptions which operate in parallel:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab a description of the user's goals, based on a task-goal hierarchy and expressed through production rules\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab a description of the system state, expressed as generalised transition networks, a form of state transition network\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Production Rules\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This form:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 if condition then action\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the condition is a statement about the contents of working memory\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the action is an elementary action, either internal (e.g. a change in the state of working memory), or external (e.g. a keypress)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A CCT analysis might have thousands of production rules. Usually the rules are written by packages, which can spot conflicts for you, etc.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The conditions attached to each rule are unique, so that only one rule can be active at a time.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Execution of a particular rule should change the state of working memory in such a way that it meets the conditions for another rule, which is then executed.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Note (in the example) the use is assumed to be storing information about the goal, the text being worked upon, and the cursor, all in working memory.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The working memory in CCT is supposed to correspond loosely to human short-term memory. If there are many things in working memory at any point, or a high average of things, the interface is probably hard to use.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Strengths and Weaknesses\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Kieras and Polson, who developed CCT, claim that complexity of an interface is reflected in the number of production rules required to describe the system using CCT.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The more rules, the harder the interface is to learn.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The number of items held in working memory also indicates how [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 However, some elements of the notation are purely structural, included solely to enable the system to function.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For example, it's sometimes necessary to place entries in working memory merely to serve as 'flags' which allow production rules to fire at the right moment.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It's not clear that such entries represent any genuine cognitive load.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Relative measures are generally useful, absolute measures aren't.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Another problem with CCT is that the amount of code required to describe even a small part of an interface can be enormous.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab this is a common problem with description methods\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 CCT production rules normally describe "expert" behaviour \u8211- the most appropriate sequence of actions to achieve the intended result.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 However, CCT also supports the use of style rules which modify the way in which conditions and actions operate in production rules.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Style rules can be used to modify a CCT model to mimic different types of user, such as novices.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Bovair, Kieras, and Polson produced a list of style rules which can be used to reflect different types of user in a CCT description.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 CCT production rules normally describe error-free performance, but there is nothing in the structure of CCT to prevent users writing production rules that model error conditions. However, in such cases the error behaviour must be explicitly specified in advance. [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Linguistic and Grammatical Forms\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Another category of cognitive models.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These use formalisms such as:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab BNF (Backus-Naur Form)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab TAG (Task Action Grammar)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These are based on [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Backus-Naur Form\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Consider a graphic application that has a polyline function.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The user selects the function from a menu, clicks at each of the points the line is to link, and then double-clicks to end it.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab {\f1 +} represents a sequence in order \u8211- this then this then this\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab {\f1 |} used for logical OR\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Syntactic constructs (in lowercase) appear on the left side of a definition.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab work down to [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Some syntactic constructs are recursive.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Complexity\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 One measure of the complexity with BNF is to count the rules, but you can reformulate the rules by using complex rules rather than simple rules.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A better measure is to count the rules and the {\f1 +} and {\f1 |} operators in the description. This is better than just counting the rules, but it still dependent on the framing of the rules.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In practice, the problems aren't very important, as BNF is never used in an absolute sense, just comparatively. So as long as the BNF descriptions being compared are generated by the same person or team and pains are taken to ensure consistency, the problems don't matter.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Task Action Grammar (TAG)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A failing of BNF-based measures is that they ignore many features of language and the user's knowledge.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For example, the UNIX commands {\f1 cp}, {\f1 mv}, {\f1 ln} all have a similar syntax and that makes them easier to remember.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If one didn't share the consistency, this would be reflected in a BNF description, but wouldn't affect the number of rules or operators used.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 TAG is based on BNF but designed to capture some of the information ignored by BNF-based approaches.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It captures consistency by allowing the use of generic descriptions.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For example, the three UNIX commands would be described using a generic "file-command", then noting the differences between each command and the generic form.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Issues With Cognitive Models\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Most cognitive modelling languages and techniques are based on ideas and approaches developed for use with command-line interfaces (CLIs) rather than GUIs.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab better with CLIs, not as good with GUIs\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Many were developed from formalisms used to describe natural languages, and later computer languages.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is true of both Goal and Task Hierarchies and Linguistic and Grammatical models.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Most early GUIs were just window-managers for command-line systems.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Since all interactions on such systems were ultimately translated into textual operations, there was little reason to doubt the adequacy of a textual description.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 More recently, researchers have begun to question the validity of using cognitive modelling languages to analyse interactions within GUIs.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 While the functionality of graphical interactions can be described using such languages, it's not clear that all the factors of importance in the interaction can be described.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab many tasks can be carried out more quickly and effectively using a GUI than a CLI\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab however, if the same functions are available in both the CLI and the GUI, many modelling languages will yield the same description for both\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab thus they will fail to capture the efficiency improvement offered by the GUI\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A grammar that fails to take account of these issues will not be able to analyse or predict the efficiency of a graphical interface.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These models no longer apply once you've reached the stage of unit tasks (routine, learned tasks). All the areas where GUIs perform better involve these tasks.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Physical and Device Models\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 These seek to model interactions at the level of motor actions.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Unlike cognition, the human motor system is well understood and relatively easy to model.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In this way, physical and device models avoid some of the problems associated with other types of cognitive model.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Modelling interactions at such a low level produces very verbose descriptions.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Because of this, physical and device models are unsuitable for describing complete interfaces/systems.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 They are typically used in conjunction with other, higher-level models:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the overall interaction is specified in a high-level model\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab some of the unit-tasks are modelled in a physical or device model\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Physical and device models can yield reliable predictions concerning operations. (also useful in an absolute rather than relative sense)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Fitts' Law\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For a given system, the time taken to move a pointer onto a target varies as a function of:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the distance the pointer has to be moved\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the size of the target\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is so consistent you can put numbers on it, and just look at the ratio of the two numbers.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 t_m = a + b log_2(d+1 / s)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab t_m = movement time\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab a = start/stop time\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab b = device tracking speed\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab d = distance moved\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab s = target size (relative to the direction of movement)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 {\f1 a} and {\f1 b} must be empirically determined for different operations, pointing devices, etc.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 * you can then try and improve the empirical values for them\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Implications\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab pop-up menus are generally faster to use than fixed menus\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab menus arranged like pie-charts, with all options equidistant from the starting point, are very efficient\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the efficiency of fixed, linear menus can be improved by:\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab placing frequently-used options near the start-point\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab placing the menu at (or near) the screen edge, so that it becomes infinitely large in the direction of movement, makes things much easier\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Card, English, and Burr (1978) used Fitts' Law to show that the mouse was the most efficient pointing device available.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This work led to choice of a mouse by Xerox for the Star 8010 Information System, the first commercial system to use a GUI.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Macintosh pull-down menus can be accessed around five times faster than typical Windows pull-down menus.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab this is because they're at the edge of the screen and so you can't overshoot (infinite-width target)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Circular pop-up menus good because of equidistance but also infinite size in each direction \u8211- can't move out of the ring, cancel by clicking a particular icon.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab palette of 16 tools \u8211- put at one edge of the screen\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Cont.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Fitts' Law has proved extremely accurate when compared with measured figures.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It can be used, in modified form, to derive an index of difficulty (ID) for a pointing device.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 It has also been extended to model many types of pointing/navigation/target-acquisition tasks.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For example, the Accot-Zhait Steering Law models the task of navigating along a path or tunnel of specified (variable) width.\par}
+}

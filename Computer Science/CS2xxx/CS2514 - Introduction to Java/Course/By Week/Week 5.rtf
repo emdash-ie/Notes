@@ -1,0 +1,171 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Interfaces\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Case Study\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public interface Animal \{\line
+    public void makeNoise(); /* No implementation */\line
+    \u8230?\line
+\}\line
+\line
+public class Cat implement Animal \{\line
+    \u8230?\line
+    @Override\line
+    public void makeNoise(); /* Must be implemented */\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Delegation\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 With interfaces we can simulate inheritance. It requires a lot more work but the resulting design may be better.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab The interface has no implementation, so you can't rely on a non-existing implementation.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We rely on object composition rather than inheritance.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We can re-use existing implementation efforts using delegation.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 To implement the interface in a class {\f1 C}:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab We need a concrete class that implements the interface\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 C} implements the interface using a concrete class instance\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab A concrete class is one that can be instantiated (see below)\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 C} delegates the work to the concrete class instance\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Finally\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab A class can only inherit from one superclass\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab A class can implement multiple interfaces\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Abstract Classes\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 What happens if we create an Animal object (from the running example)? Some implementation is incomplete in that class, and what does it mean to have an object made from that class?\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 But we need the class for inheritance and for polymorphism.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So we make it an abstract class using a keyword {\f1 abstract}. This means that instances of the class can't be created.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public abstract class Animal \{\line
+    \u8230?\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Now {\f1 Animal animal = new Animal()} will give an error.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Subclasses can also be abstract, e.g. the {\f1 Canine} and {\f1 Feline} classes from before.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 A concrete class is a class that's not abstract.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can still create polymorphic object references from an abstract class, and you can still create an array for a class:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Abstract Methods\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can have abstract methods as well. They are defined in abstract classes and have no body:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public abstract void roam();\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab This allows you to specify a method that must be implemented/overridden in any subclass of the abstract class.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Abstract classes can have implemented methods as well.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Encapsulate What Varies\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Encapsulate what varies as objects that are passed to the superclass' constructor by the subclasses.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Inheritance vs. Composition\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Inheritance:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab lets us create subclasses \u8211- white-box reuse\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab subclass inherits superclass behaviour\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab subclasses can override superclass behaviour\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab get code reuse for free\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab cannot change behaviour at runtime\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab violates encapsulation\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab subclass may rely on superclass implementation\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab subclass may break when superclass is changed\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Composition:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab lets you compose classes \u8211- black-box reuse\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab A client class may use an object\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab you get code reuse but it takes more effort\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab lets you change behaviour at runtime\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab respects encapsulation\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab helps encapsulated classes focus on a single task\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 We should favour composition over inheritance, because it gives us more flexible design \u8211- we can encapsulate behaviour and we can change behaviour at runtime. This is the third design principle.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 The Strategy Pattern\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Defines a class of algorithms\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Encapsulates each algorithm\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Makes them interchangeable\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 See slides for an example, or google it (I think we may have to google it). Reference is Gamma et al, 2008.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Enumerated Types\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Many applications require groups of named constants. For example:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab A suit of cards: HEARTS, SPADES, CLUBS, and DIAMONDS\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Predefined colours: BLACK, WHITE, RED, BLUE, \u8230?\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 In Java named constants are called {\f1 enums}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 {\f1 Java enums} overcome most of the flaws of a pattern called {\f1 int enums}. {\f1 Java enums} are objects.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Switch Statement\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 switch (expression) \{\line
+    case (constant 1): statements 1\line
+    case (constant 2): statements 2\line
+    \u8230?\line
+    default: default statements\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 By default cases will fall through into other cases, unless prevented with a {\f1 break} statement. Multiple guards means sharing statements among multiple cases:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 switch (expression) \{\line
+    case (constant 1):\line
+    case (constant 2): statements 1\line
+    default: default statements\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Int Enum Design Pattern\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Use constants with int value to represent subtypes\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Problems with the {\f1 int enum} design pattern:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Doesn't provide type safety (can compare things of different type)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Maintainability:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab programs with int enums are brittle\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab int enums are compile-time constants\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab they are compiled into clients that use them\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab client will break if enum constant changes\sa180\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab ease of use:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab int enums are difficult to use\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab it is difficult to translate them to Strings\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab no reliable iteration over all allowed values\sa180\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab namespace\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab int enums have no private name space\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 DIY\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public abstract class Beef \{\line
+    public static final Beef SHANK = new Beef() \{\line
+        @Override public double price() \{return 1.0;\}\line
+    \};\line
+    public static final Beef SIRLOIN = new Beef() \{\line
+        @Override public double price() \{return 2.0;\}\line
+    \};\line
+    public abstract double price();\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [check this bit, especially about anonymous classes]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [check the serious problem]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Java Enums\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public enum Apple \{FUJI, PIPPIN\}\line
+public enum Orange \{NAVEL, TEMPLE, BLOOD\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Each of these is a class. Each constant in braces is an instance of that class.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 For each constant in any enum class, Java automatically defines one public final class attribute.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Name of the constant in class is class.constant.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 All Java enum constructors are (implicitly) private.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 All instance methods are final, except for {\f1 toString()}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Advantages\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Java enums are type-safe.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Our programs are more maintainable because the enums aren't compiled as constants into clients. Rearranging values doesn't break clients.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Translating to strings is easy \u8211- {\f1 toString()}. Iterating over all enums is easy \u8211- {\f1 values()}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Enum classes have a private name space.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Methods in enum classes\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 compareTo(that)}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab compares this enum with that one for order\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 equals(that)}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab shallow equality just compares object reference values\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this allows us to implement deep equality\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 hashCode()}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab returns a hash code for this enum\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab worth studying\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 toString()}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab returns the name of this enum constant\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 name()}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab returns the original name of the enum\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab e.g. if {\f1 toString()} has been overridden\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 ordinal()}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab returns the ordinal of this enum\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab e.g. if we have three apples, the first will have the value 0, the second the value 1, etc.\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Java Enums are Objects\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Implementing the Planet Class\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public enum Planet \{\line
+    MERCURY(3.303e+23, 2.439e+6),\line
+    VENUS(\u8230?),\line
+    \u8230?;\line
+\line
+    Planet(double mass, double radius) \{\line
+        \u8230?\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Here we're calling the Planet constructor for each planet we're describing.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Specific Behaviour\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Our Planet application is very well behaved \u8211- all method results depend on input and attributes only.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This is not always the case: consider a calculator application:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab There are four operations PLUS, etc\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab we'd like to apply operations to doubles and get the result:\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab {\f1 double apply(double first, double second)}\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 The result also depends on the enum constant.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Common implementation is to use a switch on {\f1 this} in {\f1 apply} to match all possible values. However, if we add a new operation, we have to change the implementation of {\f1 apply}.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Better way to do it is to define an abstract method {\f1 apply} n the {\f1 Operation} class, and then provide an implementation for {\f1 apply} with each constant [see slides].\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [left out a bunch \u8211- he's going very fast]\par}
+}

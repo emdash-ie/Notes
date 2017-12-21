@@ -1,0 +1,90 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Java Basics\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab comment lines with {\f1 //}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab comment blocks with {\f1 /*} to start and {\f1 */} to end\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab have to write return type of methods\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab use {\f1 \{\}} to mark blocks\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab {\f1 void} can only be used as a return type, not as the type of a variable\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab don't forget semi-colons\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab braces not needed for {\f1 if} or {\f1 else} blocks if there's only one statement in the block\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab though it's clearer to use braces\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab don't need to use {\f1 this.} for instance attributes when there's no ambiguity\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab if the name clashes with a parameter, we'll need to\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 From the Command Line\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab use the command {\f1 javac filename.java} (in bash) to compile a java file \u8211- produces a file {\f1 filename.class}\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab run a class with the command {\f1 java filename}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Style\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab line length should be below 76 characters\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab line continuations should be indented\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab class constants should be named in UPPER_SNAKE_CASE\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab class constants are attributes which are {\f1 private}, {\f1 final}, and {\f1 static}\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab class names should be nouns, in UpperCamelCase\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab attributes and methods should be in lowerCamelCase\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab use spaces for indentation (not tabs)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab should have one exit point from a function\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab so one return statement\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab create a variable called result and give it different values in different branches of the function, but return it at the end\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Main Method\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Main method of a class will be run when the class is run. It must have this structure:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public static void main(String[] args) \{\line
+    //code\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Typically this is put inside its own {\f1 Main} class:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 public class Main \{\line
+    public static void main(String[] args) \{\line
+      // code goes here\line
+    \}\line
+\}\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Printing\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Can print using these methods:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 System.out.println("Hello");\line
+System.out.print("Hello");\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 println()} will print a whole line\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 print()} will only print what it's given\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 You can also print to error in the same way, which can be useful for showing things during writing/debugging but not during normal operation:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 System.err.println("Hello");\line
+System.err.print("Hello");\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 {\f1 public} vs. {\f1 private}\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab public classes, methods, and attributes can be accessed from any class\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab private methods, attributes, and inner classes can only be accessed by other members of their own class\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab usually don't use private classes at the top level\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab all attributes should be private (encapsulation)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 {\f1 final}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab a final class can't be subclassed\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab a final method can't be overridden\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab a final variable can't be changed\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab though if it is an object reference, the object can still be changed though the reference can't (this includes arrays)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 {\f1 static}\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab marks methods and attributes as class methods and class attributes\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab class attributes only exist in one place, and each instance of a class accesses the same value\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab unlike instance attributes, where each instance has its own copy of the value\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Javadoc\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Javadoc is a type of comment used for documentation \u8211- similar to docstrings in python. It's placed before the thing it's associated with:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 /**\line
+ * Represents a short note.\line
+ *\line
+ * @author Noel Bourke\line
+ */\line
+public class Note \{\line
+    // implementation\line
+\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab generally (Google style guide) you comment all public classes and all public members of those classes\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab there are special tags {\f1 @author}, {\f1 @param}, {\f1 @return}, and more \u8211- all used as author above\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Formal Parameters vs. Actual Parameters\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab formal parameters are the parameters inside a method definition\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab actual parameters are the values passed to the method in a method call\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Call-by-Value Mechanism\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 To call a method with n parameters:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab define n fresh scratch variables (usually on the stack)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab evaluate the actual parameters from left to right\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab order is important because the expressions in the parameter list may have side-effects, e.g. {\f1 blah(var++, var--)}\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the results are assigned to the corresponding scratch variables\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab evaluate the method body using the temporary scratch variables as the formal parameters\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab upon return:\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab if there's a result, substitute it for the method call\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab remove the scratch variables from the stack\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab local variables defined inside a block will also be removed\sa180\sa180\sa180\par}
+}

@@ -1,0 +1,8 @@
+<!ELEMENT people (student?, lecturers?)>
+<!ELEMENT students (student+)>
+<!ELEMENT student (name)>
+<!ATTLIST student studentID ID #REQUIRED>
+<!ELEMENT lecturers (lecturer+)>
+<!ELEMENT lecturer (name, lecturerID)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT lecturerID (#PCDATA)>

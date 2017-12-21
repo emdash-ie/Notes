@@ -1,0 +1,261 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Transport Layer\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Services and Protocols\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Every layer uses different names for the messages to emphasise that they're slightly different because you've usually added/stripped a header\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Multiplexing / Demultiplexing\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab the most fundamental thing done by the transport layer\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab info about how to demultiplex things must be stored in the transport layer\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 \u160?How Demultiplexing Works\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab source port often unimportant, picked randomly by client\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Connectionless Demux\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab different clients can use the same source port numbers\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Connection-oriented Demux\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab need to link destination with source\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 UDP\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab essentially just provides multiplexing/demultiplexing\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab commonly blocked by firewalls because there's no congestion control\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab most protocols (including UDP) will throw away a message if the checksum fails\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab checksums are not absolutely reliable\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Principles of Reliable Data Transfer\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab as the sender, how do I know my file didn't get there?\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab have an unreliable channel at the network layer\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab congestion is the main reason \u8211- packets get dropped from queues\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab packets can also get corrupted over wireless networks\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab packets can arrive in the wrong order\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Getting Started\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab packet has extra header with info required by the reliable data transfer protocol\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab protocols often generated from finite state machines that are written by people (rather than writing the protocol line by line)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab gradually complicate specification/requirements (1.0, 2.0, \u8230?)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab checksums not great, but we'll assume for the moment they're sufficient\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab also cyclic redundancy checks (CRC) \u8211- much stronger than checksums\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab A without bar in state machine diagram means "no action taken"\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 2.1 sender has four states \u8211- two for each packet\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab two sequence numbers is enough because the next packet isn't sent until the current one has definitely arrived\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab In 3.0 receiver will send ACK0 if it gets packet 1 but it's corrupted\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab 3.0 is called a "stop and wait" protocol\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab performance is terrible because you don't send a second packet until a whole round-trip time has happened\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab "stop and wait" protocols are used in wifi, where the round-trip time to the access point is very small\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Reliable Data Transfer (cont.)\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab stop and wait operation used in wifi connections because they're unreliable, and the round-trip time to the access point is small\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Pipelined Protocol\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab send a bunch of packets\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab then receive acks for those\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two main types:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab go-back-n\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab selective repeat [check]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 TCP is a mixture of these two\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Pipelining can improve throughput hugely.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Go-Back-N\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender sends up to N packets in the pipeline\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab receiver sends cumulative acks (stops if there's a gap)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender keeps timer for the oldest unacked packet, and retransmits all unacked packets if the timer expires\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab in practice, acked packets wouldn't be kept by the sender, just deleted once acked\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab logic is "if one got lost, some or all of the rest probably did as well"\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab inefficient if there are many packets in the pipeline (large window) and an error occurs\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab all packets will be retransmitted unnecessarily\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Selective Repeat\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender up to N unacked packets in pipeline\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab receiver acks individual packets\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender maintains timer for each unacked packet, resends the packet when its timer expires\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab receiver needs a buffer as packets may arrive out of order\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab in practice wouldn't keep acked packets, but would mark that they've been received and acked\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab receiver's window needs to be limited because otherwise connections could easily use up all its memory\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab not sure about acking of packets from before base - N\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs20 Dilemma\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab what minimum sequence number do you need if given the window size?\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 TCP\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab hasn't changed much over time (since the 1970s), except for some algorithms for congestion control and some other things\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab it has stood the test of time\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab call packets "segments" at the transport layer\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Assumes point-to-point \u8211- one sender and one receiver. UDP doesn't assume this.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Byte stream \u8211- no message boundaries. (where segments start and end is irrelevant to the application layer)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Full duplex \u8211- bi-directional data flow in a connection.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Have to set up a connection before sending any data.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Flow controlled \u8211- sender will not overwhelm receiver.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Congestion control \u8211- ensures sender won't overwhelm the network.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two options for sending segments smaller than the maximum segment size (MSS):\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab timeout\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab push request from application\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Segments can also be sent when the buffer reaches the MSS.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP Segment Structure\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab source port and destination port used for multiplexing and demultiplexing\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sequence numbers and ack numbers needed for selective repeat or go-back-n\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab these count numbers of bytes of data, rather than packets or segments\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab needed because TCP is a stream of data rather than a sequence of messages\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab treats application data as a meaningless bunch of bits (encapsulation)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab need a header length because the options section has variable length\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab note: when looking at headers, important to think about the implications of the sizes of fields\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab we can have 2^32 unique sequence numbers\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab with a 2.5 Gb/s link sending constantly, you'll wrap around in 14 seconds, which is a problem\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab TCP solves this using a timestamp in the options section\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab protocols tend to start fields on word boundaries because it makes processing easier at the receiving end\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Flags:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab A marks as ack\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab U means urgent\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab not widely used\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab S marks a SYN\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab used for establishing connection\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP Connection Management\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Setup\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Three-way handshake:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab client sends SYN\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab specifies initial sequence number\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab usually picked at random to allow for successive short connections between the same client and server\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab server responds with SYNACK\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab also allocates buffers and specifies initial server sequence number\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab client sends ACK, which may contain data\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Closing\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab either party sends a FIN message\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab other party receives, sends its own FIN\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab first party receives FIN, sends an ACK, and then waits for a short while before closing the connection (say 1-2 minutes)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP Sequence Numbers and ACKs\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 ACKs and data are sent in the same messages.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sequence number refers to the byte stream number of the first byte in the segment's data\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab in an empty message (an ACK with no data), it's the same as the last number\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab ACK number refers to the next expected byte\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab cumulative ACK\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP Reliable Data Transfer\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab offers pipelining\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab uses cumulative ACKs\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab uses a single transmission timer\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab retransmissions are triggered by:\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab timeouts\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab duplicate ACKs [need to work this one out]\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP Sender Events\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Note not using FSMs because it's too complicated.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 When data is received from an application:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab create segment with sequence number\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sequence number is the byte-stream number of the first data byte in the segment\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab start timer if not already running (think of timer as for the oldest unacked segment)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab pseudocode is simplified: don't send packets straight away to the network layer (MSS etc.)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Retransmission Scenarios\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab lost ACK\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab premature timeout\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP ACK Generation (Optimisations)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab receiver receives in-order segment with expected sequence number, all data up to expected sequence number already acked\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab delay the ACK \u8211-\u160?wait up to 500 ms for next segment. If no segment, send ACK\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab arrival of in-order segment with expected sequence number. One other segment has an ACK pending.\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab Immediately send single cumulative ACK, ACKing both in-order segments.\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab arrival of out-of-order segment with higher than expected sequence number. Gap detected.\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab immediately send duplicate ACK indicating sequence number of next expected byte.\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab helps sender tell that the link is still good if only one segment doesn't get through, allows fast retransmit\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Fast Retransmit\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 If the sender receives 3 ACKs for the same data, it assumes the segment after the ACKed data was lost.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab made a dramatic improvement to TCP throughput\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP Selective ACKs\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab non-mandatory extension that is widely used\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab receiver can ACK a sequence of bytes in addition to the number of the next expected bytes\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab even if there's a gap, confirms some segments did arrive\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender can re-send only packets that haven't arrived\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP Round-trip Time and Timeout\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab timeout for stop-and-wait protocol in a wifi access point is pretty deterministic (easy to work out), once you've sent your packet\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab note: stop-and-wait in wifi is actually used in the link layer\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab for end-to-end tcp, it's much harder \u8211- have to account for transmission and queueing delays on all routers\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Dangers of getting timeout wrong:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab under-estimate\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab redundant packets transmitted, decreasing throughput (and contributing to congestion)\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab over-estimate\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab decrease throughput because lots of waiting\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 So we want the timeout to be longer than the roundtrip time.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Sender keeps a running average of the roundtrip times and uses that to set the timeouts. (ignores retransmissions)\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Current Model\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 {\f1 EstimatedRTT = (1 - a)*EstimatedRTT + a*SampleRTT}\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Exponential weighted moving average\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab want to balanced between the influence of the average value and of the most recent value\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab want to ignore outliers, but don't want to ignore sudden changes to the network\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab influence of past sample decreases exponentially fast\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab typical value: {\f1 a = 0.125}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Note: samples jump around mostly due to queueing dynamics\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Setting the Timeout\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Look at the variance of the estimate to tell how accurate it is\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab use a weighted moving average of the variance\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab add a safety margin to account for that\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab through experimentation, it's been seen that a margin of 4 times the variance average works well\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab if every packet has the same RTT, then the deviation will be 0\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP Flow Control\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Without flow control, if the receiver's buffer fills up, the sender will keep sending and a lot of packets will be discarded.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab flow control matches the send rate to the receiving application's drain rate\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 How It Works\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab receiver keeps track of unused buffer space as {\f1 rwnd} (receive window)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab receiver advertises unused buffer space by including {\f1 rwnd} value in segment headers\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab the sender limits the number of unACKed bytes to {\f1 rwnd}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab this guarantees the receiver's buffer doesn't overflow\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Example\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Slow receiver:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab receiver buffer fills up and window shrinks to 0\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender learns of empty window and stops\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender buffer fills up with bytes from its application process\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender TCP asks OS to block the application process\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab once the receiver catches up, the window opens again, and the sender TCP learns the new window size\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab how does it learn the window size again? It's not sending anymore, so there's nothing for the receiver to ACK\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab uses probing \u8211- sends a 1-byte message every now and then to trigger an ACK from the receiver\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab chose this over having the receiver send an ACK when the window opens because it doesn't seem to fit with the philosophy of TCP \u8211-\u160?normally everything a receiver does is a response to something it was sent\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender resumes transmission\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender buffer frees up\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab sender TCP asks OS to unblock sender process\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 \u160?TCP Congestion Control\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab reduce sending rate so as not to lose things in the network buffers between the sender and receiver\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab harder than flow control because there are more buffers, and their occupancy doesn't just depend on what you send\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Goal:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab TCP sender should transmit as fast as possible, but without congesting the network\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab how do you find a rate just below the congestion level?\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab decentralised: each TCP sender sets its own rate, based on implicit feedback:\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab ACK: segment received (a good thing!), network not congested, so increase sending rate\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab lost segment: assume loss due to congested network, so decrease sending rate\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab could be for other reasons (e.g. packet was corrupted), but is almost certainly because of congestion\par}
+{\pard \ql \f0 \sa180 \li1080 \fi-360 \bullet \tx360\tab this assumption caused problems in early wireless networks\par}
+{\pard \ql \f0 \sa0 \li1440 \fi-360 \endash \tx360\tab no longer a problem because wireless networks now recover lost packets at lower layers\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab needs to be decentralised, because of the rapid changing of the network (buffer occupancy, etc.)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab there are explicit feedback methods, e.g. DECBIT and ECN\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab ECN isn't widely used because it's complicated (even though it is widely deployed)\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Bandwidth Probing\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 By increasing on ACK receipt and decreasing with each loss (with a faster decrease than increase), you get a sawtooth plot.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 Congestion Window\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 sender limits rate by limiting number of unACKed bytes in pipeline:\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \f1 * last_byte_sent - last_byte_acked <= cwnd\line
+\line
+* `cwnd` is the congestion window, only relevant to the sender\line
+\line
+* the sender is limited by `min(rwnd, cwnd)`\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs24 More Details\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab segment loss event:\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab timeout \u8211- no response\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab cut {\f1 cwnd} to 1\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab 3 duplicate ACKs \u8211- at least some segments getting through (recall fast retransmit)\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab cut {\f1 cwnd} in half (less aggressive than on timeout)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab ACK received:\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab slowstart phase\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab increase exponentially fast at connection start or following timeout\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab congestion avoidance\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab increase linearly (increase by one every time you get an ACK)\sa180\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP Slowstart\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab start with {\f1 cwnd = MSS}\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab available bandwidth may be >> MSS/RTT\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab desirable to quickly ramp up to a respectable rate\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab increase rate exponentially until first loss event or when threshold reached\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab increase threshold with each ACK you receive (this gives exponential behaviour), increase by MSS\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 [\u8230?]\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Transition into/out of Slowstart\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 {\f1 ssthresh} \u8211- {\f1 cwnd} threshold maintained by TCP\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab on loss event \u8211- set {\f1 ssthresh} to {\f1 cwnd / 2}\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab remember half of TCP rate when congestion last occurred\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab when {\f1 cwnd >= ssthresh} \u8211- transition from slowstart to congestion avoidance phase\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 TCP Congestion Avoidance\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 AIMD \u8211- additive increase, multiplicative decrease\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab when cwnd > ssthresh grow cwnd linearly\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab increase it by 1 MSS per RTT\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab approach possible congestion slower than in slowstart\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab implementation [\u8230?]\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Fast Recovery\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 3 duplicate ACKs treated differently from full timeout\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Flavours of TCP\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There are many different flavours.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Reno and Tahoe are the most popular \u8211- Reno is the most widely deployed one.\par}
+}

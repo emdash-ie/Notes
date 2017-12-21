@@ -1,0 +1,112 @@
+{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Intro\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Most existing software is written to exploit a single-core processor and doesn't take advantage of multi-core processors.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab need significant performance improvement (otherwise might as well just use a faster uniprocessor)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 There are difficulties:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab partitioning\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab need to separate out the bits that could be parallelised\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab co-ordination\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab e.g. have to co-ordinate to get results\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab communications overhead\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab must be a controller controlling each divided unit, management of these requires communication\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Amdahl's Law\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab sequential part can limit speedup\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Instruction and Data Streams\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 An alternative classification based on the number of instructions and data streams.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 E.g. MIMD \u8211- multi-instruction, multi-data\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab SPMD \u8211-\u160?single-program, multi-data\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab a parallel program on a MIMD computer\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab conditional code for different processors\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Single Instruction Multiple Data (SIMD)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab operates element-wise on vectors of data\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab e.g. MMX and SSE instructions in x86\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab multiple data elements in 128-bit registers\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab all processors execute the same instruction at the same time\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab simplifies synchronisation\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab reduced instruction control hardware\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab works best for highly data-parallel applications\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab loops in programs\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Vector Processors (as opposed to scalar processors)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab highly pipelined function units\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab an elegant interpretation of SIMD\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab stream data to/from vector registers to units\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab data collected from memory into registers\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab results stored from registers to memory\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab don't know what a vector is in this context, but the width of the registers in important\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab you can execute an entire loop in one operation\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab significantly reduces instruction-fetch bandwidth\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Vectors vs. Scalars\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab vector architectures and compilers\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab single vector instruction is equivalent to executing entire scalar loop\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab explicit statement of absence of loop-carried dependencies\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab reduced checking in hardware\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab regular access patterns benefit from interleaved and burst memory\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab burst memory \u8211- copy a lot of memory in one go\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab avoid control hazards by avoiding loops\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab better power and energy savings than scalar architecture\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab less instruction and memory bandwidths and less hazard checking\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab don't see much vector architecture these days\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab have the problem of context-switching being harder\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab can get scalar processing nearly as good\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab would have to discard scalar architecture \u8211- not worth it?\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Multithreading\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab performing multiple threads of execution in parallel for a single processor\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab replicate registers, PC, etc.\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab fast switching between threads as compared to processes\par}
+{\pard \ql \f0 \sa0 \li1080 \fi-360 \bullet \tx360\tab this is context-switching \u8211- very slow for full processes\sa180\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab uses virtual memory mechanism to share memory\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two approaches:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab fine-grain multithreading\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab switch threads after each instruction\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab interleave instruction execution\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab if one thread stalls, others are executed\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Coarse-grain multithreading\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab only switch on long stalls (e.g. L2 cache miss)\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab simplifies hardware, but doesn't hide short stalls (e.g. data hazards)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 \u160?Simultaneous Multithreading\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Combines fine-grain and coarse-grain multithreading.\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab in a multiple-issue dynamically scheduled processor\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab schedule instructions from multiple threads\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab instructions from independent threads execute when function units are available\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab within threads, dependencies handled by scheduling and register renaming\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab tries to use up all instruction bandwidth by taking instructions from different threads and running them simultaneously\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Example: Pentium-4 HT\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab two threads: duplicated registers [\u8230?]\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Multiprocessor Shared Memory\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 SMP \u8211- shared memory multiprocessor\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab hardware provides single physical address space for all processors\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab synchronise shared variables using locks and cache coherence\par}
+{\pard \ql \f0 \sa0 \li720 \fi-360 \endash \tx360\tab lock: a process locks a variable and until it unlocks it, no other process can write to it (or lock it)\sa180\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Two styles of SMP access time:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab uniform memory access \u8211- latency does not depend on processor\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab non-uniform memory access \u8211- variable access time depending on processor\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Example: Sum Reduction\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 How do you split a task across multiple processes so that each does an equal amount of work?\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This uses divide and conquer approach:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab half the processors add pairs, etc.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 History of GPUs\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab originally in high-end computers, then available as an expansion, now commonly pre-installed\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab different aims than the microprocessor community\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 GPU Architecture\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Processing is highly data-parallel\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab GPUs are highly multithreaded\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab use thread switching to hide memory latency\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab less reliance on multi-level caches\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab hardware multithreading\sa180\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab graphics memory is wide and high-bandwidth\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Trend toward general purpose GPUs\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab heterogeneous CPU/GPU systems\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab CPU for sequential code, GPU for parallel code\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Programming languages / APIs\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab DirectX, OpenGL\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab C for Graphics (Cg), High Level Shader Language (HLSL)\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Compute Unified Device Architecture (CUDA)\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Classifying GPUs\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 They don't fit nicely into SIMD/MIMD model\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab conditional execution in a thread allows an illusion of MIMD\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab but with performance degradation\par}
+{\pard \ql \f0 \sa180 \li720 \fi-360 \endash \tx360\tab need to write general purpose code with care\sa180\sa180\par}
+}
