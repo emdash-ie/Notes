@@ -1,3 +1,5 @@
+buildDir '/Users/Noel/Desktop/Temp'
+
 task buildNotes {
     group 'Build'
     description 'Builds the notes using pandoc'
@@ -6,12 +8,11 @@ task buildNotes {
         FileTree inputs = fileTree(dir: '.', include: '**/*.md')
         inputs.each {File file ->
             exec {
-                executable '/bin/bash'
+                executable 'runPandoc'
                 args = [
-                    '-c',
-                    'pandoc',
                     file.getAbsolutePath(),
-                    '-o', '/Users/Noel/Desktop/Temp/' + '\${${file.getAbsolutePath()}#*/Notes/}'
+                    projectDir,
+                    buildDir
                 ]
             }
         }
