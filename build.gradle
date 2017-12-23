@@ -1,18 +1,46 @@
+import java.nio.file.Path
+import java.io.File
+
 buildDir '/Users/Noel/Desktop/Temp'
 
 task buildNotes {
     group 'Build'
     description 'Builds the notes using pandoc'
 
+    /**
+     * Calculates the output file for a given input file.
+     */
+    ext.calculateOutput = { File inputPath ->
+        Path relativePath = projectDir.toPath().relativize(inputPath.toPath())
+        Path outputPath = buildDir.toPath().resolve(relativePath)
+        String outputString = outputPath.toString().replace(".md", ".pdf")
+        return new File(outputString)
+    }
+
+    FileTree inputFiles = fileTree(dir: '.', include: '**/*.md')
+    inputs.files(inputFiles)
+    inputFiles.each {File input ->
+        outputs.file(calculateOutput(input))
+    }
+
     doLast {
-        FileTree inputs = fileTree(dir: '.', include: '**/*.md')
-        inputs.each {File file ->
+        inputFiles.each {File file ->
             exec {
-                executable 'runPandoc'
+                executable '/usr/local/bin/pandoc'
                 args = [
-                    file.getAbsolutePath(),
-                    projectDir,
-                    buildDir
+                    "${file.getAbsolutePath()}",
+                    "-o", "${calculateOutput(file).getAbsolutePath()}",
+                    "-s",
+                    "--highlight-style", "tango",
+                    "--pdf-engine=xelatex",
+                    "-V", "margin-top=1in",
+                    "-V", "margin-bottom=1in",
+                    "-V", "margin-left=1.25in",
+                    "-V", "margin-right=1.25in",
+                    "-V", "mainfont=Source Serif Pro",
+                    "-V", "sansfont=Source Sans Pro",
+                    "-V", "monofont=Source Code Pro",
+                    "-V", "fontsize=12pt"
                 ]
             }
         }
