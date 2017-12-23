@@ -1,0 +1,31 @@
+#!/bin/bash
+# Runs pandoc on a given markdown file, outputting it to the same relative path
+# in another subtree.
+#
+# Arguments:
+#     $1: The path to the input markdown file.
+#     $2: The path prefix of the input to replace with $3. (The root directory
+#          from which to preserve the relative path in the output.)
+#     $3: The path prefix to substitute for $2.
+
+inputFile="$1"
+sourceRoot="$2"
+destinationRoot="$3"
+
+outputFile="$destinationRoot/${inputFile#$sourceRoot}"
+outputFile="${outputFile%.md}.pdf"
+
+pandoc \
+    "$inputFile" \
+    -o "$outputFile" \
+    -s \
+    --highlight-style tango \
+    --pdf-engine=xelatex \
+    -V margin-top=1in \
+    -V margin-bottom=1in \
+    -V margin-left=1.25in \
+    -V margin-right=1.25in \
+    -V mainfont="Source Serif Pro" \
+    -V sansfont="Source Sans Pro" \
+    -V monofont="Source Code Pro" \
+    -V fontsize="12pt"
