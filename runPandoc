@@ -14,6 +14,11 @@ destinationRoot="$3"
 
 outputFile="$destinationRoot/${inputFile#$sourceRoot}"
 outputFile="${outputFile%.md}.pdf"
+outputFolder="${outputFile%/*}"
+
+if [ ! -d "$outputFolder" ]; then
+    mkdir -p "$outputFolder"
+fi
 
 pandoc \
     "$inputFile" \
