@@ -40,14 +40,14 @@ Let 'green' represent an output of 0, and 'red' represent an ouput of 1. The fou
 * red, again (state 3)
 	* input 0 -> state 0
 	* input 1 -> state 0
-	
+
 ### State Transition Table
 
 	z' = f(z, x)
-	
+
 where `z'` represents the next state, `z` represents the current state, and `x` represents the input.
 
-|  z\x  | 0 | 1 |
+|  `z\x`  | 0 | 1 |
 |-------|---|---|
 | **0** | 1 | 2 |
 | **1** | 2 | 2 |
@@ -82,7 +82,7 @@ We have a state for each partial sequence, including one state for having seen n
 	* output: 0
 	* input 0 -> Seen 0
 	* input 1 -> Seen nothing
-	
+
 ### Mealy Machine
 
 The output depends on the state and the input, but can change in between clock steps, instead of only being allowed to change at clock steps.
@@ -95,7 +95,7 @@ For the Mealy machine, we only have three states:
 
 * Seen 0
 * [complete this]
-	
+
 ## Synchronous Circuit
 
 A synchronous circuit is one where all state transitions happen in one go, as all flip-flops are clocked by the same clock pulse.
