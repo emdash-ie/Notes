@@ -1,35 +1,58 @@
 import java.nio.file.Path
 import java.io.File
+import java.util.HashSet
+import java.util.Set
 
 buildDir '/Users/Noel/Desktop/Temp'
 
-task buildNotes {
+task buildNotes(type : PandocTask) {
     group 'Build'
     description 'Builds the notes using pandoc'
 
-    /**
-     * Calculates the output file for a given input file.
-     */
-    ext.calculateOutput = { File inputPath ->
-        Path relativePath = projectDir.toPath().relativize(inputPath.toPath())
+    inputFiles = fileTree(dir: '.', include: '**/*.md')
+
+    outputCalculator = { File input ->
+        Path relativePath = projectDir.toPath().relativize(input.toPath())
         Path outputPath = buildDir.toPath().resolve(relativePath)
         String outputString = outputPath.toString().replace(".md", ".pdf")
         return new File(outputString)
     }
+}
 
-    FileTree inputFiles = fileTree(dir: '.', include: '**/*.md')
-    inputs.files(inputFiles)
-    inputFiles.each {File input ->
-        outputs.file(calculateOutput(input))
+class PandocTask extends DefaultTask {
+    Closure<File> outputCalculator
+    FileCollection inputFiles
+    private Iterable<File> outputFiles
+
+    @InputFiles
+    public FileCollection getInputFiles() {
+        return inputFiles
     }
 
-    doLast {
+    @OutputFiles
+    public Iterable<File> getOutputFiles() {
+        if (outputFiles == null) {
+            outputFiles = determineOutputFiles()
+        }
+        return outputFiles
+    }
+
+    private Iterable<File> determineOutputFiles() {
+        Set<File> outputs = new HashSet<File>()
+        inputFiles.each { File input ->
+            outputs.add(outputCalculator(input))
+        }
+        return outputs
+    }
+
+    @TaskAction
+    public void runPandoc() {
         inputFiles.each {File file ->
-            exec {
+            project.exec {
                 executable '/usr/local/bin/pandoc'
                 args = [
                     "${file.getAbsolutePath()}",
-                    "-o", "${calculateOutput(file).getAbsolutePath()}",
+                    "-o", "${outputCalculator(file).getAbsolutePath()}",
                     "-s",
                     "--highlight-style", "tango",
                     "--pdf-engine=xelatex",
@@ -45,4 +68,5 @@ task buildNotes {
             }
         }
     }
+
 }
