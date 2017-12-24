@@ -47,14 +47,14 @@ class PandocTask extends DefaultTask {
     }
 
     @TaskAction
-    public void runPandoc() {
-        inputFiles.each {File file ->
+    public void runPandoc(IncrementalTaskInputs inputs) {
+        inputs.outOfDate {input ->
             project.exec {
                 ignoreExitValue true
                 executable '/usr/local/bin/pandoc'
                 args = [
-                    "${file.getAbsolutePath()}",
-                    "-o", "${outputCalculator(file).getAbsolutePath()}",
+                    "${input.getFile().getAbsolutePath()}",
+                    "-o", "${outputCalculator(input.getFile()).getAbsolutePath()}",
                     "-s",
                     "--highlight-style", "tango",
                     "--pdf-engine=xelatex",
@@ -69,6 +69,12 @@ class PandocTask extends DefaultTask {
                 ]
             }
         }
-    }
 
+        inputs.removed { input ->
+            def outputFile = new File(outputCalculator(input.getFile()))
+            if (outputFile.exists()) {
+                outputFile.delete()
+            }
+        }
+    }
 }
