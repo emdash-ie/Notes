@@ -24,6 +24,7 @@ class PandocTask extends DefaultTask {
     FileCollection inputFiles
     private Iterable<File> outputFiles
 
+    @SkipWhenEmpty
     @InputFiles
     public FileCollection getInputFiles() {
         return inputFiles
