@@ -50,6 +50,7 @@ class PandocTask extends DefaultTask {
     public void runPandoc() {
         inputFiles.each {File file ->
             project.exec {
+                ignoreExitValue true
                 executable '/usr/local/bin/pandoc'
                 args = [
                     "${file.getAbsolutePath()}",
