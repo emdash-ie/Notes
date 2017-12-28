@@ -1,3 +1,7 @@
+---
+title: C Programming
+...
+
 # Nature of C
 
 C tends to trust the programmer, and has few rules. You have the liberty to write unusual code, but that makes it easier to write needlessly tricky code.
