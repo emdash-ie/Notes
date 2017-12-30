@@ -83,7 +83,7 @@ class PandocTask extends DefaultTask {
         }
 
         inputs.removed { input ->
-            def outputFile = new File(outputCalculator(input.getFile()))
+            def outputFile = outputCalculator(input.getFile())
             if (outputFile.exists()) {
                 outputFile.delete()
             }
@@ -132,7 +132,7 @@ class LinkTask extends DefaultTask {
         }
 
         sources.removed { source ->
-            def targetFile = new File(targetCalculator.transform(source.getFile()))
+            def targetFile = targetCalculator.transform(source.getFile())
             if (targetFile.exists()) {
                 targetFile.delete()
             }
