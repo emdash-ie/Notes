@@ -32,7 +32,7 @@ task makeLinks(type: LinkTask) {
 }
 
 class PandocTask extends DefaultTask {
-    Closure<File> outputCalculator
+    Transformer<File, File> outputCalculator
     FileCollection inputFiles
     private Iterable<File> outputFiles
 
@@ -53,7 +53,7 @@ class PandocTask extends DefaultTask {
     private Iterable<File> determineOutputFiles() {
         Set<File> outputs = new HashSet<File>()
         inputFiles.each { File input ->
-            outputs.add(outputCalculator(input))
+            outputs.add(outputCalculator.transform(input))
         }
         return outputs
     }
@@ -66,7 +66,7 @@ class PandocTask extends DefaultTask {
                 executable '/usr/local/bin/pandoc'
                 args = [
                     "${input.getFile().getAbsolutePath()}",
-                    "-o", "${outputCalculator(input.getFile()).getAbsolutePath()}",
+                    "-o", "${outputCalculator.transform(input.getFile()).getAbsolutePath()}",
                     "-s",
                     "--highlight-style", "tango",
                     "--pdf-engine=xelatex",
@@ -83,7 +83,7 @@ class PandocTask extends DefaultTask {
         }
 
         inputs.removed { input ->
-            def outputFile = outputCalculator(input.getFile())
+            def outputFile = outputCalculator.transform(input.getFile())
             if (outputFile.exists()) {
                 outputFile.delete()
             }
