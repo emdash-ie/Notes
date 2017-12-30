@@ -5,17 +5,29 @@ import java.util.Set
 
 buildDir '/Users/Noel/Desktop/Temp'
 
-task buildNotes(type : PandocTask) {
+task runPandoc(type : PandocTask) {
     group 'Build'
     description 'Builds the notes using pandoc'
 
-    inputFiles = fileTree(dir: '.', include: '**/*.md')
+    inputFiles = fileTree(dir: 'Computer Science', include: '**/*.md')
 
     outputCalculator = { File input ->
         Path relativePath = projectDir.toPath().relativize(input.toPath())
         Path outputPath = buildDir.toPath().resolve(relativePath)
         String outputString = outputPath.toString().replace(".md", ".pdf")
         return new File(outputString)
+    }
+}
+
+task makeLinks(type: LinkTask) {
+    group 'Build'
+    description 'Links non-markdown files into the destination tree'
+
+    sourceFiles = fileTree(dir: 'Computer Science', exclude: '**/*.md')
+    targetCalculator = { File source ->
+        Path relativePath = projectDir.toPath().relativize(source.toPath())
+        Path targetPath = buildDir.toPath().resolve(relativePath)
+        return targetPath.toFile()
     }
 }
 
@@ -74,6 +86,55 @@ class PandocTask extends DefaultTask {
             def outputFile = new File(outputCalculator(input.getFile()))
             if (outputFile.exists()) {
                 outputFile.delete()
+            }
+        }
+    }
+}
+
+class LinkTask extends DefaultTask {
+    Transformer<File, File> targetCalculator
+    FileCollection sourceFiles
+    private Iterable<File> targetFiles
+
+    @SkipWhenEmpty
+    @InputFiles
+    public FileCollection getSourceFiles() {
+        return sourceFiles
+    }
+
+    @OutputFiles
+    public Iterable<File> getTargetFiles() {
+        if (targetFiles == null) {
+            targetFiles = determineTargetFiles()
+        }
+        return targetFiles
+    }
+
+    private Iterable<File> determineTargetFiles() {
+        Set<File> targets = new HashSet<File>()
+        sourceFiles.each { File source ->
+            targets.add(targetCalculator.transform(source))
+        }
+        return targets
+    }
+
+    @TaskAction
+    public void makeLinks(IncrementalTaskInputs sources) {
+        sources.outOfDate {source ->
+            project.exec {
+                ignoreExitValue true
+                executable '/bin/ln'
+                args = [
+                    "${source.getFile().getAbsolutePath()}",
+                    "${targetCalculator.transform(source.getFile()).getAbsolutePath()}",
+                ]
+            }
+        }
+
+        sources.removed { source ->
+            def targetFile = new File(targetCalculator.transform(source.getFile()))
+            if (targetFile.exists()) {
+                targetFile.delete()
             }
         }
     }
