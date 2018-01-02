@@ -67,6 +67,7 @@ class PandocTask extends DefaultTask {
                 args = [
                     "${input.getFile().getAbsolutePath()}",
                     "-o", "${outputCalculator.transform(input.getFile()).getAbsolutePath()}",
+                    "--resource-path=${input.getFile().getParentFile().getAbsolutePath()}",
                     "-s",
                     "--highlight-style", "tango",
                     "--pdf-engine=xelatex",
