@@ -3,7 +3,7 @@ import java.io.File
 import java.util.HashSet
 import java.util.Set
 
-buildDir '/Users/Noel/Desktop/Temp'
+buildDir "/Users/Noel/Google Drive/Noel's Notes"
 
 task runPandoc(type : PandocTask) {
     group 'Build'
