@@ -2,6 +2,7 @@
 title: Module Information
 dates:
 - 15th January 2018
+- 16th January 2018
 ...
 
 Lecturer: Steve Prestwich (s.prestwich@cs.ucc.ie)
@@ -23,3 +24,10 @@ We won’t go to expert level in these languages, but provide a grounding and co
 C programming:
 
 - “The C Programming Language” by Kernighan & Ritchie (optional)
+
+# Labs
+
+These are the lab times for the moment, but one of them clashes with a workshop, so they may be rearranged:
+
+- Wednesday 12-1, WGB.G24
+- Thursday 11-12, WGB.G24
