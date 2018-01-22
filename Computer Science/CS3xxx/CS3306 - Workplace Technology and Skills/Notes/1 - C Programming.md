@@ -2,6 +2,7 @@
 title: "1: C Programming"
 dates:
 - 15th January 2018
+- 22nd January 2018
 ...
 
 # Intro
@@ -81,3 +82,28 @@ int power(int base, int n) {
     return p;
 }
 ```
+
+# Dynamic Memory Allocation
+
+Dynamic memory allocation is allocation of memory at runtime – e.g. you need to create an array, but the size is input by the user.
+
+```C
+// You need to include stdlib.h to use malloc().
+#include <stdlib.h>
+int *x;
+scanf("%d", &n);
+
+// Allocate memory to hold n integers
+x = malloc(n * sizeof(int));
+
+// use x
+
+// You need to free the memory that was used by x when you’re done with it.
+// Otherwise, the memory will stay allocated and won’t be available for
+// later allocation.
+free(x);
+```
+
+* `calloc(n, sizeof(int))` will do the same as `malloc()` above, but also initialise the values in memory to 0. It’s slightly slower than `malloc()`.
+
+* `realloc(x, m * sizeof(int))` will change the size of memory allocated to x. It’s equivalent to `free(x)` followed by `x = malloc(m * sizeof(int))`.
