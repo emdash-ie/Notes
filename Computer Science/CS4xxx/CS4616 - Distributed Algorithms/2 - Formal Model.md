@@ -12,22 +12,22 @@ distance(i, j)
 :   Shortest path between i and j (or infinity)
 
 diam
-:   The maximum `distance(i, j)` in the graph – the maximum (shortest) communication distance
+:   The maximum $distance(i, j)$ in the graph – the maximum (shortest) communication distance
 
 # Processes, States, Transitions
 
-Some fixed message alphabet `M` (for the leader election it was the set of all unique IDs), with `null` representing the absence of a message.
+Some fixed message alphabet $M$ (for the leader election it was the set of all unique IDs), with $null$ representing the absence of a message.
 
 A process has four components:
 
-- *states~i~*
+- $states_i$
     - a (possibly infinite) set of states
-- *start~i~*
-    - a nonempty subset of *states~i~*, which are the start/initial states
-- *msgs~i~*
-    - a message-generating function mapping $states~i~ x out-nbrs~i~$ to elements from $M U {null}$
-- $trans~i~$
-    - a state-transition function mapping $states~i~$ and vectors of $M U {null}$ to $states~i~$
+- $start_i$
+    - a nonempty subset of $states_i$, which are the start/initial states
+- $msgs_i$
+    - a message-generating function mapping $states_i \times out-nbrs_i$ to elements from $M \cup \{null\}$
+- $trans_i$
+    - a state-transition function mapping $states_i$ and vectors of $M \cup \{null\}$ to $states_i$
 
 # Channels and Execution
 
