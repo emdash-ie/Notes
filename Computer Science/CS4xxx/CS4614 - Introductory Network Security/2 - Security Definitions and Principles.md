@@ -14,16 +14,7 @@
     - Normally the first step of access to services
     - May be local e.g. fingerprint recognition on phone
 
-# Areas
-
-Network security consists of measures to do the following to security violations that involve the transmission of information:
-
-1. Deter
-2. Prevent
-3. Detect
-4. Correct
-
-# Computer Security Objectives
+# Objectives
 
 There are three main objectives/properties:
 
@@ -54,7 +45,7 @@ Cyber insurance may or may not be a good idea – since viruses etc. spread real
 
 # Challenges
 
-- Not simple
+- Security isn’t simple
 - Attacks on security features also need to be considered
 - Requires constant monitoring (and timely application of countermeasures)
 - Often an afterthought for companies
@@ -65,7 +56,7 @@ Cyber insurance may or may not be a good idea – since viruses etc. spread real
 
 # OSI Security Architecture
 
--
+- attack
 - mechanism
 - service
 
@@ -91,7 +82,7 @@ Passive attack
 Active attack
 :   Attempts to alter system resources or affect their operation
 
-## Active Attacks
+## Active Attacks
 
 Usually more harmful than passive attacks. Difficult to prevent because of variety of vulnerabilities, so goal is detection and recovery.
 
@@ -115,7 +106,7 @@ Usually more harmful than passive attacks. Difficult to prevent because of varie
 ## Authentication
 
 - For a single message, guaranteeing that it came from where it says it did
-- For ongoing communication, …
+- For ongoing communication, assures that the two entities are authentic, and that the connection is not interfered with in such a way that a third party can masquerade as one of the two legitimate parties
 
 ## Access Control
 

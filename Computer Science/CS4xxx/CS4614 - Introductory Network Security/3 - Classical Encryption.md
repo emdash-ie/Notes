@@ -17,7 +17,7 @@ Deciphering/decryption
 :       ciphertext -> plaintext
 
 Cryptographic cipher
-:       ?
+:       A scheme
 
 Cryptography
 :       The area of study of the many schemes used for encryption (more specific than cryptology)
