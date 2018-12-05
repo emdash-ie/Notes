@@ -1,0 +1,25 @@
+graph LR
+  A((A: Start))
+  B((B))
+  C((C))
+  D((D))
+  E((E))
+  F((F))
+  G((G: Accept))
+  H((H: Accept))
+  I((I: Accept))
+  A -->|0| B
+  A -->|1| E
+  B -->|0| C
+  B -->|1| F
+  C -->|0| D
+  C -->|1| G
+  D -->|0,1| D
+  E -->|0,1| F
+  F -->|0,1| G
+  G -->|0| H
+  G -->|1| G
+  H -->|0| I
+  H -->|1| G
+  I -->|0| D
+  I -->|1| G

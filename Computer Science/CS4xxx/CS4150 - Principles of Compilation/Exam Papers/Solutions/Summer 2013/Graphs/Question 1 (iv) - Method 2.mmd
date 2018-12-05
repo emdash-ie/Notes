@@ -1,0 +1,15 @@
+graph LR
+  A((A: Start))
+  B((B))
+  C((C: Accept))
+  D((D))
+  E((E))
+
+  A -->|0| B
+  B -->|0| B
+  B -->|1| C
+  C -->|0,1| D
+  D -->|0,1| D
+
+  A -->|1| E
+  E -->|1| B
