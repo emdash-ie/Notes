@@ -43,7 +43,7 @@ The time for each phase $l$ is $2 \times 2^l = 2^{l+1}$ – the tokens go out an
 
 The final phase takes time $n$, an incomplete phase where tokens only travel outbound.
 
-Second=last phase is phase $l = \lceil logn \rceil - 1$ and its time complexity is at least the total time complexity of all preceding phases.
+Second-last phase is phase $l = \lceil logn \rceil - 1$ and its time complexity is at least the total time complexity of all preceding phases.
 
 Total time complexity of all phases (except for the last one): $2 \times 2^{\lceil logn \rceil}$.
 
