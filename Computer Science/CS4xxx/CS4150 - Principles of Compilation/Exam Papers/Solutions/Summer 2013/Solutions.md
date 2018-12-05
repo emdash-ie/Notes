@@ -225,3 +225,37 @@ graph TD
   li3 --> lic3[ListItemClose]
 
 ```
+
+# Question 3
+
+## (i)
+
+### Question
+
+List the FIRST sets of the non-terminals of the grammar shown below that is based on the venerable
+programming language Pascal.
+
+```
+⟨program⟩ → PROGRAM ID ; ⟨compound-statement⟩ ⊙
+⟨compound-statement⟩ → BEGIN ⟨optional-statements⟩ END
+⟨optional-statements⟩ → ⟨statement-list⟩ | Empty
+⟨statement-list⟩ → ⟨statement⟩ ; ⟨statement-list⟩ | Empty
+⟨statement⟩ → ⟨variable⟩ := ⟨expression⟩
+    | ⟨compound-statement⟩
+    | IF ⟨expression⟩ THEN ⟨statement⟩ ELSE ⟨statement⟩
+    | WHILE ⟨expression⟩ DO ⟨statement⟩
+⟨variable⟩ → ID
+⟨expression⟩ → EXPR
+```
+
+The non-terminals are enclosed within <>, while the terminals (reserved words PROGRAM, BEGIN, END, IF, THEN, ELSE, WHILE, DO; place-holders ID and EXPR and symbols ’;’, ’⊙’ and ’:=’) are shown in boldface.
+
+### Answer
+
+- First(program) = {PROGRAM ID}
+- First(compound-statement) = {BEGIN}
+- First(optional-statements) = {$\epsilon$, ID, BEGIN, IF, WHILE}
+- First(statement-list) = {$\epsilon$, ID, BEGIN, IF, WHILE}
+- First(statement) = {$\epsilon$, ID, BEGIN, IF, WHILE}
+- First(variable) = {ID}
+- First(expression) = {EXPR}
