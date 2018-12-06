@@ -1,0 +1,58 @@
+graph TD
+  document --> html
+
+  html --> HtmlOpen
+  html --> head
+  html --> body
+  html --> HtmlClose
+
+  head --> HeadOpen
+  head --> title
+  head --> HeadClose
+
+  title --> t5[Text]
+
+  body --> BodyOpen
+  body --> bc1[body-content]
+  body --> BodyClose
+
+  bc1 --> bc2[body-content]
+  bc1 --> be1[body-element]
+
+  bc2 --> be2[body-element]
+
+  be1 --> p1[p]
+  be2 --> p2[p]
+
+  p1 --> po1[POpen]
+  p1 --> pc1[p-content]
+  p1 --> pcl1[PClose]
+
+  p2 --> po2[POpen]
+  p2 --> pc2[p-content]
+  p2 --> pcl2[PClose]
+
+  pc2 --> t1[Text]
+
+  pc1 --> list
+  list --> ListOpen
+  list --> lc1[list-content]
+  list --> ListClose
+
+  lc1 --> lc2[list-content]
+  lc1 --> li3[list-item]
+  lc2 --> lc3[list-content]
+  lc2 --> li2[list-item]
+  lc3 --> li1[list-item]
+
+  li1 --> lio1[ListItemOpen]
+  li1 --> t2[Text]
+  li1 --> lic1[ListItemClose]
+
+  li2 --> lio2[ListItemOpen]
+  li2 --> t3[Text]
+  li2 --> lic2[ListItemClose]
+
+  li3 --> lio3[ListItemOpen]
+  li3 --> t4[Text]
+  li3 --> lic3[ListItemClose]
