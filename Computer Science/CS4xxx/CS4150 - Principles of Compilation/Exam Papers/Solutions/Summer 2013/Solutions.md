@@ -76,7 +76,7 @@ Give a regular expressions for the set of all binary strings that do not contain
 
 ### Question
 
-Construct a finite automaton equivalent to the following regular expression 10|(0|11)0 ∗ 1.
+Construct a finite automaton equivalent to the following regular expression: $10|(0|11)0 \ast 1$.
 
 ### Answer
 
@@ -170,7 +170,7 @@ Give a complete parse tree for the following document:
 
 # Question 3
 
-## (i)
+## (i) (10%)
 
 ### Question
 
@@ -190,7 +190,7 @@ programming language Pascal.
 ⟨expression⟩ → EXPR
 ```
 
-The non-terminals are enclosed within <>, while the terminals (reserved words PROGRAM, BEGIN, END, IF, THEN, ELSE, WHILE, DO; place-holders ID and EXPR and symbols ’;’, ’⊙’ and ’:=’) are shown in boldface.
+The non-terminals are enclosed within <>, while the terminals (reserved words PROGRAM, BEGIN, END, IF, THEN, ELSE, WHILE, DO; place-holders ID and EXPR and symbols ’;’, ’$\odot$’ and ’:=’) are shown in boldface.
 
 ### Answer
 
@@ -201,3 +201,44 @@ The non-terminals are enclosed within <>, while the terminals (reserved words PR
 - First(statement) = {$\epsilon$, ID, BEGIN, IF, WHILE}
 - First(variable) = {ID}
 - First(expression) = {EXPR}
+
+## (ii) (10%)
+
+### Question
+
+List the FOLLOW sets of the non-terminals of this grammar.
+
+### Answer
+
+Taking $ as the end-of-input symbol:
+
+- Follow(program) = {$}
+- Follow(compound-statement) = {$\odot$, ELSE, ;}
+- Follow(optional-statements) = {END}
+- Follow(statement-list) = {END}
+- Follow(statement) = {ELSE, ;}
+- Follow(variable) = {:=}
+- Follow(expression) = {THEN, DO, ELSE, ;}
+
+## (iii) (10%)
+
+### Question
+
+Sketch the LL(1) table for this grammar. You need not compete the entire table but should indicate the row and column headings and the rows that correspond to the two non-terminals statement-list and statement.
+
+### Answer
+
+| Symbol         | $\odot$ | ELSE  | ;     | END    | BEGIN  | :=  | THEN | DO  | IF     | WHILE  | ID     | EXPR | PROGRAM |
+| -------------- | ------- | ----- | ----- | ------ | ------ | --- | ---- | --- | ------ | ------ | ------ | ---- | ------- |
+| statement-list |         |       |       | `<sl>` | `<sl>` |     |      |     | `<sl>` | `<sl>` | `<sl>` |      |         |
+| statement      |         | `<s>` | `<s>` |        | `<s>`  |     |      |     | `<s>`  | `<s>`  | `<s>`  |      |         |
+
+## (iv) (5%)
+
+### Question
+
+Write a brief note indicating the connection between the stack-based LL(1) parsing technique mentioned above and the classical recursive descent parsing approach.
+
+### Answer
+
+I’m not really sure what he wants here.
