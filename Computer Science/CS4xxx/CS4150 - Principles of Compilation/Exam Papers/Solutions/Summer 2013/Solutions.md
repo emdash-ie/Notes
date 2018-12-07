@@ -242,3 +242,104 @@ Write a brief note indicating the connection between the stack-based LL(1) parsi
 ### Answer
 
 I’m not really sure what he wants here.
+
+# Question 4 (15%)
+
+## (i) (3%)
+
+### Question
+
+Write a brief note sketching how a parse/syntax tree might be used to facilitate a syntax-directed translation of a Pascal program into three-address code (TAC). You are not required to draw a tree merely to describe in words how a tree might drive the translation process. (A summary of TAC are appended to this paper.)
+
+### Answer
+
+Note: I’m not sure what kind of answers he’s looking for on these “brief note” questions.
+
+Given a parse tree for a Pascal program, one can crawl the tree and transform the nodes into an equivalent representation in TAC, ending up with a parse tree for a TAC program, which can then be converted back into text form.
+
+For example, a node in the Pascal tree for a while loop might look like this:
+
+![](Images/Question 4 (i) (pascal).png)
+
+This could be translated into the following TAC tree:
+
+![](Images/Question 4 (i) (tac).png)
+
+## (ii) (12%)
+
+### Question
+
+Show a complete translation of the following Pascal fragment into TAC, indicating clearly the connection between the various source constructs and the corresponding TAC. You may assume that the Pascal if, while and assignment statements share the same semantics as their Java equivalents and that Pascal’s BEGIN-END play the same role as Java’s {} in grouping statements together.
+
+```Pascal
+IF 0 < x THEN
+  BEGIN
+  fact := 1;
+  WHILE x > 1 DO
+    BEGIN
+    fact := fact * x;
+    x := x − 1
+    END
+  END
+ELSE
+  BEGIN
+  END
+```
+
+### Answer
+
+First, the outer if-else:
+
+```tac
+t1 := 0 < x;
+if (t1 == 0) goto else1;
+[if-block]
+goto afterIf1;
+else1:
+[else-block]
+afterIf1:
+```
+
+Next, the assignment in the if-branch:
+
+```tac
+fact := 1;
+```
+
+Then the while loop in the if-branch:
+
+```tac
+loopStart1:
+t2 := x > 1;
+if (t2 == 0) goto afterLoop1;
+[while-body]
+goto loopStart1;
+afterLoop1:
+```
+
+Then the body of the while loop:
+
+```tac
+fact := fact * x;
+x := x - 1;
+```
+
+Since the (outer) else-block is empty, no code is generated for it.
+
+So the whole program is as follows:
+
+```tac
+t1 := 0 < x;
+if (t1 == 0) goto else1;
+fact := 1;
+loopStart1:
+t2 := x > 1;
+if (t2 == 0) goto afterLoop1;
+fact := fact * x;
+x := x - 1;
+goto loopStart1;
+afterLoop1:
+goto afterIf1;
+else1:
+afterIf1:
+```
