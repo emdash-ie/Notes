@@ -187,3 +187,28 @@ Here we can reuse C and its subtree because everything after the decimal point i
 The language of symbols is: $L = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, +, -, E, .\}$
 
 So for every missing outward path in the graph, add a path to a black-hole state, which isn’t an accept state and contains only self-loops.
+
+## (iii) (10%)
+
+### Question
+
+The characters `/*` introduce a C comment, which terminates with the characters `*/`. Comments do not nest. Give a nondeterministic finite state automaton that accepts the set of strings that are valid comments according to this definition.
+
+### Answer
+
+Using `^a` to mean any symbol in the language except `a`:
+
+```mermaid
+graph LR
+  A["Start: A"]
+  F["Accept: F"]
+  A --> |/| B
+  B --> |*| C
+  C --> |/| D
+  C --> |^/| C
+  D --> |epsilon| C
+  D --> |*| R
+  C --> |*| E
+  E --> |epsilon| C
+  E --> |/| F
+```
