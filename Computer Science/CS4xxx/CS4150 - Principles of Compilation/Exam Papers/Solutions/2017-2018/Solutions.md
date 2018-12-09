@@ -297,3 +297,124 @@ Draw a complete parse tree for each of the following strings:
 (c):
 
 ![](Images/Question 2 (iv) (c).png)
+
+# Question 3 (30%)
+
+## (i) (14%)
+
+### Question
+
+Compute the FIRST and FOLLOW sets for the non-terminals of the Tiny grammar given above.
+
+### Answer
+
+#### FIRST
+
+```
+First(program) = {if, repeat, id}
+First(stmtseq) = {if, repeat, id}
+First(stmtseq2) = {;, epsilon}
+First(statement) = {if, repeat, id}
+First(ifstmt) = {if}
+First(repeatstmt) = {repeat}
+First(assignmentstmt) = {id}
+First(exp) = {num}
+```
+
+#### FOLLOW
+
+```
+Follow(program) = {$}
+Follow(stmtseq) = {$, end, until}
+Follow(stmtseq2) = {$, end, until}
+Follow(statement) = {;, $, end, until}
+Follow(ifstmt) = {;, $, end, until}
+Follow(repeatstmt) = {;, $, end, until}
+Follow(assignstmt) = {;, $, end, until}
+Follow(exp) = {;, $, end, until, then}
+```
+
+## (ii) (10%)
+
+### Question
+
+Complete the parse table for this language for the stack-based, table-driven LL(1) parsing algorithm.
+
+### Answer
+
+| Nonterminal | ;          | if          | then | end        | repeat       | until      | id           | num   | $          |
+| ----------- | ---------- | ----------- | ---- | ---------- | ------------ | ---------- | ------------ | ----- | ---------- |
+| program     |            | program->   |      |            | program->    |            | program->    |       |            |
+| stmtseq     |            | stmtseq->   |      |            | stmtseq->    |            | stmtseq->    |       |            |
+| stmtseq2    | stmtseq2-> |             |      | stmtseq2-> |              | stmtseq2-> |              |       | stmtseq2-> |
+| statement   |            | statement-> |      |            | statement->  |            | statement->  |       |            |
+| ifstmt      |            | ifstmt->    |      |            |              |            |              |       |            |
+| repeatstmt  |            |             |      |            | repeatstmt-> |            |              |       |            |
+| assignstmt  |            |             |      |            |              |            | assignstmt-> |       |            |
+| exp         |            |             |      |            |              |            |              | exp-> |            |
+
+## (iii) (6%)
+
+### Question
+
+Write a succinct description of the stack-based, table-driven LL(1) parsing algorithm.
+
+### Answer
+
+The stack holds the result of the current production, and symbols are consumed from the input (and the stack is popped) while they match the top of the stack. When the next input symbol doesn’t match the top symbol on the stack, the table is checked for a production that converts the top symbol of the stack into something that starts with the next input symbol. The results of this production are then pushed onto the stack in place of its current top symbol.
+
+Errors can be encountered in the table lookup or if the top of the stack is a terminal symbol which doesn’t match the next input token (meaning the current production hasn’t been matched).
+
+# Question 4 (10%)
+
+## (i) (5%)
+
+### Question
+
+Suppose we wish to augment the Tiny language with a simple for loop with the syntax shown below:
+
+```Tiny
+total := 0
+for i := 1 to 100 do
+  begin
+  total := total + i
+  end
+```
+
+Show how the grammar of question 2 may be modified to incorporate this feature.
+
+### Answer
+
+```Tiny
+<statement> -> <ifstmt> | <repeatstmt> | <assignstmt> | <forstmt>
+<forstmt> -> for id := <exp> to <exp> do begin <stmtseq> end
+```
+
+## (ii) (5%)
+
+### Question
+
+Give a general template for the translation of any for loop into three-address code. Use the example given above to illustrate the approach.
+
+### Answer
+
+- put initial value in counter
+- start label
+- check if counter is less than end value, store in temporary variable
+- if temporary variable contains false, jump to end label
+- loop body code
+- jump to start label
+- end label
+
+For example:
+
+```tac
+total := 0;
+i := 1;
+loop1start:
+t0 = i < 100;
+if (t0 == 0) goto loop1end;
+total := total + i
+goto loop1start;
+loop1end:
+```
