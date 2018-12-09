@@ -212,3 +212,88 @@ graph LR
   E --> |epsilon| C
   E --> |/| F
 ```
+
+# Question 2 (30%)
+
+## (i) (7%)
+
+### Question
+
+Consider the following simplified grammar for the Tiny programming language:
+
+```
+<program> -> <stmtseq>
+<stmtseq> -> <statement> <stmtseq2>
+<stmtseq2> -> ; <stmtseq> | Empty
+<statement> -> <ifstmt> | <repeatstmt> | <assignstmt>
+<ifstmt> -> if <exp> then <stmtseq> end
+<repeatstmt> -> repeat <stmtseq> until <exp>
+<assignstmt> -> id := <exp>
+<exp> -> num
+```
+
+Give a complete parse tree for the following Tiny program:
+
+```Tiny
+x := 17;
+if 1 then y := 23 end;
+z := 29
+```
+
+### Answer
+
+![](Images/Question 2 (i).png)
+
+## (ii) (3%)
+
+### Question
+
+Give a context-free grammar for the language consisting of strings of the form $0^n1^n$ over the alphabet {0,1}, i.e. strings containing some number of zeroes followed by the same number of ones.
+
+### Answer
+
+```cfg
+<string> -> 0<string>1 | Empty
+```
+
+## (iii) (14%)
+
+### Question
+
+Give a context-free grammar for the language consisting of strings over the alphabet {0,1} that contain precisely the same number of zeroes and ones.
+
+### Answer
+
+```cfg
+<string> -> Empty
+  | <string><pair>
+  | <pair><string>
+  | 0<string>1
+  | 1<string>0
+  | <string><string>
+<pair> -> 01 | 10
+```
+
+## (iv) (6%)
+
+### Question
+
+Draw a complete parse tree for each of the following strings:
+
+(a) `000111`
+(b) `010101`
+(c) `00111100`
+
+### Answer
+
+(a):
+
+![](Images/Question 2 (iv) (a).png)
+
+(b):
+
+![](Images/Question 2 (iv) (b).png)
+
+(c):
+
+![](Images/Question 2 (iv) (c).png)

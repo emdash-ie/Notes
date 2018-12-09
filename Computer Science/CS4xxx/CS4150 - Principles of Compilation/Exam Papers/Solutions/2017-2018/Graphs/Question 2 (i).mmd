@@ -1,0 +1,41 @@
+graph TD
+  program --> ss1[stmtseq]
+  ss1 --> s1[statement]
+  ss1 --> sst1[stmtseq2]
+  sst1 --> sc1[";"]
+  sst1 --> ss2[stmtseq]
+  ss2 --> s2[statement]
+  ss2 --> sst2[stmtseq2]
+  sst2 --> sc2[";"]
+  sst2 --> ss3[stmtseq]
+  ss3 --> s3[statement]
+  ss3 --> sst3[stmtseq2]
+  sst3 --> empty1[Empty]
+
+  s1 --> as1[assignstmt]
+  as1 --> x
+  as1 --> a1[:=]
+  as1 --> e1[exp]
+  e1 --> n1[17]
+
+  s2 --> ifstmt
+  ifstmt --> if
+  ifstmt --> e2[exp]
+  ifstmt -->then
+  ifstmt --> ss4[stmtseq]
+  ifstmt --> end1[end]
+  e2 --> n2[1]
+  ss4 --> s4[statement]
+  ss4 --> sst4[stmtseq2]
+  sst4 --> empty2[Empty]
+  s4 --> as2[assignstmt]
+  as2 --> y
+  as2 --> a2[:=]
+  as2 --> e3[exp]
+  e3 --> n3[23]
+
+  s3 --> as3[assignstmt]
+  as3 --> z
+  as3 --> a3[:=]
+  as3 --> e4[exp]
+  e4 --> n4[29]
