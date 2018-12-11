@@ -1,0 +1,9 @@
+graph LR
+  Start -->|a| A
+  A -->|E| Star
+  Star --> |E| Choice
+  Choice -->|b| B
+  Choice -->|c| C
+  B -->|E| Star
+  C -->|E| Star
+  Star -->|d| D["D: Accept"]

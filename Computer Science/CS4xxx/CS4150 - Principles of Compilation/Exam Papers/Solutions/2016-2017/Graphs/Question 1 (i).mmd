@@ -1,0 +1,13 @@
+graph LR
+  A["Start: A (Accept)"] -->|"[c-z]"| A
+  A -->|a| B["B (Accept)"]
+  A -->|b| C["C (Accept)"]
+  B -->|a| R
+  B -->|b| D["D (Accept)"]
+  B -->|"[c-z]"| B
+  C -->|a| D
+  C -->|b| R
+  C -->|"[c-z]"| C
+  D -->|a,b| R
+  D -->|"[c-z]"| D
+  R -->|"[a-z]"| R

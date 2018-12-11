@@ -1,0 +1,11 @@
+graph LR
+  S[Start] -->|a| A
+  S -->|b,c| S
+  A -->|b| B
+  A -->|a| A
+  A -->|c| S
+  B -->|a| A
+  B -->|b| S
+  B -->|c| C["C: Accept"]
+  C -->|a| A
+  C -->|b,c| S
