@@ -1,0 +1,28 @@
+graph TD
+  P[program] --> sl1[statement-list]
+  sl1 --> s1[statement]
+  sl1 --> sl2[statement-list]
+  sl2 --> s2[statement]
+
+  s1 --> a1[assignment-statement]
+  a1 --> id1[n]
+  a1 --> e1[=]
+  a1 --> ex1[1]
+  a1 --> el1["(end-line)"]
+
+  s2 --> w1[while-statement]
+  w1 --> k1[while]
+  w1 --> ex2[n < 100]
+  w1 --> c1[:]
+  w1 --> b1[body]
+
+  b1 --> i1["(indent)"]
+  b1 --> sl3[statement-list]
+  b1 --> o1["(outdent)"]
+
+  sl3 --> s3[statement]
+  s3 --> a2[assignment-statement]
+  a2 --> id2[n]
+  a2 --> e2[=]
+  a2 --> ex3[n + 2]
+  a2 --> el2["(end-line)"]

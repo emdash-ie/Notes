@@ -66,3 +66,52 @@ For example, `a|b` has the following shape (`E` represents $\epsilon$):
 So for `a(b|c)*d`, we can combine these operations to give:
 
 ![](Images/Question 1 (iii) Answer.png)
+
+# Question 2 (25%)
+
+## (i) (15%)
+
+### Question
+
+The following is an example of a program written in a simplified Python-like syntax. While pure Python is whitespace-sensitive, our variant uses special symbols (end-line), (indent), and (outdent) to indicate program structure explicitly.
+
+```python
+n = 1 (end-line)
+while n < 100:
+  (indent)
+  n = n + 2 (end-line)
+  (outdent)
+```
+
+Give a grammar for this mini-language that respects the following rules:
+
+- A program consists of a sequence of statements
+- Which can be assignment statements, while statements, or if statements
+- Assignment statements have Java-like syntax but are terminated with an (end-line) instead of a semicolon
+- Multi-line assignments are disallowed
+- The condition of a while/if is delimited by the keyword and a colon
+- The body is delimited by (indent) and (outdent) symbols
+
+You may assume that grammar productions to capture the syntax of expressions have already been written and you may use the resulting non-terminal `<exp>` in your grammar.
+
+### Answer
+
+```CFG
+<program> -> <statement-list>
+<statement-list> -> <statement> | <statement> <statement-list>
+<statement> -> <assignment-statement> | <if-statement> | <while-statement>
+<assignment-statement> -> id = <exp> (end-line)
+<if-statement> -> if <exp> colon <body>
+<while-statement> -> while <exp> colon <body>
+<body> -> (indent) <statement-list> (outdent)
+```
+
+## (ii) (10%)
+
+### Question
+
+Draw a parse tree for the example python program shown above. You need not complete any subtrees representing `<exp>` constructs.
+
+### Answer
+
+![](Images/Question 2 (ii).png)
