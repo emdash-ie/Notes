@@ -1,0 +1,12 @@
+graph LR
+  A["Start: A"]
+  F["Accept: F"]
+  A --> |/| B
+  B --> |*| C
+  C --> |/| D
+  C --> |^/| C
+  D --> |epsilon| C
+  D --> |*| R
+  C --> |*| E
+  E --> |epsilon| C
+  E --> |/| F

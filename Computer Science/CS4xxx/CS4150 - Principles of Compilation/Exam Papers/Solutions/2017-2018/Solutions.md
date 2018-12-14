@@ -198,20 +198,7 @@ The characters `/*` introduce a C comment, which terminates with the characters 
 
 Using `^a` to mean any symbol in the language except `a`:
 
-```mermaid
-graph LR
-  A["Start: A"]
-  F["Accept: F"]
-  A --> |/| B
-  B --> |*| C
-  C --> |/| D
-  C --> |^/| C
-  D --> |epsilon| C
-  D --> |*| R
-  C --> |*| E
-  E --> |epsilon| C
-  E --> |/| F
-```
+![](Images/Question 1 (iii).png)
 
 # Question 2 (30%)
 
@@ -342,16 +329,16 @@ Complete the parse table for this language for the stack-based, table-driven LL(
 
 ### Answer
 
-| Nonterminal | ;          | if          | then | end        | repeat       | until      | id           | num   | $          |
-| ----------- | ---------- | ----------- | ---- | ---------- | ------------ | ---------- | ------------ | ----- | ---------- |
-| program     |            | program->   |      |            | program->    |            | program->    |       |            |
-| stmtseq     |            | stmtseq->   |      |            | stmtseq->    |            | stmtseq->    |       |            |
-| stmtseq2    | stmtseq2-> |             |      | stmtseq2-> |              | stmtseq2-> |              |       | stmtseq2-> |
-| statement   |            | statement-> |      |            | statement->  |            | statement->  |       |            |
-| ifstmt      |            | ifstmt->    |      |            |              |            |              |       |            |
-| repeatstmt  |            |             |      |            | repeatstmt-> |            |              |       |            |
-| assignstmt  |            |             |      |            |              |            | assignstmt-> |       |            |
-| exp         |            |             |      |            |              |            |              | exp-> |            |
+| Nonterminal | ;   | if  | then | end | repeat | until | id  | num | $   |
+| ----------- | --- | --- | ---- | --- | ------ | ----- | --- | --- | --- |
+| program     |     | x   |      |     | x      |       | x   |     |     |
+| stmtseq     |     | x   |      |     | x      |       | x   |     |     |
+| stmtseq2    | x   |     |      | x   |        | x     |     |     | x   |
+| statement   |     | x   |      |     | x      |       | x   |     |     |
+| ifstmt      |     | x   |      |     |        |       |     |     |     |
+| repeatstmt  |     |     |      |     | x      |       |     |     |     |
+| assignstmt  |     |     |      |     |        |       | x   |     |     |
+| exp         |     |     |      |     |        |       |     | x   |     |
 
 ## (iii) (6%)
 

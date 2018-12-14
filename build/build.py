@@ -28,7 +28,7 @@ def process_changed_files(db: Dict[Path, "Data"], root: Path, build_file: Callab
     t1 = time.time()
     print(f"Starting files at {t1}")
     for f in fs:
-        print(f"Doing file {c} of {l}…")
+        print(f"Doing file {c} of {l} ({f.name})…")
         c += 1
         p = Path(f)
         if build_file(root, p):
