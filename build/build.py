@@ -1,4 +1,5 @@
 from functools import partial
+from itertools import filterfalse
 from hashlib import sha256
 from pathlib import Path
 from typing import Dict, Callable, Any, NamedTuple, Iterable
@@ -22,7 +23,7 @@ def store_data(d: Dict[Path, "Data"]) -> None:
         db["data"] = d
 
 def process_changed_files(db: Dict[Path, "Data"], root: Path, build_file: Callable[[Path, Path], bool]) -> Dict[Path, "Data"]:
-    fs = list(changed_files(db, root))
+    fs = list(filterfalse(hidden_file, changed_files(db, root)))
     c = 1
     l = len(fs)
     t1 = time.time()
@@ -44,6 +45,9 @@ def changed_files(db: Dict[Path, "Data"], root: Path) -> Iterable[Path]:
             p = Path(os.path.join(dirpath, f))
             if recently_modified(db, p) and hash_changed(db, p):
                 yield p
+
+def hidden_file(f: Path) -> bool:
+    return f.name.startswith(".")
 
 def skip_hidden_files(f: Callable[[Path, Path], bool]) -> Callable[[Path, Path], bool]:
     def g(r: Path, p: Path) -> bool:
