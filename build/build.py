@@ -24,12 +24,10 @@ def store_data(d: Dict[Path, "Data"]) -> None:
 
 def process_changed_files(db: Dict[Path, "Data"], root: Path, build_file: Callable[[Path, Path], bool]) -> Dict[Path, "Data"]:
     fs = list(filterfalse(hidden_file, changed_files(db, root)))
-    c = 1
     l = len(fs)
     t1 = time.time()
-    for f in fs:
+    for c, f in enumerate(fs, 1):
         print(f"Doing file {c} of {l} ({f.name})…")
-        c += 1
         p = Path(f)
         if build_file(root, p):
             db = store_hash(db, p)
@@ -37,7 +35,8 @@ def process_changed_files(db: Dict[Path, "Data"], root: Path, build_file: Callab
     t = t2 - t1
     minutes = t // 60
     seconds = (t - minutes)
-    print(f"Ran for {minutes} minutes and {seconds} seconds")
+    minutes_bit = f"{minutes} minutes and " if minutes > 0 else ""
+    print(f"Ran for {minutes_bit}{seconds} seconds")
     return db
 
 def changed_files(db: Dict[Path, "Data"], root: Path) -> Iterable[Path]:
