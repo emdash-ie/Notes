@@ -27,7 +27,6 @@ def process_changed_files(db: Dict[Path, "Data"], root: Path, build_file: Callab
     c = 1
     l = len(fs)
     t1 = time.time()
-    print(f"Starting files at {t1}")
     for f in fs:
         print(f"Doing file {c} of {l} ({f.name})…")
         c += 1
@@ -35,8 +34,10 @@ def process_changed_files(db: Dict[Path, "Data"], root: Path, build_file: Callab
         if build_file(root, p):
             db = store_hash(db, p)
     t2 = time.time()
-    print(f"Finished at {t2}")
-    print(f"Ran for {(t2 - t1) / 60} minutes")
+    t = t2 - t1
+    minutes = t // 60
+    seconds = (t - minutes)
+    print(f"Ran for {minutes} minutes and {seconds} seconds")
     return db
 
 def changed_files(db: Dict[Path, "Data"], root: Path) -> Iterable[Path]:
