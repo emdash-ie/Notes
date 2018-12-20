@@ -11,7 +11,7 @@ We cover a bottom-up (agglomerative), hierarchical algorithm.
 # Zoo Dataset
 
 - Why did he drop two examples from it?
-        - frog was in there twice, and “girl” was in there (why not human?)
+  - frog was in there twice, and “girl” was in there (why not human?)
 
 # Constraints
 

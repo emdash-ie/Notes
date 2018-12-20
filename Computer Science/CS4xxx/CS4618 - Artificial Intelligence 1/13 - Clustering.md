@@ -34,7 +34,7 @@ This is the best-known point-assignment algorithm.
 - assumes you know the number of clusters ($k$) in advance
 - partitions a dataset $X$ into $k$ subsets
 - uses the centroid of a cluster:
-        - featurewise mean of the examples in the cluster
+  - featurewise mean of the examples in the cluster
 
 ## Centroids
 

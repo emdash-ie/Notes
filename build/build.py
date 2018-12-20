@@ -34,7 +34,7 @@ def process_changed_files(db: Dict[Path, "Data"], root: Path, build_file: Callab
     t2 = time.time()
     t = t2 - t1
     minutes = t // 60
-    seconds = (t - minutes)
+    seconds = f"{(t - minutes):.1f}"
     minutes_bit = f"{minutes} minutes and " if minutes > 0 else ""
     print(f"Ran for {minutes_bit}{seconds} seconds")
     return db
