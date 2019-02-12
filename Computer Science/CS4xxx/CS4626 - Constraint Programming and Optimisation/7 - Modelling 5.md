@@ -1,6 +1,8 @@
 ---
 title: "Modelling 5: Scheduling"
-date: 07/02/2019
+dates:
+- 07/02/2019
+- 12/02/2019
 ...
 
 # Scheduling Problem
@@ -80,3 +82,36 @@ The global constraint `cumulative` in Choco solves this problem.
 # Better Model
 
 Could specify total ordering on tasks instead of assigning a start time to each task. This gives a smaller space, but is more complex. For now we won’t look at this model.
+
+# Scheduling Jobs on Multi-capacity Resources
+
+- multiple tasks allowed per machine
+- [more]
+- [more]
+
+## Applications
+
+- processes competing for memory
+- vehicle repairs with limited garage capacity
+- managing power use (e.g. to stay below a certain limit imposed by a company)
+
+# Finite Capacity Resource Scheduling
+
+- Each resource has a maximum capacity at any time point
+- Each task has a duration and a resource consumption
+- [more here]
+
+## Sample Problem
+
+- can split any task across rows (resource is simply additive)
+  - hence not rectangle-packing problem
+
+## Constraint Model
+
+Each task has a start time, a duration, an end time, and a consumption rate. Duration and consumption are fixed.
+
+$start + duration = end$
+
+Define a task to be active in time `t` if $t \in [start, end - 1]$. (Finishes immediately before $end$.)
+
+Assign start times to the tasks so that for each time point, the sum of the consumption rates for each active task is less than or equal to the resource capacity.
