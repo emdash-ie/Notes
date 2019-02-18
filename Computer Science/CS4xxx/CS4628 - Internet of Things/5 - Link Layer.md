@@ -4,6 +4,7 @@ dates:
 - 05/02/2019
 - 11/02/2019
 - 12/02/2019
+- 18/02/2019
 ...
 
 # 802.15.4
@@ -129,3 +130,135 @@ Time-slotted channel hopping (TSCH):
 
 - Difficult due to frequency mismatch
 - Use enhanced beacons
+
+# Bluetooth and Bluetooth Low-Energy
+
+- Wireless technology for cable replacement
+- Designed for phones, e.g. for connecting to headsets
+  - This means it is unsuitable for other purposes sometimes
+
+## Key Features
+
+Low-power
+[more here]
+
+## Frequency Spectrum
+
+- chose 2.4 GHz, as it’s unregulated space in most countries
+- conflicts with other things (e.g. Wifi)
+
+Transmit power grouped into classes, trading power consumption for transmission range.
+
+Security: challenge/response authentication, AES-128
+
+Radio frequency hopping: 1600 times/sec. Common hopping sequence for all devices of a piconet.
+
+## Piconet
+
+Leader-follower split – leader sends clock and device ID to followers. No direct communication between followers.
+
+## Scatternet
+
+Piconets with overlapping devices.
+
+Hopping times and frequencies are not synchronised, so you get random collisions. 10 piconets within the saem range decrease the data rate by roughly 10%.
+
+A device can share different piconets (a bridge device), but can only be leader in one.
+
+## Looking for Nearby Devices
+
+Discoverable devices enter inquiry scan state periodically to make themselves available to inquiring devices.
+
+[more here]
+
+## Basic Communication
+
+Slots are dedicated to a leader or a specific follower. Leader polls followers and follower uses next slot to answer.
+
+There are contol packets as well as data packets:
+
+- `NULL` packet for ack (follower has no payload to transmit)
+- `POLL` packate when leader has no payload to send
+
+As leader organises slots and polls, it’s continuously active even if there’s no data to transmit. This power use is impractical for an IoT device, which is why bluetooth isn’t very suitable. (Leader device for normal bluetooth would be e.g. a phone, where the battery capacity is big enough that this isn’t as much of a concern.)
+
+## Mixed Synchronous and Asynchronous Communication
+
+- still poll and request, but some difference?
+
+## Error Correction
+
+When packet doesn’t get through due to interference, it’s usually the header bits that have been interfered with. To counteract this, the header is transmitted 3 times.
+
+Couple of options for data:
+
+- transmit 3 and make a majority decision (2 say this, 1 says that, the 1 must be corrupt)
+  - 1/3 data rate
+- use (15,10) Hamming code
+  - 2/3 data rate
+- no protection
+  - full data rate
+
+## Bluetooth to Bluetooth Smart™
+
+Some problems with bluetooth:
+
+- not low-power enough for coin cells and energy harvesting
+  - traditional bluetooth is connection-oriented, maintains a link even if no data is flowing
+  - long an complex discovery process
+- piconet only supports up to 7 follower devices
+
+## Bluetooth Low-Energy (BLE)
+
+New standard to overcome limitations with bluetooth. Based on Nokia’s WiBree technology, merged into standard in 2010 (Bluetooth v4.0).
+
+Main features:
+
+- new physical layer
+- new advertising mechanism for easy discovery and connection
+- explicit support for broadcasting applications
+- asynchronous connectionless MAC
+- low-enery (1–50% of classic bluetooth)
+- [more here]
+
+### Dual Mode or Single Mode
+
+Typically one chip will support both bluetooth classic stack and BLE stack, being a dual-mode chip. This makes the chips complicated (sometimes more powerful than the main CPU, to manage the complexity).
+
+### Physical Layer
+
+3 advertisement channels, in between WiFi channels (to avoid interference).
+
+### Device Roles
+
+Four roles:
+
+- connection-based:
+  - central device
+  - peripheral device
+    - can operate as follower (e.g. thermometer, heart rate sensor)
+- unidirectional-communication:
+  - observer
+    - scans for ads without initiating connections
+  - broadcaster
+
+[more here]
+
+### Advertising Mechanism
+
+- central device can query peripheral device for details
+- can have non-connectible devices, which only broadcast and don’t receive
+
+### Generic Attribute Profile
+
+Profiles contain services, which contain characteristics.
+
+[more here]
+
+### Latency
+
+Very low-latency connection (~3 ms per transaction).
+
+### Control
+
+Bluetooth abstracts a lot of the difficulties of the communication, but takes control away from the application. Isn’t used where that control is needed.
