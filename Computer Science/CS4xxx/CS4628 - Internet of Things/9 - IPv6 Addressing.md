@@ -2,6 +2,7 @@
 title: IPv6 Addressing
 dates:
 - 4/03/2019
+- 5/03/2019
 ...
 
 # Intro
@@ -71,3 +72,13 @@ A prefix identifies a set of addresses.
 # Stateless Auto-configuration
 
 A device can autonomously derive its link-local and global addresses – protocol is based on ICMPv6.
+
+# ICMPv6 and Neighbour Discovery
+
+## ICMPv6
+
+Two categories of message: error and informational.
+
+## Neighbour Discovery
+
+- Also used for finding a unique adress – see if anyone else has it first
